@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TrueLine — Trace to DXF</title>
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+
+  <header id="appbar">
+    <div class="ab-cluster">
+      <svg id="appmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M3 21 L12 4 L16 12" stroke="var(--accent)"/>
+        <path d="M14 21 A7 7 0 0 0 21 14" />
+        <circle cx="21" cy="14" r="1.4" fill="currentColor" stroke="none"/>
+        <circle cx="3" cy="21" r="1.4" fill="currentColor" stroke="none"/>
+      </svg>
+      <span id="docname" title="Double-click to rename">untitled</span>
+      <span id="dirty" title="Unsaved changes — Ctrl+S" hidden></span>
+      <div class="menu-anchor">
+        <button id="fileBtn" class="ab-btn">File</button>
+        <div id="fileMenu" class="menu" hidden>
+          <button data-cmd="tour">Tutorial — walkthrough tour</button>
+          <hr>
+          <button data-cmd="new">New<kbd></kbd></button>
+          <button data-cmd="open">Open project / DXF…<kbd>Ctrl+O</kbd></button>
+          <button data-cmd="save">Save project<kbd>Ctrl+S</kbd></button>
+          <hr>
+          <button data-cmd="underlay">Import image underlay…</button>
+          <button data-cmd="underlay-clear">Remove underlay</button>
+          <hr>
+          <button data-cmd="export-dxf">Export DXF</button>
+          <button data-cmd="export-svg">Export SVG</button>
+          <button data-cmd="export-pdf">Export PDF (1:1)</button>
+        </div>
+      </div>
+    </div>
+    <div class="ab-cluster ab-right">
+      <button id="undoBtn" class="ab-icon" title="Undo — Ctrl+Z" disabled></button>
+      <button id="redoBtn" class="ab-icon" title="Redo — Ctrl+Y" disabled></button>
+      <span class="vdiv"></span>
+      <div class="split-btn">
+        <button id="exportBtn" class="ab-btn accent">Export DXF</button>
+        <button id="exportMore" class="ab-btn accent narrow"></button>
+        <div id="exportMenu" class="menu" hidden>
+          <button data-cmd="export-dxf">DXF (R12)</button>
+          <button data-cmd="export-svg">SVG</button>
+          <button data-cmd="export-pdf">PDF (1:1 scale)</button>
+        </div>
+      </div>
+      <button id="settingsBtn" class="ab-icon" title="Settings"></button>
+    </div>
+  </header>
+
+  <div id="ctxstrip">
+    <span id="ctxIcon"></span>
+    <span id="ctxName"></span>
+    <span class="vdiv"></span>
+    <div id="ctxControls"></div>
+    <button id="helpBtn" title="Help — tour, shortcuts, tips (?)">?</button>
+  </div>
+
+  <nav id="palette"></nav>
+
+  <main id="viewport">
+    <canvas id="rulerX"></canvas>
+    <canvas id="rulerY"></canvas>
+    <div id="rulerCorner"></div>
+    <div id="stack">
+      <canvas id="cvGrid"></canvas>
+      <canvas id="cvScene"></canvas>
+      <canvas id="cvOverlay"></canvas>
+    </div>
+
+    <div id="dyninput" hidden>
+      <div class="dynfield"><input id="dynMain" autocomplete="off" spellcheck="false"><span id="dynGhost">mm</span></div>
+      <div class="dynhint" id="dynHint">50 · 50&lt;30 · @dx,dy · #x,y</div>
+    </div>
+
+    <div id="firstrun" class="card" hidden>
+      <h3>Trace first, scale after</h3>
+      <p>Just start tracing your object at any size. When you're done, click <b>📏 Set scale</b>,
+         click across one feature you know the size of (a hole, an edge), and type its real
+         measurement — the whole drawing snaps to exact size and the DXF is dimensionally true.
+         This is the reliable way and works with any tablet.</p>
+      <div class="card-actions">
+        <button id="frStart" class="btn-accent">Start tracing</button>
+        <button id="frTour" class="btn-ghost">▶ 2-min tour</button>
+      </div>
+    </div>
+
+    <div id="toast" hidden></div>
+  </main>
+
+  <aside id="dock">
+    <section class="panel" id="panelLayers">
+      <header class="panel-h" data-panel="layers"><span>Layers</span><span class="chev"></span></header>
+      <div class="panel-body">
+        <div id="layerList"></div>
+        <div class="panel-foot" id="layerTools">
+          <button id="layerAdd" title="Add layer"></button>
+          <button id="layerDup" title="Duplicate layer"></button>
+          <button id="layerDel" title="Delete layer"></button>
+          <button id="layerIso" title="Isolate (solo) current layer"></button>
+        </div>
+      </div>
+    </section>
+    <section class="panel" id="panelProps">
+      <header class="panel-h" data-panel="props"><span>Properties</span><span class="chev"></span></header>
+      <div class="panel-body" id="propsBody"></div>
+    </section>
+    <section class="panel" id="panelTablet">
+      <header class="panel-h" data-panel="tablet"><span>Tablet<i id="penDot" title="Pen status"></i></span><span class="chev"></span></header>
+      <div class="panel-body" id="tabletBody"></div>
+    </section>
+  </aside>
+
+  <div id="hints">
+    <span id="hintPrompt"></span>
+    <span id="hintMsg"></span>
+  </div>
+
+  <footer id="statusbar">
+    <span id="coords"><b id="coX">X 0.00</b><b id="coY">Y 0.00</b><b id="coD" hidden></b></span>
+    <span class="chips">
+      <button class="chip" id="chipSnap"  title="Grid snap — F9">SNAP</button>
+      <button class="chip" id="chipGrid"  title="Grid display — F7">GRID</button>
+      <button class="chip" id="chipOrtho" title="Ortho — F8 (hold Shift to invert)">ORTHO</button>
+      <button class="chip" id="chipPolar" title="Polar tracking — F10 (right-click: angle)">POLAR</button>
+      <button class="chip" id="chipOsnap" title="Object snap — F3 (right-click: modes)">OSNAP</button>
+      <button class="chip" id="chipDyn"   title="Dynamic input — F12">DYN</button>
+    </span>
+    <span class="status-right">
+      <button class="chip wide" id="chipUnits" title="Units & precision">mm · 0.01</button>
+      <button class="chip wide" id="chipZoom" title="Zoom (Shift+1 fit)">100%</button>
+      <button class="chip wide" id="chipCal" title="Calibration">UNCAL</button>
+    </span>
+  </footer>
+</div>
+
+<div id="modalRoot" hidden>
+  <div id="modalScrim"></div>
+  <div id="modalBox"></div>
+</div>
+
+<div id="popRoot"></div>
+
+<input type="file" id="filePick" hidden>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

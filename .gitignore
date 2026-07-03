@@ -1,0 +1,10 @@
+node_modules/
+dist/
+dist-installer/
+dist-test/
+*.log
+# dev artifacts in the repo root (README images live in assets/ and ARE tracked)
+/*.png
+/*.svg
+/*.dxf
+/*.pdf

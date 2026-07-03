@@ -1,0 +1,70 @@
+{
+  "name": "trueline",
+  "productName": "TrueLine",
+  "version": "3.0.2",
+  "description": "Trace with a pen tablet, export dimensionally-accurate DXF/SVG/PDF",
+  "main": "electron/main.cjs",
+  "author": "TrueLine",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "test": "node tests/run-tests.mjs",
+    "test:app": "node tests/production.cjs dist-test",
+    "pack": "node build/pack.mjs",
+    "dist": "node build/pack.mjs && tar -a -c -f dist/TrueLine-win-x64.zip -C dist TrueLine-win32-x64",
+    "installer": "electron-builder --win nsis"
+  },
+  "build": {
+    "appId": "com.trueline.cad",
+    "productName": "TrueLine",
+    "copyright": "MIT — free to use and redistribute",
+    "asar": false,
+    "directories": {
+      "output": "dist-installer",
+      "buildResources": "build"
+    },
+    "files": [
+      "index.html",
+      "style.css",
+      "js/**/*",
+      "fonts/**/*",
+      "electron/**/*"
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "build/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "TrueLine",
+      "artifactName": "TrueLine-Setup-${version}.${ext}"
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "Nik-Horner",
+        "repo": "TrueLine"
+      }
+    ]
+  },
+  "license": "MIT",
+  "type": "module",
+  "devDependencies": {
+    "@electron/packager": "^20.0.2",
+    "electron": "^43.0.0",
+    "electron-builder": "^26.15.3",
+    "gifenc": "^1.0.3",
+    "png-to-ico": "^3.0.1",
+    "pngjs": "^7.0.0",
+    "puppeteer-core": "^25.3.0"
+  },
+  "dependencies": {
+    "electron-updater": "^6.8.9"
+  }
+}
