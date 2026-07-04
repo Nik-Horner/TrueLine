@@ -10,14 +10,14 @@ Sketch a rough circle and it becomes a perfect one. Trace an outline and it snap
 lines, arcs, and smooth curves — then exports as true-to-size DXF your CAM software reads
 directly.
 
-### [⬇ Download TrueLine for Windows](https://github.com/Nik-Horner/TrueLine/releases/latest)
+### [⬇ Download TrueLine for Windows](https://github.com/Nik-Horner/TrueLine/releases/latest/download/TrueLine-Setup.exe)
 
-[![Download TrueLine for Windows](https://img.shields.io/badge/⬇%20Download-TrueLine%20for%20Windows-2ea44f?style=for-the-badge)](https://github.com/Nik-Horner/TrueLine/releases/latest)
+[![Download TrueLine for Windows](https://img.shields.io/badge/⬇%20Download-TrueLine%20for%20Windows-2ea44f?style=for-the-badge)](https://github.com/Nik-Horner/TrueLine/releases/latest/download/TrueLine-Setup.exe)
 &nbsp;
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
 
-Click the button, then download **`TrueLine-Setup.exe`** from the latest release. Run it — no
-account, no internet, no license.
+That button downloads the installer directly and always points at the newest version. Run it —
+no account, no internet, no license.
 
 > First launch, Windows SmartScreen may show a blue "Windows protected your PC" box because the
 > app isn't code-signed with a paid certificate. Click **More info → Run anyway**. That's normal
