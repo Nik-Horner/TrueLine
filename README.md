@@ -10,23 +10,20 @@ Sketch a rough circle and it becomes a perfect one. Trace an outline and it snap
 lines, arcs, and smooth curves — then exports as true-to-size DXF your CAM software reads
 directly.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-![Platform: Windows x64](https://img.shields.io/badge/platform-Windows%20x64-informational)
+### [⬇ Download TrueLine for Windows](https://github.com/Nik-Horner/TrueLine/releases/latest/download/TrueLine-Setup.exe)
 
----
+[![Download TrueLine for Windows](https://img.shields.io/badge/⬇%20Download-TrueLine%20for%20Windows-2ea44f?style=for-the-badge)](https://github.com/Nik-Horner/TrueLine/releases/latest/download/TrueLine-Setup.exe)
+&nbsp;
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
 
-## Download
+That link always downloads the newest installer. Run it — no account, no internet, no license.
 
-Grab the latest **`TrueLine-Setup-x.y.z.exe`** from the
-[**Releases page**](https://github.com/Nik-Horner/TrueLine/releases/latest) and run it.
-No account, no internet, no per-seat license.
+> First launch, Windows SmartScreen may show a blue "Windows protected your PC" box because the
+> app isn't code-signed with a paid certificate. Click **More info → Run anyway**. That's normal
+> for free/indie apps — it's not a virus warning, just an unrecognized publisher.
 
-> First launch, Windows SmartScreen may show a blue "Windows protected your PC" box because
-> the app isn't code-signed with a paid certificate. Click **More info → Run anyway**. That's
-> normal for free/indie apps — it's not a virus warning, just an unrecognized publisher.
-
-The app **updates itself**: when a new release is published here, installed copies download it
-in the background and install it on the next launch.
+The app **updates itself**: when a new release is published here, installed copies download it in
+the background and install it on the next launch.
 
 ---
 
@@ -46,6 +43,13 @@ CAM, or apparel software.
 Draw rough; get clean. Circles snap to perfect circles, arcs to arcs, straight edges to straight
 lines, and freeform curves become smooth tangent-continuous arc chains — not jagged facets.
 Prefer a faithful smooth outline? Switch the trace mode to **Raw** for a tremor-cleaned polyline.
+
+### Real parts, real dimensions
+
+![Engineering parts drawn in TrueLine — bracket, flange, slotted plate, lever, gasket, hex spacer](assets/examples.png)
+
+Brackets, flanges, gaskets, slots, bolt circles, hex profiles — traced or drawn with holes,
+fillets, arcs, and dimensions, exported as true-scale DXF for the shop.
 
 ## Features
 
@@ -91,11 +95,16 @@ npm run test:app     # full app suite: every tool, exports validated by parsers
 
 1. Bump `"version"` in `package.json`.
 2. `npm run installer`
-3. Create a GitHub release for the new tag and attach `TrueLine-Setup-<version>.exe`,
-   `latest.yml`, and the `.blockmap` from `dist-installer/`.
+3. Create a GitHub release for the new tag and attach the three files from `dist-installer/`:
+   `TrueLine-Setup.exe`, `latest.yml`, and `TrueLine-Setup.exe.blockmap`.
 
-Installed apps pick it up automatically on next launch. (`GH_TOKEN=... npx electron-builder
---win nsis --publish always` does the upload for you.)
+```bash
+gh release create v3.0.3 dist-installer/TrueLine-Setup.exe dist-installer/latest.yml \
+  dist-installer/TrueLine-Setup.exe.blockmap --title "TrueLine 3.0.3" --notes "..."
+```
+
+Installed apps pick it up automatically on next launch, and the download button above always
+points at the newest installer (the filename never changes).
 
 ## Roadmap / deliberately not in v1
 

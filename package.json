@@ -43,7 +43,7 @@
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
       "shortcutName": "TrueLine",
-      "artifactName": "TrueLine-Setup-${version}.${ext}"
+      "artifactName": "TrueLine-Setup.${ext}"
     },
     "publish": [
       {
