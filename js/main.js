@@ -9,11 +9,12 @@ import './tools.js';
 import { TOOL_GROUPS } from './tools.js';
 import { initUI, tabletCfg, toggle } from './ui.js';
 import * as G from './geom.js';
+import { initUpgrades } from './upgrades.js';
 
 window.__parseCoordInput = s => parseCoordInput(s, App.tool?.getAnchor?.() || null);
 
 // ---------------------------------------------------------------- boot
-if (!loadAutosaved()) newDoc();
+if (!await loadAutosaved()) newDoc();
 initCanvases({
   cvGrid: document.getElementById('cvGrid'),
   cvScene: document.getElementById('cvScene'),
@@ -23,6 +24,7 @@ initCanvases({
   stackEl: document.getElementById('stack'),
 });
 initUI();
+initUpgrades();
 reloadUnderlayImg();
 setTool('select');
 if (App.doc.entities.length) requestAnimationFrame(() => zoomFit());
@@ -94,7 +96,11 @@ function touchNav(ev) {
   ev.preventDefault();
   return true;
 }
-overlayEl.addEventListener('pointercancel', ev => { touchNav(ev); });
+overlayEl.addEventListener('pointercancel', ev => {
+  if (touchNav(ev)) return;
+  panDrag = null; eraserStroke = false; downScreen = null;
+  App.tool?.cancel?.(); invalidate('overlay'); App.ui.refreshCtx?.();
+});
 
 overlayEl.addEventListener('pointerdown', ev => {
   if (touchNav(ev)) return;
@@ -217,6 +223,7 @@ function penAction(action, ev, s) {
       if (ev.pointerId !== undefined) { try { overlayEl.setPointerCapture(ev.pointerId); } catch (e) {} }
       break;
     }
+    case 'finish': if (App.tool?.id === 'freehand') App.tool.accept(); else App.tool?.onKey?.({ key: 'Enter' }); break;
     case 'undo': undo(); App.ui.refreshAll?.(); break;
     case 'esc': App.tool?.cancel?.(); App.tool?.hint?.(); invalidate('overlay'); break;
     case 'toggle-osnap': App.toggles.osnap = !App.toggles.osnap; App.ui.refreshAll?.(); break;

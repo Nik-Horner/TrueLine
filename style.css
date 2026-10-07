@@ -509,3 +509,24 @@ hr { border: none; border-top: 1px solid var(--stroke-hairline); margin: 4px 0; 
 ::-webkit-scrollbar { width: 8px; height: 8px; }
 ::-webkit-scrollbar-thumb { background: var(--bg-hover); border-radius: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
+
+/* Tracing workflows */
+.workflow-menu { position: relative; }
+.workflow-menu summary { cursor: pointer; padding: 5px 10px; list-style: none; }
+.workflow-menu .menu { left: 0; top: 100%; min-width: 245px; }
+.workflow-menu .menu button { display: block; width: 100%; text-align: left; padding: 8px 12px; }
+.workflow-field { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin: 12px 0; }
+.workflow-field input { width: 140px; }
+.alignment-preview { width: 100%; background: var(--bg-canvas); border: 1px solid var(--stroke-hairline); }
+.contour-issues, .recovery-list { max-height: 260px; overflow-y: auto; }
+.recovery-list button { display: block; width: 100%; text-align: left; padding: 8px; }
+#tracingBar { display: none; }
+.tracing-mode #app { grid-template: "ctx ctx ctx" 40px "viewport viewport viewport" 1fr "hints hints hints" 24px "status status status" 28px / 0 1fr 0; }
+.tracing-mode #appbar, .tracing-mode #palette, .tracing-mode #dock { display: none; }
+.tracing-mode #tracingBar { display: flex; position: fixed; right: 16px; bottom: 64px; gap: 8px; padding: 10px; z-index: 90; background: var(--bg-panel); border: 1px solid var(--stroke-hairline); border-radius: 6px; flex-wrap: wrap; max-width: calc(100vw - 32px); }
+.tracing-mode #tracingBar button { padding: 5px 8px; }
+
+.modal-actions { flex-wrap: wrap; }
+button:disabled { opacity: .45; cursor: default; }
+.assembly-piece { padding: 12px 0; border-bottom: 1px solid var(--stroke-hairline); }
+.assembly-piece button { margin: 8px 8px 0 0; }

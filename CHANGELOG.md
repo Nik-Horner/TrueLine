@@ -1,5 +1,21 @@
 # Changelog
 
+## Unreleased
+- Independent assembly pieces with two/three reference marks, rigid placement
+  previews, error checks, dedicated layers, reassembly, and undo.
+- Expanded tracing mode with floating pen-friendly controls and a finish/accept
+  action available for tablet bindings.
+- Photo rotation, rectangle-based perspective correction, and calibration from
+  multiple measured features with an error readout.
+- Original-versus-fitted trace previews with adjustable cleanup, measured
+  deviation, explicit acceptance, and discard. Auto-close now respects its toggle
+  in fitted mode.
+- Contour diagnostics before export and on demand; explicit gap bridges and
+  unbranched joins that preserve arcs, with optional joining across layers.
+- Native project saves with atomic replacement, truthful unsaved state, and
+  IndexedDB recovery history for large projects. Stable desktop storage origin,
+  bounded undo memory, and undo support for image edits.
+
 ## 3.0.2
 - **Smooth curves.** Freeform curves (waves, S-shapes, ellipses, spirals) now fit as
   tangent-continuous arc chains (biarcs) — they flow smoothly instead of looking faceted or

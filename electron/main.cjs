@@ -1,5 +1,6 @@
 // TrueLine desktop shell.
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog } = require('electron');
+const { randomUUID } = require('crypto');
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
@@ -27,8 +28,9 @@ function serve() {
         res.end(data);
       });
     });
-    // fixed port when TRUELINE_PORT is set (tests); otherwise an ephemeral port
-    const port = parseInt(process.env.TRUELINE_PORT || '0', 10) || 0;
+    // Stable origin preserves IndexedDB recovery and tablet settings across launches.
+    const port = parseInt(process.env.TRUELINE_PORT || '8390', 10) || 8390;
+    srv.on('error', err => { dialog.showErrorBox('TrueLine could not start', `The local app server could not start: ${err.message}`); app.quit(); });
     srv.listen(port, '127.0.0.1', () => resolve(srv.address().port));
   });
 }
@@ -41,7 +43,7 @@ async function createWindow() {
     backgroundColor: '#0B0E13',
     title: 'TrueLine',
     autoHideMenuBar: true,
-    webPreferences: { contextIsolation: true, sandbox: true },
+    webPreferences: { contextIsolation: true, sandbox: true, preload: path.join(__dirname, 'preload.cjs') },
   });
   win.setMenu(null);
   win.webContents.on('before-input-event', (ev, input) => {
@@ -49,6 +51,28 @@ async function createWindow() {
   });
   win.loadURL(`http://127.0.0.1:${port}/`);
 }
+
+// Native saving confirms success or cancellation before clearing the dirty indicator.
+ipcMain.handle('trueline:save-project', async (event, payload) => {
+  const win = BrowserWindow.fromWebContents(event.sender);
+  const origin = new URL(event.sender.getURL());
+  if (!win || origin.hostname !== '127.0.0.1' || event.senderFrame !== event.sender.mainFrame) throw new Error('Invalid save caller');
+  if (typeof payload?.json !== 'string' || payload.json.length > 64 * 1024 * 1024) throw new Error('Invalid or oversized project');
+  const data = JSON.parse(payload.json);
+  if (data.app !== 'trueline' || !Array.isArray(data.entities) || !Array.isArray(data.layers)) throw new Error('Invalid project');
+  const name = typeof payload.name === 'string' ? path.basename(payload.name).replace(/[<>:"/\\|?*]/g, '_') : 'drawing.trueline.json';
+  const result = await dialog.showSaveDialog(win, { defaultPath: name, filters: [{ name: 'TrueLine project', extensions: ['json'] }] });
+  if (result.canceled || !result.filePath) return { canceled: true };
+  const temporary = result.filePath + '.' + randomUUID() + '.tmp';
+  try {
+    await fs.promises.writeFile(temporary, payload.json, { encoding: 'utf8', flush: true });
+    await fs.promises.rename(temporary, result.filePath);
+    return { saved: true };
+  } catch (err) {
+    await fs.promises.unlink(temporary).catch(() => {});
+    return { saved: false, error: err.message };
+  }
+});
 
 // Auto-update: on launch, check the configured feed (build.publish url) for a newer
 // version, download it in the background, and install on quit. To PUSH an update you
@@ -62,5 +86,8 @@ function initUpdater() {
   autoUpdater.checkForUpdatesAndNotify().catch(() => {});
 }
 
-app.whenReady().then(() => { createWindow(); initUpdater(); });
+const singleInstance = app.requestSingleInstanceLock();
+if (!singleInstance) app.quit();
+app.on('second-instance', () => { const win = BrowserWindow.getAllWindows()[0]; if (win) { if (win.isMinimized()) win.restore(); win.focus(); } });
+app.whenReady().then(() => { if (singleInstance) { createWindow(); initUpdater(); } });
 app.on('window-all-closed', () => app.quit());

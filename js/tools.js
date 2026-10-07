@@ -9,6 +9,7 @@ import {
   drawingBounds, zoomFit, setUnderlay, dimGeometry, visibleEntities,
 } from './app.js';
 import * as G from './geom.js';
+import { fitTrace, traceDeviation } from './workflows.js';
 
 const reg = t => App.tools.set(t.id, t);
 const P = () => palette();
@@ -464,69 +465,66 @@ reg({
 // =================================================================
 reg({
   id: 'freehand', name: 'Trace', icon: 'freehand', key: 'S', group: 'draw',
-  raw: null,
-  activate() { toolHint('<b>TRACE</b>  draw with the pen — strokes are fitted to lines & arcs on release'); },
+  raw: null, pending: null,
+  activate() { this.hint(); },
+  hint() { toolHint(this.pending ? '<b>TRACE PREVIEW</b>  orange = original · cyan = fitted · Enter accept · Esc discard' : '<b>TRACE</b>  draw with the pen · review the fitted outline on release'); },
   options() {
     const o = App.doc.traceOpts;
+    const update = () => { if (this.pending) this.refit(); scheduleTraceSettings(); };
     return [
-      { type: 'seg', options: [{ id: 'fit', label: 'Fit lines+arcs' }, { id: 'raw', label: 'Raw polyline' }], value: o.mode, onChange: v => { o.mode = v; } },
-      { type: 'num', label: 'Tolerance', value: o.tol, unit: true, step: 0.1, onChange: v => { o.tol = Math.max(0.05, v); } },
-      { type: 'num', label: 'Corner °', value: o.cornerDeg, step: 5, onChange: v => { o.cornerDeg = Math.min(80, Math.max(15, v)); } },
-      { type: 'check', label: 'Auto-close', value: o.close, onChange: v => { o.close = v; } },
+      { type: 'seg', options: [{ id: 'fit', label: 'Fit lines+arcs' }, { id: 'raw', label: 'Raw polyline' }], value: o.mode, onChange: v => { o.mode = v; update(); } },
+      { type: 'num', label: 'Tolerance', value: o.tol, unit: true, step: 0.1, onChange: v => { if (Number.isFinite(v)) o.tol = Math.max(0.05, v); update(); } },
+      { type: 'num', label: 'Corner °', value: o.cornerDeg, step: 5, onChange: v => { if (Number.isFinite(v)) o.cornerDeg = Math.min(80, Math.max(15, v)); update(); } },
+      { type: 'check', label: 'Auto-close', value: o.close, onChange: v => { o.close = v; update(); } },
+      { type: 'check', label: 'Review', value: o.preview !== false, onChange: v => { o.preview = v; update(); } },
+      ...(this.pending ? [
+        { type: 'info', text: `Max ${this.pending.deviation.max.toFixed(3)} mm · RMS ${this.pending.deviation.rms.toFixed(3)} mm` },
+        { type: 'btn', label: 'Accept', cb: () => this.accept() },
+        { type: 'btn', label: 'Discard', cb: () => { this.cancel(); this.hint(); App.ui.refreshCtx?.(); invalidate('overlay'); } },
+      ] : []),
     ];
   },
-  onDown(p, ev, raw) { this.raw = [{ ...raw }]; },
+  onDown(p, ev, raw) { if (this.pending) { App.ui.toast?.('Accept or discard the preview before drawing another stroke'); return; } this.raw = [{ ...raw }]; },
   onMove(p, ev, raw, coalesced) {
     if (!this.raw) return;
     for (const c of coalesced || [raw]) this.raw.push({ ...c });
     invalidate('overlay');
   },
-  onUp() {
+  onUp(p, ev, raw) {
     if (!this.raw || this.raw.length < 2) { this.raw = null; return; }
-    const o = App.doc.traceOpts;
-    const pts = this.raw; this.raw = null;
-    let ents;
-    if (o.mode === 'raw') {
-      const simp = G.smoothStroke(pts, o.tol);
-      const closed = o.close && simp.length > 2 && G.dist(simp[0], simp[simp.length - 1]) < o.tol * 6;
-      ents = [{ type: 'poly', pts: closed ? simp.slice(0, -1).map(q => ({ ...q })) : simp.map(q => ({ ...q })), closed }];
-    } else {
-      ents = G.fitStroke(pts, { tol: o.tol, cornerDeg: o.cornerDeg, closeTol: o.tol * 6 });
-      ents = axisSnapPass(ents, App.doc.traceOpts.axisSnapDeg || 2);
-    }
-    if (ents && ents.length) {
-      mutate(`Traced → ${ents.length} ${ents.length > 1 ? 'entities' : 'entity'}`, () => {
-        for (const e of ents) addEntity({ ...e, id: newId(), layer: App.doc.currentLayer });
-      });
-    }
-    invalidate('overlay');
+    if (raw) this.raw.push({ ...raw });
+    this.pending = { raw: this.raw }; this.raw = null;
+    this.refit();
+    if (App.doc.traceOpts.preview === false) this.accept();
   },
-  onKey(ev) { if (ev.key === 'Escape' && this.raw) { this.raw = null; invalidate('overlay'); return true; } },
-  cancel() { this.raw = null; },
+  refit() {
+    this.pending.entities = fitTrace(this.pending.raw, App.doc.traceOpts);
+    this.pending.deviation = traceDeviation(this.pending.raw, this.pending.entities);
+    this.hint(); App.ui.refreshCtx?.(); invalidate('overlay');
+  },
+  accept() {
+    if (!this.pending) return;
+    const ents = this.pending.entities;
+    if (ents.length) mutate(`Traced → ${ents.length} entities`, () => {
+      for (const e of ents) {
+        const added = addEntity({ ...e, id: newId(), layer: App.doc.currentLayer });
+      }
+    });
+    this.pending = null; this.hint(); App.ui.refreshCtx?.(); invalidate('overlay');
+  },
+  onKey(ev) {
+    if (ev.key === 'Enter' && this.pending) { this.accept(); return true; }
+    if (ev.key === 'Escape' && (this.raw || this.pending)) { this.cancel(); this.hint(); App.ui.refreshCtx?.(); invalidate('overlay'); return true; }
+  },
+  cancel() { this.raw = null; this.pending = null; },
   preview(cx) {
-    if (!this.raw || this.raw.length < 2) return;
-    cx.strokeStyle = P().accent;
-    cx.lineWidth = 1.4;
-    cx.beginPath();
-    const s0 = toScreen(this.raw[0]);
-    cx.moveTo(s0.x, s0.y);
-    for (let i = 1; i < this.raw.length; i++) { const s = toScreen(this.raw[i]); cx.lineTo(s.x, s.y); }
-    cx.stroke();
+    const pts = this.raw || this.pending?.raw;
+    if (!pts || pts.length < 2) return;
+    ghost(cx, { type: 'poly', pts, closed: false }, this.pending ? '#f5ad56' : P().accent);
+    if (this.pending) for (const e of this.pending.entities) ghost(cx, e, '#54dbe7');
   },
 });
-
-function axisSnapPass(ents, deg) {
-  const tol = deg * Math.PI / 180;
-  return ents.map(e => {
-    if (e.type !== 'line') return e;
-    const ang = Math.atan2(e.b.y - e.a.y, e.b.x - e.a.x);
-    for (const target of [0, Math.PI / 2, Math.PI, -Math.PI / 2, -Math.PI]) {
-      const d = ang - target;
-      if (Math.abs(d) < tol) return G.rotateEnt(e, { x: (e.a.x + e.b.x) / 2, y: (e.a.y + e.b.y) / 2 }, -d);
-    }
-    return e;
-  });
-}
+function scheduleTraceSettings() { App.ui.setDirty?.(true); App.ui.scheduleAutosave?.(); }
 
 // =================================================================
 // MOVE / COPY / ROTATE / SCALE / MIRROR (selection-based transforms)
@@ -1078,6 +1076,11 @@ reg({
     if (hasContent) {
       mutate(`Set scale ×${f.toFixed(3)}`, () => {
         for (const e of App.doc.entities) Object.assign(e, G.scaleEnt(e, this.a, f));
+        const scalePoint = p => ({ x: this.a.x + (p.x - this.a.x) * f, y: this.a.y + (p.y - this.a.y) * f });
+        if (App.doc.section) App.doc.section.target = App.doc.section.target.map(scalePoint);
+        for (const piece of App.doc.assemblies || []) {
+          piece.target = piece.target.map(scalePoint); piece.source = piece.source.map(scalePoint); piece.maxError *= f;
+        }
         const u = App.doc.underlay;
         if (u) { u.wMM *= f; u.hMM *= f; u.x = this.a.x + (u.x - this.a.x) * f; u.y = this.a.y + (u.y - this.a.y) * f; }
       });

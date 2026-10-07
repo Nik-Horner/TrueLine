@@ -1,10 +1,10 @@
 // TrueLine UI: DOM chrome, panels, exports. app.js stays DOM-free apart from canvases.
 import {
   App, newDoc, setTool, invalidate, invalidateView, zoomFit, zoomPhysical, zoomAt,
-  fmt, fmtU, parseNum, undo, redo, deleteSelection, setSelection, selectedEntities,
+  fmt, fmtU, parseNum, undo, redo, beginChange, commitChange, deleteSelection, setSelection, selectedEntities,
   decomposeForExport, projectJSON, loadProject, scheduleAutosave, setUnderlay,
   reloadUnderlayImg, k, toScreen, newId, mutate, addEntity, drawingBounds,
-  visibleEntities, currentLayer, layerOf, viewSize, setCalibration,
+  visibleEntities, currentLayer, layerOf, viewSize, setCalibration, flushAutosave,
 } from './app.js';
 import { TOOL_GROUPS } from './tools.js';
 import { ICONS, icon } from './icons.js';
@@ -12,6 +12,7 @@ import { writeDXF, readDXF } from './dxf.js';
 import { writePDF } from './pdf.js';
 import { startTour, tourDone } from './tour.js';
 import * as G from './geom.js';
+import { clearOlderRevisions } from './recovery.js';
 
 const $ = id => document.getElementById(id);
 function el(tag, attrs = {}, ...kids) {
@@ -187,7 +188,7 @@ function refreshLayers() {
     const eyeBtn = el('button', { class: 'lr-btn' + (layer.visible ? ' on' : ''), html: icon(layer.visible ? 'eye' : 'eye-off'), title: 'Visibility' });
     eyeBtn.addEventListener('click', ev => { ev.stopPropagation(); mutate(layer.visible ? 'Hide layer' : 'Show layer', () => { layer.visible = !layer.visible; }); refreshLayers(); invalidate('scene'); });
     row.append(lockBtn, eyeBtn);
-    row.addEventListener('click', () => { App.doc.currentLayer = layer.id; refreshLayers(); scheduleAutosave(); });
+    row.addEventListener('click', () => { App.doc.currentLayer = layer.id; refreshLayers(); setDirty(true); scheduleAutosave(); });
     list.append(row);
   }
 }
@@ -257,15 +258,16 @@ function refreshProps() {
     // document properties
     const g = el('div', { class: 'prop-grid' });
     const gridInp = el('input', { type: 'number', step: 'any', value: +fmt(App.doc.gridStep) });
-    gridInp.addEventListener('change', () => { const v = parseNum(gridInp.value); if (v > 0) { App.doc.gridStep = v; invalidate('grid'); scheduleAutosave(); } });
+    gridInp.addEventListener('change', () => { const v = parseNum(gridInp.value); if (v > 0) { App.doc.gridStep = v; invalidate('grid'); setDirty(true); scheduleAutosave(); } });
     g.append(el('label', {}, `Grid (${App.doc.units})`), gridInp);
     if (App.doc.underlay) {
       const op = el('input', { type: 'range', min: 0.05, max: 1, step: 0.05, value: App.doc.underlay.opacity });
-      op.addEventListener('input', () => { App.doc.underlay.opacity = +op.value; invalidate('grid'); scheduleAutosave(); });
+      op.addEventListener('input', () => { beginChange(); App.doc.underlay.opacity = +op.value; invalidate('grid'); });
+      op.addEventListener('change', () => commitChange('Image opacity'));
       g.append(el('label', {}, 'Underlay α'), op);
       const vis = el('input', { type: 'checkbox' });
       vis.checked = App.doc.underlay.visible;
-      vis.addEventListener('change', () => { App.doc.underlay.visible = vis.checked; invalidate('grid'); scheduleAutosave(); });
+      vis.addEventListener('change', () => { mutate('Image visibility', () => { App.doc.underlay.visible = vis.checked; }); });
       g.append(el('label', {}, 'Underlay'), vis);
     }
     box.append(el('div', { class: 'prop-group' }, el('div', { class: 'prop-title', html: 'Document' }), g));
@@ -364,7 +366,7 @@ export const tabletCfg = JSON.parse(localStorage.getItem('tl-tablet') || 'null')
 };
 function saveTablet() { localStorage.setItem('tl-tablet', JSON.stringify(tabletCfg)); }
 const PEN_ACTIONS = [
-  ['cycle-tool', 'Next tool'], ['pan', 'Pan'], ['undo', 'Undo'], ['esc', 'Esc / cancel'],
+  ['finish', 'Finish / accept trace'], ['cycle-tool', 'Next tool'], ['pan', 'Pan'], ['undo', 'Undo'], ['esc', 'Esc / cancel'],
   ['toggle-osnap', 'Toggle OSNAP'], ['repeat', 'Repeat last tool'], ['delete', 'Delete hovered'], ['none', 'Nothing'],
 ];
 let listening = null;
@@ -450,9 +452,9 @@ function wireChips() {
     popover($('chipUnits'), pop => {
       pop.append(el('h4', { html: 'Units & precision' }));
       const us = el('select', {}, ...['mm', 'cm', 'in'].map(u => el('option', { value: u, ...(App.doc.units === u ? { selected: '' } : {}) }, u)));
-      us.addEventListener('change', () => { App.doc.units = us.value; refreshAll(); scheduleAutosave(); });
+      us.addEventListener('change', () => { App.doc.units = us.value; refreshAll(); setDirty(true); scheduleAutosave(); });
       const pr = el('select', {}, ...[0, 1, 2, 3, 4].map(p => el('option', { value: p, ...(App.doc.precision === p ? { selected: '' } : {}) }, `${p} decimals`)));
-      pr.addEventListener('change', () => { App.doc.precision = +pr.value; refreshAll(); scheduleAutosave(); });
+      pr.addEventListener('change', () => { App.doc.precision = +pr.value; refreshAll(); setDirty(true); scheduleAutosave(); });
       pop.append(el('label', {}, 'Units ', us), el('label', {}, 'Precision ', pr));
     });
   });
@@ -646,7 +648,8 @@ function pdfOut() {
   return writePDF([{ widthMM: W, heightMM: H, paths, texts }]);
 }
 
-function doExport(kind) {
+function doExport(kind, reviewed = false) {
+  if (!reviewed && App.ui.reviewContours) return App.ui.reviewContours(() => doExport(kind, true));
   const name = (App.doc.name || 'drawing').replace(/[^\w.-]+/g, '_');
   try {
     if (kind === 'dxf') {
@@ -725,22 +728,43 @@ function importUnderlay(file) {
       const wMM = img.naturalWidth * 25.4 / 96, hMM = img.naturalHeight * 25.4 / 96;
       const c = { x: App.view.x + viewSize().w / k() / 2, y: App.view.y + viewSize().h / k() / 2 };
       setUnderlay({ dataURL: rd.result, x: c.x - wMM / 2, y: c.y - hMM / 2, wMM, hMM, opacity: 0.5, visible: true }, img);
-      toast('Underlay placed — use Calibrate → Underlay to set its true scale');
+      toast('Image placed — Tracing → Calibrate photo measurements sets its true scale');
       refreshProps();
     };
     img.src = rd.result;
   };
   rd.readAsDataURL(file);
 }
-function saveProject() {
-  download(projectJSON(), (App.doc.name || 'drawing') + '.trueline.json', 'application/json');
-  setDirty(false);
-  msg('Project saved');
+let savingProject = false;
+async function saveProject() {
+  if (savingProject) return;
+  if (App.tools.get('freehand')?.pending) { toast('Accept or discard the trace preview before saving'); return; }
+  savingProject = true;
+  const json = projectJSON(), name = (App.doc.name || 'drawing').replace(/[^\w.-]+/g, '_') + '.trueline.json';
+  try {
+    if (window.trueLineFiles) {
+      const result = await window.trueLineFiles.saveProject({ json, name });
+      if (result.canceled) return;
+      if (!result.saved) throw new Error(result.error || 'File was not saved');
+      if (projectJSON() === json) setDirty(false);
+      msg('Project file saved');
+    } else {
+      download(json, name, 'application/json');
+      // Browser downloads provide no completion/cancellation signal.
+      toast('Project download started. Confirm the file was saved before closing.', 6000);
+    }
+    await flushAutosave();
+  } catch (err) { toast('Save failed: ' + err.message, 8000); }
+  finally { savingProject = false; }
 }
-function setDirty(d) { $('dirty').hidden = !d; }
+function setDirty(d) {
+  App.fileDirty = d; $('dirty').hidden = !d;
+  try { localStorage.setItem('tl-file-dirty', String(d)); } catch {}
+  App.ui.recoveryStatus?.();
+}
 
 // ---------------------------------------------------------------- modals
-function showModal(build) {
+export function showModal(build) {
   const root = $('modalRoot');
   root.hidden = false;
   const box = $('modalBox');
@@ -748,7 +772,7 @@ function showModal(build) {
   build(box);
   $('modalScrim').onclick = hideModal;
 }
-function hideModal() { $('modalRoot').hidden = true; }
+export function hideModal() { $('modalRoot').hidden = true; }
 
 // ---- editable tool key bindings ----
 // main.js matches tools by their live `tool.key`, so rebinding = mutate tool.key + persist.
@@ -934,7 +958,7 @@ function settingsModal() {
     const ds = App.doc.dimStyle;
     const mk = (val, cb) => {
       const inp = el('input', { type: 'number', step: 'any', value: val });
-      inp.addEventListener('change', () => { const v = parseFloat(inp.value); if (!isNaN(v) && v > 0) { cb(v); invalidate('scene'); scheduleAutosave(); } });
+      inp.addEventListener('change', () => { const v = parseFloat(inp.value); if (!isNaN(v) && v > 0) { cb(v); invalidate('scene'); setDirty(true); scheduleAutosave(); } });
       return inp;
     };
     add('Dim text height (mm)', mk(ds.textH, v => { ds.textH = v; }));
@@ -948,8 +972,11 @@ function settingsModal() {
       updateCalChip(); invalidateView(); hideModal();
       toast('Calibration reset to 96 dpi default');
     });
-    const wipe = el('button', { class: 'btn-ghost', html: 'Clear autosaved document' });
-    wipe.addEventListener('click', () => { localStorage.removeItem('tl-doc'); toast('Autosave cleared (reload to start fresh)'); });
+    const wipe = el('button', { class: 'btn-ghost', html: 'Clear older recovery revisions' });
+    wipe.addEventListener('click', async () => {
+      try { await flushAutosave(); await clearOlderRevisions(); localStorage.removeItem('tl-history'); toast('Older recovery revisions cleared; latest drawing kept'); }
+      catch (err) { toast('Could not clear recovery history: ' + err.message); }
+    });
     box.append(el('div', { class: 'modal-actions' }, reset, wipe, el('button', { class: 'btn-accent', html: 'Close', onclick: hideModal })));
   });
 }
@@ -974,7 +1001,7 @@ function wireAppBar() {
   document.querySelectorAll('[data-cmd]').forEach(b => b.addEventListener('click', () => {
     const cmd = b.dataset.cmd;
     if (cmd === 'tour') startTour();
-    else if (cmd === 'new') { if (confirm('Start a new drawing? Unsaved changes are kept in autosave until you draw.')) { newDoc(); refreshAll(); zoomFit(); } }
+    else if (cmd === 'new') { if (confirm('Start a new drawing? The current drawing is kept in recovery history.')) { newDoc(); refreshAll(); zoomFit(); } }
     else if (cmd === 'open') openFile();
     else if (cmd === 'save') saveProject();
     else if (cmd === 'underlay') openFile();
@@ -990,7 +1017,7 @@ function wireAppBar() {
     dn.focus();
     document.execCommand?.('selectAll');
   });
-  dn.addEventListener('blur', () => { dn.contentEditable = 'false'; App.doc.name = dn.textContent.trim() || 'untitled'; scheduleAutosave(); });
+  dn.addEventListener('blur', () => { dn.contentEditable = 'false'; App.doc.name = dn.textContent.trim() || 'untitled'; setDirty(true); scheduleAutosave(); });
   dn.addEventListener('keydown', ev => { ev.stopPropagation(); if (ev.key === 'Enter') { ev.preventDefault(); dn.blur(); } });
 
   $('exportBtn').textContent = 'Export ' + (localStorage.getItem('tl-lastexport') || 'dxf').toUpperCase();
@@ -1042,7 +1069,7 @@ export function initUI() {
     moveSelectionToLayer,
     penIndicator, tabletCaptureKey,
     shortcutOverlay, helpMenu, startTour,
-    doExport, openFile, saveProject,
+    doExport, openFile, saveProject, showModal, hideModal, scheduleAutosave, undo,
   };
   refreshAll();
 }

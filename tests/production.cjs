@@ -224,6 +224,7 @@ const check = (name, cond, extra = '') => { results.push({ name, pass: !!cond, e
     URL.revokeObjectURL = () => {};
     HTMLAnchorElement.prototype.click = function () {};
     window.__m.App.ui.doExport(fmt);
+    document.querySelectorAll('#modalBox button').forEach(b => { if (b.textContent === 'Export drawing') b.click(); });
     setTimeout(async () => {
       URL.createObjectURL = origCreate; URL.revokeObjectURL = origRevoke; HTMLAnchorElement.prototype.click = origClick;
       if (!blob) return res({ size: 0, text: '' });

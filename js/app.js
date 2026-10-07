@@ -1,9 +1,12 @@
 // TrueLine core: document, view, rendering, snapping, input routing.
 // Frame: world = true millimeters, Y-down. k() = screen px per mm.
 import * as G from './geom.js';
+import { readRevisions, writeRevision } from './recovery.js';
 
 export const App = {
   doc: null,
+  fileDirty: false,
+  recoveryAt: null,
   view: { x: -30, y: -30, z: 1 },
   CAL: +localStorage.getItem('tl-cal') || 96 / 25.4,   // px per mm at zoom 1
   calibrated: !!localStorage.getItem('tl-cal'),
@@ -38,6 +41,8 @@ export const toWorld = (sx, sy) => ({ x: sx / k() + App.view.x, y: sy / k() + Ap
 
 // ---------------------------------------------------------------- document
 export function newDoc() {
+  if (App.doc) flushAutosave();
+  App.tool?.cancel?.();
   App.doc = {
     v: 3,
     name: 'untitled',
@@ -47,9 +52,11 @@ export function newDoc() {
     layers: [{ id: 'L0', name: 'Layer 0', color: '#DEE3EC', ltype: 'continuous', visible: true, locked: false }],
     currentLayer: 'L0',
     dimStyle: { textH: 3.5, arrow: 2.5, extOff: 1.5, extOver: 1.5 },
-    traceOpts: { tol: 0.8, cornerDeg: 40, axisSnapDeg: 2, close: true, mode: 'fit' },
+    traceOpts: { tol: 0.8, cornerDeg: 40, axisSnapDeg: 2, close: true, mode: 'fit', preview: true },
+    section: null, assemblies: [],
     underlay: null,               // {dataURL, x, y, wMM, hMM, opacity, visible}
   };
+  App.fileDirty = false; pendingSnap = null; App.ui.setDirty?.(false);
   App.selection.clear();
   App.undoStack = []; App.redoStack = [];
   underlayImg = null;
@@ -76,21 +83,27 @@ export function selectableEntities() {
 
 // ---------------------------------------------------------------- undo/redo
 function snapshot() {
-  return JSON.stringify({ entities: App.doc.entities, layers: App.doc.layers, currentLayer: App.doc.currentLayer });
+  return JSON.stringify({ doc: App.doc, CAL: App.CAL, calibrated: App.calibrated });
 }
 function restore(s) {
   const d = JSON.parse(s);
-  App.doc.entities = d.entities; App.doc.layers = d.layers; App.doc.currentLayer = d.currentLayer;
+  App.doc = d.doc; App.CAL = d.CAL; App.calibrated = d.calibrated;
+  if (App.calibrated) localStorage.setItem('tl-cal', App.CAL); else localStorage.removeItem('tl-cal');
+  reloadUnderlayImg(); App.ui.updateCalChip?.();
   App.selection = new Set([...App.selection].filter(id => App.doc.entities.some(e => e.id === id)));
 }
 let pendingSnap = null;
 // first-wins: a mutate fired mid-drag must not clobber the live pre-drag snapshot
+function trimUndoHistory(stack) {
+  let bytes = stack.reduce((sum, s) => sum + s.length * 2, 0);
+  while (stack.length > 1 && (stack.length > 200 || bytes > 64 * 1024 * 1024)) bytes -= stack.shift().length * 2;
+}
 export function beginChange() { if (pendingSnap === null) pendingSnap = snapshot(); }
 export function commitChange(label) {
   if (pendingSnap === null) return;
   if (pendingSnap === snapshot()) { pendingSnap = null; return; }
   App.undoStack.push(pendingSnap);
-  if (App.undoStack.length > 200) App.undoStack.shift();
+  trimUndoHistory(App.undoStack);
   App.redoStack = [];
   pendingSnap = null;
   markDirtyDoc(label);
@@ -100,20 +113,21 @@ export function abortChange() {
 }
 export function mutate(label, fn) { beginChange(); fn(); commitChange(label); }
 export function undo() {
+  if (App.tools.get('freehand')?.pending) { App.tools.get('freehand').cancel(); App.ui.refreshCtx?.(); invalidate('overlay'); return; }
   if (pendingSnap !== null) { abortChange(); return; }
   if (!App.undoStack.length) return;
-  App.redoStack.push(snapshot());
+  App.redoStack.push(snapshot()); trimUndoHistory(App.redoStack);
   restore(App.undoStack.pop());
   markDirtyDoc('undo');
 }
 export function redo() {
   if (!App.redoStack.length) return;
-  App.undoStack.push(snapshot());
+  App.undoStack.push(snapshot()); trimUndoHistory(App.undoStack);
   restore(App.redoStack.pop());
   markDirtyDoc('redo');
 }
 function markDirtyDoc(label) {
-  invalidate('scene');
+  invalidate('all');
   App.ui.refreshLayers?.(); App.ui.refreshProps?.(); App.ui.refreshUndo?.();
   App.ui.setDirty?.(true);
   scheduleAutosave();
@@ -449,7 +463,7 @@ function gridSpacing() {
 }
 
 let underlayImg = null;
-export function setUnderlay(u, img) { App.doc.underlay = u; underlayImg = img || null; invalidate('grid'); scheduleAutosave(); }
+export function setUnderlay(u, img) { mutate(u ? 'Image updated' : 'Image removed', () => { App.doc.underlay = u; }); underlayImg = img || null; invalidate('grid'); }
 export function getUnderlayImg() { return underlayImg; }
 export async function reloadUnderlayImg() {
   if (!App.doc.underlay) { underlayImg = null; return; }
@@ -468,7 +482,8 @@ function drawGrid() {
   if (u && u.visible && underlayImg && underlayImg.complete && underlayImg.naturalWidth) {
     const s = toScreen({ x: u.x, y: u.y });
     ctxG.globalAlpha = u.opacity;
-    ctxG.drawImage(underlayImg, s.x, s.y, u.wMM * k(), u.hMM * k());
+    ctxG.save(); ctxG.translate(s.x, s.y); ctxG.rotate(u.rotation || 0);
+    ctxG.drawImage(underlayImg, 0, 0, u.wMM * k(), u.hMM * k()); ctxG.restore();
     ctxG.globalAlpha = 1;
   }
 
@@ -792,6 +807,7 @@ export function addEntity(e) {
   e.id = e.id || newId();
   e.layer = e.layer || App.doc.currentLayer;
   App.doc.entities.push(e);
+  if (App.doc.section && !App.doc.section.existing && e.layer === App.doc.section.layer) App.doc.section.ids.push(e.id);
   return e;
 }
 export function replaceEntity(oldE, newEnts) {
@@ -803,30 +819,67 @@ export function replaceEntity(oldE, newEnts) {
 
 // ---------------------------------------------------------------- persistence
 let autosaveTimer = null;
+let revisionClock = 0;
+export function recoveryHistory() {
+  try { return JSON.parse(localStorage.getItem('tl-history') || '[]'); } catch { return []; }
+}
+export async function flushAutosave() {
+  clearTimeout(autosaveTimer);
+  if (!App.doc) return;
+  const json = JSON.stringify(App.doc), now = revisionClock = Math.max(Date.now(), revisionClock + 1), fileDirty = App.fileDirty;
+  const revision = { at: now, name: App.doc.name, json, fileDirty };
+  let fallback = false;
+  try {
+    try { localStorage.setItem('tl-doc', json); }
+    catch { localStorage.removeItem('tl-history'); localStorage.setItem('tl-doc', json); }
+    localStorage.setItem('tl-recovery-at', String(now));
+    localStorage.setItem('tl-file-dirty', String(fileDirty));
+    fallback = true;
+  } catch {} // Photos may exceed localStorage's quota; IndexedDB remains primary.
+  try {
+    await writeRevision(revision);
+    App.recoveryAt = now; App.ui.recoveryStatus?.();
+  } catch {
+    if (fallback) { App.recoveryAt = now; App.ui.recoveryStatus?.(); App.ui.toast?.('Recovery history unavailable; latest drawing backed up. Save a project file.', 6500); }
+    else App.ui.toast?.('Recovery backup failed — save your project file now', 8000);
+  }
+}
 export function scheduleAutosave() {
   clearTimeout(autosaveTimer);
-  autosaveTimer = setTimeout(() => {
-    try {
-      localStorage.setItem('tl-doc', JSON.stringify(App.doc));
-      App.ui.setDirty?.(false);
-    } catch (e) {
-      App.ui.toast?.('Autosave failed (storage full) — use File → Save to keep your work');
-    }
-  }, 700);
+  autosaveTimer = setTimeout(flushAutosave, 700);
 }
-export function loadAutosaved() {
+export async function loadAutosaved() {
+  let revision;
+  try { revision = (await readRevisions())[0]; } catch {}
+  const localAt = +localStorage.getItem('tl-recovery-at') || 0;
   try {
+    if (revision && revision.at >= localAt) {
+      const d = JSON.parse(revision.json);
+      if (d.v === 3 && Array.isArray(d.entities) && d.layers?.length) {
+        App.doc = d; App.fileDirty = revision.fileDirty !== false; App.recoveryAt = revision.at; return true;
+      }
+    }
     const d = JSON.parse(localStorage.getItem('tl-doc'));
-    if (d && d.v === 3 && Array.isArray(d.entities)) { App.doc = d; return true; }
-  } catch (e) {}
+    if (d && d.v === 3 && Array.isArray(d.entities) && Array.isArray(d.layers) && d.layers.length) {
+      App.doc = d;
+      App.fileDirty = localStorage.getItem('tl-file-dirty') !== 'false';
+      App.recoveryAt = +localStorage.getItem('tl-recovery-at') || null;
+      return true;
+    }
+  } catch {}
   return false;
 }
 export function projectJSON() { return JSON.stringify({ app: 'trueline', ...App.doc }, null, 1); }
 export function loadProject(json) {
   const d = JSON.parse(json);
-  if (!Array.isArray(d.entities) || !Array.isArray(d.layers)) throw new Error('not a TrueLine project');
+  if (!Array.isArray(d.entities) || !Array.isArray(d.layers) || !d.layers.length) throw new Error('not a TrueLine project');
   delete d.app;
-  App.doc = { ...App.doc, ...d, v: 3 };
+  if (App.doc) flushAutosave();
+  App.tool?.cancel?.(); pendingSnap = null;
+  App.doc = { ...App.doc, ...d, v: 3, section: d.section || null, assemblies: d.assemblies || [], traceOpts: { tol: 0.8, cornerDeg: 40, axisSnapDeg: 2, close: true, mode: 'fit', preview: true, ...d.traceOpts } };
+  App.fileDirty = false;
+  App.ui.setDirty?.(false);
+  scheduleAutosave();
   App.selection.clear();
   App.undoStack = []; App.redoStack = [];
   reloadUnderlayImg();
@@ -845,10 +898,11 @@ export function setCalibration(pxPerMM) {
 
 // ---------------------------------------------------------------- tool switching
 export function setTool(id, opts) {
+  if (App.tool?.id === 'freehand' && App.tool.pending) { App.ui.toast?.('Accept or discard the trace preview before switching tools'); return; }
   const t = App.tools.get(id);
   if (!t) return;
   if (App.tool?.cancel) App.tool.cancel(true);
-  if (App.tool && App.tool.id !== 'select' && App.tool.id !== 'pan') App.lastToolId = App.tool.id;
+  if (App.tool?.group && App.tool.id !== 'select' && App.tool.id !== 'pan') App.lastToolId = App.tool.id;
   App.tool = t;
   t.activate?.(opts);
   App.ui.onToolChange?.(t);

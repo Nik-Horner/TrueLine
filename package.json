@@ -8,7 +8,8 @@
   "private": true,
   "scripts": {
     "start": "electron .",
-    "test": "node tests/run-tests.mjs",
+    "test": "node tests/run-tests.mjs && node tests/workflows.mjs && node tests/native-save.cjs",
+    "test:upgrades": "node tests/upgrades.cjs",
     "test:app": "node tests/production.cjs dist-test",
     "pack": "node build/pack.mjs",
     "dist": "node build/pack.mjs && tar -a -c -f dist/TrueLine-win-x64.zip -C dist TrueLine-win32-x64",
