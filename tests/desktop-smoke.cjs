@@ -20,12 +20,21 @@ const {spawn,execFileSync}=require('node:child_process'),puppeteer=require('pupp
   await page.reload();await page.waitForFunction(async()=>(await import('/js/app.js')).App.ready);
   fs.mkdirSync(path.join('test-artifacts','native-'+process.platform),{recursive:true});
   await page.evaluate(async()=>{localStorage.setItem('tl-tour-done','1');localStorage.setItem('tl-frdone','1');window.m=await import('/js/app.js');m.newDoc();m.mutate('Native shortcut test',()=>m.addEntity({type:'circle',c:{x:5,y:5},r:2}));});
+  if(process.platform==='darwin' && process.env.TRUELINE_EXECUTABLE) {
+   // A copied .app launched by its executable may remain a background app.
+   // Activate through Launch Services, as Finder does, before native menu keys.
+   execFileSync('/usr/bin/open',['-a',path.resolve(path.dirname(executable),'../..')]);
+  }
+  await page.bringToFront();await page.focus('#cvOverlay');
   const modifier=process.platform==='darwin'?'Meta':'Control';await page.keyboard.down(modifier);await page.keyboard.press('z');await page.keyboard.up(modifier);
   await page.waitForFunction(()=>m.App.doc.entities.length===0);await page.keyboard.down(modifier);await page.keyboard.down('Shift');await page.keyboard.press('z');await page.keyboard.up('Shift');await page.keyboard.up(modifier);
   await page.waitForFunction(()=>m.App.doc.entities.length===1);await page.evaluate(()=>m.App.fileDirty=false);
   browser.disconnect();browser=null;
   execFileSync(process.execPath,[path.join(__dirname,'production.cjs'),path.join('test-artifacts','native-'+process.platform)],{env:{...process.env,CDP_URL:'http://127.0.0.1:9238',APP_URL:'http://127.0.0.1:8438/'},stdio:'inherit',timeout:90000});
   console.log('PASS: native Electron startup, '+modifier+' undo/redo and general production workflows');
+ }catch(error){
+  console.error('Electron diagnostics:',fs.readFileSync(path.join(directory,'electron.log'),'utf8'));
+  throw error;
  }finally{
   browser?.disconnect();
   if(process.platform==='win32')spawn('taskkill',['/pid',String(child.pid),'/T','/F'],{stdio:'ignore'});
