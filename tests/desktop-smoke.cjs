@@ -4,7 +4,9 @@ const {spawn,execFileSync}=require('node:child_process'),puppeteer=require('pupp
 (async()=>{
  const directory=fs.mkdtempSync(path.join(os.tmpdir(),'trueline-native-'));
  const log=fs.openSync(path.join(directory,'electron.log'),'w');
- const child=spawn(require('electron'),['.', '--no-sandbox','--disable-gpu','--remote-debugging-port=9238',`--user-data-dir=${directory}`],{cwd:path.resolve(__dirname,'..'),env:{...process.env,TRUELINE_PORT:'8438'},stdio:['ignore',log,log]});
+ const executable=process.env.TRUELINE_EXECUTABLE||require('electron');
+ const launchArgs=process.env.TRUELINE_EXECUTABLE?[]:['.','--no-sandbox','--disable-gpu'];
+ const child=spawn(executable,[...launchArgs,'--remote-debugging-port=9238',`--user-data-dir=${directory}`],{cwd:path.resolve(__dirname,'..'),env:{...process.env,TRUELINE_PORT:'8438'},stdio:['ignore',log,log]});
  let browser;
  try{
   const until=Date.now()+45000;
