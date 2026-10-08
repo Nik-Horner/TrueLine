@@ -29,8 +29,9 @@
           <button data-cmd="open">Open project / DXF…<kbd>Ctrl+O</kbd></button>
           <button data-cmd="save">Save project<kbd>Ctrl+S</kbd></button>
           <hr>
-          <button data-cmd="underlay">Import image underlay…</button>
-          <button data-cmd="underlay-clear">Remove underlay</button>
+          <button data-cmd="upload-image">Upload image…</button>
+          <button data-cmd="autotrace">Auto-trace image outline</button>
+          <button data-cmd="underlay-clear">Remove image underlay</button>
           <hr>
           <button data-cmd="export-dxf">Export DXF</button>
           <button data-cmd="export-svg">Export SVG</button>
@@ -149,6 +150,7 @@
 <div id="popRoot"></div>
 
 <input type="file" id="filePick" hidden>
+<input type="file" id="imagePick" accept="image/*" hidden>
 
 <script type="module" src="js/main.js"></script>
 </body>

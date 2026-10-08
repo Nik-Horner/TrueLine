@@ -1,9 +1,10 @@
+import { isMac, localizeShortcuts } from './platform.js';
 // TrueLine UI: DOM chrome, panels, exports. app.js stays DOM-free apart from canvases.
 import {
   App, newDoc, setTool, invalidate, invalidateView, zoomFit, zoomPhysical, zoomAt,
   fmt, fmtU, parseNum, undo, redo, beginChange, commitChange, deleteSelection, setSelection, selectedEntities,
   decomposeForExport, projectJSON, loadProject, scheduleAutosave, setUnderlay,
-  reloadUnderlayImg, k, toScreen, newId, mutate, addEntity, drawingBounds,
+  reloadUnderlayImg, getUnderlayImg, k, toScreen, newId, mutate, addEntity, drawingBounds,
   visibleEntities, currentLayer, layerOf, viewSize, setCalibration, flushAutosave,
 } from './app.js';
 import { TOOL_GROUPS } from './tools.js';
@@ -13,6 +14,7 @@ import { writePDF } from './pdf.js';
 import { startTour, tourDone } from './tour.js';
 import * as G from './geom.js';
 import { clearOlderRevisions } from './recovery.js';
+import { createOutlineEditor, circlePoints, closestOnSegment, outlineIssue } from './outline-editor.js';
 
 const $ = id => document.getElementById(id);
 function el(tag, attrs = {}, ...kids) {
@@ -675,7 +677,7 @@ function doExport(kind, reviewed = false) {
 // ---------------------------------------------------------------- file ops
 function openFile() {
   const fp = $('filePick');
-  fp.accept = '.json,.dxf,.png,.jpg,.jpeg';
+  fp.accept = '.json,.dxf';
   fp.onchange = async () => {
     const file = fp.files[0];
     fp.value = '';
@@ -686,11 +688,37 @@ function openFile() {
       catch (err) { toast('Open failed: ' + err.message); }
     } else if (lower.endsWith('.dxf')) {
       importDXF(await file.text(), file.name);
-    } else {
-      importUnderlay(file);
     }
   };
   fp.click();
+}
+function openImageFile() {
+  const fp = $('imagePick');
+  fp.onchange = () => {
+    const file = fp.files[0];
+    fp.value = '';
+    if (file) importUnderlay(file);
+  };
+  fp.click();
+}
+function zoomUnderlay(u) {
+  const origin = { x: u.x, y: u.y };
+  const corners = [
+    origin,
+    { x: u.x + u.wMM, y: u.y },
+    { x: u.x + u.wMM, y: u.y + u.hMM },
+    { x: u.x, y: u.y + u.hMM },
+  ].map(p => G.rotatePt(p, origin, u.rotation || 0));
+  const b = {
+    minX: Math.min(...corners.map(p => p.x)), maxX: Math.max(...corners.map(p => p.x)),
+    minY: Math.min(...corners.map(p => p.y)), maxY: Math.max(...corners.map(p => p.y)),
+  };
+  const { w, h } = viewSize(), bw = Math.max(b.maxX - b.minX, 1), bh = Math.max(b.maxY - b.minY, 1);
+  App.view.z = Math.min(400, Math.max(0.005, Math.min(w / (bw * App.CAL) * 0.85, h / (bh * App.CAL) * 0.85)));
+  const scale = App.view.z * App.CAL;
+  App.view.x = b.minX - (w / scale - bw) / 2;
+  App.view.y = b.minY - (h / scale - bh) / 2;
+  invalidateView();
 }
 function importDXF(text, fname) {
   try {
@@ -721,19 +749,376 @@ function importDXF(text, fname) {
   }
 }
 function importUnderlay(file) {
+  if (!file?.size || file.size > 24 * 1024 * 1024) { toast('Choose an image file smaller than 24 MB.'); return; }
   const rd = new FileReader();
+  rd.onerror = () => toast('Could not read that image file');
   rd.onload = () => {
     const img = new Image();
+    img.onerror = () => toast('That image could not be decoded');
     img.onload = () => {
+      if (!img.naturalWidth || !img.naturalHeight || img.naturalWidth * img.naturalHeight > 64 * 1024 * 1024) { toast('Choose an image smaller than 64 megapixels.'); return; }
       const wMM = img.naturalWidth * 25.4 / 96, hMM = img.naturalHeight * 25.4 / 96;
       const c = { x: App.view.x + viewSize().w / k() / 2, y: App.view.y + viewSize().h / k() / 2 };
-      setUnderlay({ dataURL: rd.result, x: c.x - wMM / 2, y: c.y - hMM / 2, wMM, hMM, opacity: 0.5, visible: true }, img);
-      toast('Image placed — Tracing → Calibrate photo measurements sets its true scale');
+      const u = { dataURL: rd.result, x: c.x - wMM / 2, y: c.y - hMM / 2, wMM, hMM, opacity: 0.5, visible: true, rotation: 0 };
+      setUnderlay(u, img);
+      zoomUnderlay(u);
+      toast('Image uploaded — choose File → Auto-trace image outline');
       refreshProps();
     };
     img.src = rd.result;
   };
   rd.readAsDataURL(file);
+}
+function autoTraceUnderlay() {
+  const underlay = App.doc.underlay, img = getUnderlayImg();
+  if (!underlay || !img?.naturalWidth) { toast('Upload an image first'); return; }
+  const ratio = Math.min(1, 2048 / Math.max(img.naturalWidth, img.naturalHeight));
+  const width = Math.round(img.naturalWidth * ratio), height = Math.round(img.naturalHeight * ratio);
+  if (width < 16 || height < 16) { toast('Choose an image at least 16 × 16 pixels on each side.'); return; }
+  const source = document.createElement('canvas'); source.width = width; source.height = height;
+  const sourceCtx = source.getContext('2d', { willReadFrequently: true });
+  if (!sourceCtx) { toast('Image processing is unavailable in this window.'); return; }
+  sourceCtx.fillStyle = '#fff'; sourceCtx.fillRect(0, 0, width, height); sourceCtx.drawImage(img, 0, 0, width, height);
+  showModal(box => {
+    box.classList.add('trace-modal');
+    box.setAttribute('role', 'dialog'); box.setAttribute('aria-modal', 'true'); box.setAttribute('aria-labelledby', 'trace-title');
+    const close = el('button', { class: 'trace-close', 'aria-label': 'Close auto-trace', html: '×', onclick: hideModal });
+    box.append(el('header', { class: 'trace-header' }, el('div', {}, el('h3', { id: 'trace-title', html: 'Auto-trace image' }), el('p', { html: 'Select a part, then check its outline before adding it.' })), close));
+    const body = el('div', { class: 'trace-body' }); box.append(body);
+    const crop = el('button', { class: 'trace-button', html: 'Crop part', 'aria-pressed': 'false' });
+    const reset = el('button', { class: 'trace-button', html: 'Reset crop' });
+    const cropInfo = el('span', { class: 'trace-crop-info' });
+    const edit = el('button', { class: 'trace-button', html: 'Edit outline', 'aria-pressed': 'false', disabled: '' });
+    body.append(el('div', { class: 'trace-toolbar' }, crop, reset, edit, cropInfo));
+    const editBar=el('div',{class:'trace-edit-toolbar',hidden:''});
+    const editButton=(text)=>{const b=el('button',{class:'trace-button',html:text});editBar.append(b);return b;};
+    const drawOpening=editButton('Draw opening'),finishOpening=editButton('Finish opening'),cancelOpening=editButton('Cancel opening'),insertPoint=editButton('Insert point'),removePoint=editButton('Remove point'),removeOutline=editButton('Remove outline'),convertCircle=editButton('Convert to points');
+    const undoEdit=editButton('Undo edit'),redoEdit=editButton('Redo edit'),resetEdits=editButton('Reset edits');
+    const panView=editButton('Pan view'),zoomOut=editButton('−'),zoomIn=editButton('+'),fitPreview=editButton('Fit image');
+    panView.setAttribute('aria-pressed','false');zoomOut.setAttribute('aria-label','Zoom out preview');zoomIn.setAttribute('aria-label','Zoom in preview');
+    const selectedInfo=el('span',{class:'trace-selected-info','aria-live':'polite'});editBar.append(selectedInfo);body.append(editBar);
+    const preview = document.createElement('canvas'); preview.width = width; preview.height = height;
+    preview.setAttribute('aria-label', 'Photo and outline preview. In edit mode drag handles, double-click an edge to add a point, or use arrow keys to adjust the selected handle.');
+    preview.tabIndex=0;
+    const stage = el('div', { class: 'trace-stage' }, preview); body.append(stage);
+    const instructions = el('p', { class: 'trace-help', html: 'Cyan: detected outline · Amber: crop or edges to review. Leave background around every edge of the part.' });
+    body.append(instructions);
+    const contrast = el('input', { id: 'trace-contrast', type: 'range', min: '.15', max: '1.5', step: '.05', value: '.35' });
+    const value = el('output', { for: 'trace-contrast', html: '0.35' });
+    const details = el('input', { id: 'trace-openings', type: 'checkbox' });
+    body.append(el('div', { class: 'trace-settings' }, el('div', { class: 'trace-contrast' }, el('label', { for: 'trace-contrast', html: 'Edge contrast' }), value, contrast), el('label', { class: 'trace-check', for: 'trace-openings' }, details, el('span', {}, 'Keep small or irregular openings', el('small', { html: 'Includes more detail, but may also include glare and texture.' })))));
+    const bounds = el('details', { class: 'trace-bounds' }, el('summary', { html: 'Set crop bounds in pixels' }));
+    const fields = {}, fieldRow = el('div', { class: 'trace-bound-fields' });
+    for (const [key, label] of [['x','Left'], ['y','Top'], ['w','Width'], ['h','Height']]) {
+      fields[key] = el('input', { type: 'number', step: '1', min: key === 'w' || key === 'h' ? '16' : '0', id: `trace-${key}` });
+      fieldRow.append(el('label', { for: `trace-${key}` }, label, fields[key]));
+    }
+    bounds.append(fieldRow); body.append(bounds);
+    const status = el('div', { class: 'trace-status', role: 'status', 'aria-live': 'polite' }); body.append(status);
+    const accept = el('button', { class: 'trace-button trace-accept', html: 'Add outline', disabled: '' });
+    box.append(el('footer', { class: 'trace-footer' }, el('span', {}, 'Processed on this device · Check scale before export.'), el('div', { class: 'trace-actions' }, el('button', { class: 'trace-button', html: 'Cancel', onclick: hideModal }), accept)));
+    let roi = { x: 0, y: 0, w: width, h: height }, start = null, previousROI = null, result = null, cropMode = false;
+    let worker = null, request = 0, timer = null, deadline = null, alive = true;
+    let editor=null,editMode=false,selection=null,editDrag=null,draft=null,panMode=false,previewZoom=1,previewPan={x:0,y:0};
+    const setCropMode = on => {
+      if(on){setEditMode(false);previewZoom=1;previewPan={x:0,y:0};}
+      cropMode = on; crop.setAttribute('aria-pressed', String(on)); stage.classList.toggle('is-cropping', on);
+      instructions.textContent = on ? 'Drag a box around one part. Keep a margin of background on all sides.' : 'Cyan: detected outline · Amber: crop or edges to review. Leave background around every edge of the part.';
+    };
+    const syncFields = () => {
+      for (const key of ['x','y','w','h']) fields[key].value = roi[key];
+      cropInfo.textContent = `${roi.w} × ${roi.h} px${roi.w === width && roi.h === height ? ' · Full image' : ' · Selected area'}`;
+    };
+    const paint = () => {
+      const ctx = preview.getContext('2d'); ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,width,height);
+      ctx.setTransform(previewZoom,0,0,previewZoom,previewPan.x,previewPan.y);ctx.drawImage(source, 0, 0);
+      ctx.lineWidth = Math.max(1, width / 600)/previewZoom; ctx.strokeStyle = '#00ffff';
+      for (const e of editor?.entities || result?.entities || []) {
+        ctx.beginPath();
+        if (e.type === 'circle') ctx.arc(e.c.x, e.c.y, e.r, 0, Math.PI * 2);
+        else { e.pts.forEach((p, i) => i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y)); ctx.closePath(); }
+        ctx.stroke();
+      }
+      ctx.strokeStyle='#ffbd4a';
+      for(const [a,b] of (editor?.dirty?[]:result?.quality?.weakSegments)||[]){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}
+      if(editMode&&editor){
+        const scale=displayScale()*previewZoom,selected=editor.entities[selection?.entity];
+        ctx.lineWidth=1.5/scale;ctx.fillStyle='#f7fbff';ctx.strokeStyle='#00ffff';
+        const handles=selected?.type==='circle'?[selected.c,{x:selected.c.x+selected.r,y:selected.c.y}]:selected?.pts||[];
+        let lastHandle=null;
+        for(let i=0;i<handles.length;i++){const p=handles[i],chosen=selected?.type==='circle'?(selection.handle==='center'?i===0:i===1):selection.point===i;if(!chosen&&lastHandle&&Math.hypot(p.x-lastHandle.x,p.y-lastHandle.y)*scale<8)continue;lastHandle=p;ctx.beginPath();ctx.arc(p.x,p.y,(chosen?5:3.5)/scale,0,Math.PI*2);ctx.fillStyle=chosen?'#ffbd4a':'#f7fbff';ctx.fill();ctx.stroke();}
+        if(draft?.length){ctx.beginPath();draft.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.strokeStyle='#ffbd4a';ctx.stroke();for(const p of draft){ctx.beginPath();ctx.arc(p.x,p.y,4/scale,0,Math.PI*2);ctx.fillStyle='#ffbd4a';ctx.fill();}}
+      }
+      if (roi.x === 0 && roi.y === 0 && roi.w === width && roi.h === height && !start) return;
+      ctx.fillStyle = 'rgba(0,0,0,.4)';
+      ctx.fillRect(0, 0, width, roi.y); ctx.fillRect(0, roi.y + roi.h, width, height - roi.y - roi.h);
+      ctx.fillRect(0, roi.y, roi.x, roi.h); ctx.fillRect(roi.x + roi.w, roi.y, width - roi.x - roi.w, roi.h);
+      ctx.strokeStyle = '#ffbd4a'; ctx.strokeRect(roi.x, roi.y, roi.w, roi.h);
+    };
+    const invalidateResult = () => { request++; clearTimeout(timer); clearTimeout(deadline); worker?.terminate(); worker = null; result = null; editor=null;selection=null;draft=null;edit.disabled=true;accept.disabled = true; };
+    const run = () => {
+      if(editor?.dirty){status.textContent='Reset edits before changing automatic tracing settings.';return;}
+      invalidateResult(); syncFields(); paint();
+      if (roi.w < 16 || roi.h < 16 || roi.x < 0 || roi.y < 0 || roi.x + roi.w > width || roi.y + roi.h > height) {
+        status.dataset.state = 'error'; status.textContent = 'Choose a crop at least 16 × 16 pixels inside the image, or reset the crop.'; return;
+      }
+      status.dataset.state = 'busy'; status.textContent = 'Finding the outline…';
+      const id = request;
+      timer = setTimeout(() => {
+        if (!alive || id !== request) return;
+        let settled=false;
+        const finish = ({ result: local, error }) => {
+          if (settled || !alive || id !== request) return;
+          settled=true;
+          clearTimeout(deadline);deadline=null;
+          worker?.terminate(); worker = null;
+          if (error) { status.dataset.state = 'error'; status.textContent = error; return; }
+          const issue=local&&Array.isArray(local.entities)?outlineIssue(local.entities):'No valid outline was returned.';
+          if(issue){status.dataset.state='error';status.textContent='The automatic outline is invalid. Crop around the part and try again. '+issue;return;}
+          const offset = p => ({ x: p.x + roi.x, y: p.y + roi.y });
+          result = { ...local, entities: local.entities.map(e => e.type === 'circle' ? { ...e, c: offset(e.c) } : { ...e, pts: e.pts.map(offset) }) };
+          if(local.quality)result.quality={...local.quality,weakSegments:(local.quality.weakSegments||[]).map(segment=>segment.map(offset))};
+          status.dataset.state = local.warnings?.length?'warning':'ready';
+          status.textContent = `${result.engine?.startsWith('MobileSAM')?'AI outline · ':''}${result.entities.length} contours found.${local.suppressedOpenings ? ` ${local.suppressedOpenings} possible openings hidden; enable detail to inspect them.` : ''} ${local.warnings?.length?' '+local.warnings.join(' '):' Inspect shadows and openings before adding.'}`;
+          editor=createOutlineEditor(result.entities);edit.disabled=false;selection=firstSelection();
+          accept.disabled = false;updateEditorControls();paint();
+        };
+        try {
+          const rgba = sourceCtx.getImageData(roi.x, roi.y, roi.w, roi.h).data;
+          const options = { sensitivity: Number(contrast.value), keepSmallHoles: details.checked };
+          worker = new Worker(new URL('./autotrace-worker.js', import.meta.url), { type: 'module' });
+          worker.onmessage = ({ data }) => {
+            if(!data||data.id!==id||settled||!alive||id!==request)return;
+            if(data.progress){status.dataset.state='busy';status.textContent=data.progress;return;}
+            finish(data);
+          };
+          worker.onerror = ev => { ev.preventDefault(); finish({ error: 'The outline engine could not start. Check the app installation and try again.' }); };
+          worker.onmessageerror = () => finish({error:'The outline result could not be read. Try tracing again.'});
+          deadline=setTimeout(()=>finish({error:'Tracing took too long. Crop closer around one part and try again.'}),120000);
+          worker.postMessage({ id, width: roi.w, height: roi.h, rgba, options }, [rgba.buffer]);
+        } catch (err) { finish({ error: err.name==='SecurityError'?'Upload the image from a local file before tracing.':err.message }); }
+      }, 100);
+    };
+    const displayScale=()=>{const r=preview.getBoundingClientRect();return Math.min(r.width/width,r.height/height);};
+    const position = ev => {
+      const r = preview.getBoundingClientRect(), scale = Math.min(r.width / width, r.height / height);
+      const x=((ev.clientX-r.left-(r.width-width*scale)/2)/scale-previewPan.x)/previewZoom,y=((ev.clientY-r.top-(r.height-height*scale)/2)/scale-previewPan.y)/previewZoom;
+      return {x:Math.max(0,Math.min(width,editMode?x:Math.round(x))),y:Math.max(0,Math.min(height,editMode?y:Math.round(y)))};
+    };
+    const updateDrag = ev => { const p = position(ev); roi = { x: Math.min(start.x,p.x), y: Math.min(start.y,p.y), w: Math.abs(p.x-start.x), h: Math.abs(p.y-start.y) }; syncFields(); paint(); };
+    preview.onpointerdown = ev => {
+      if(editMode&&editor){editPointerDown(ev);return;}
+      if (!cropMode || ev.button !== 0 || !ev.isPrimary || start) return;
+      previousROI = { ...roi }; start = { ...position(ev), pointerId: ev.pointerId }; invalidateResult(); preview.setPointerCapture(ev.pointerId); status.textContent = 'Release to trace the selected area.';
+    };
+    preview.onpointermove = ev => { if(editDrag){editPointerMove(ev);return;}if (start?.pointerId === ev.pointerId) updateDrag(ev); };
+    preview.onpointerup = ev => {
+      if(editDrag?.pointerId===ev.pointerId){finishEditDrag(ev,false);return;}
+      if (start?.pointerId !== ev.pointerId) return;
+      updateDrag(ev); start = null; preview.releasePointerCapture(ev.pointerId); setCropMode(false); run();
+    };
+    const cancelDrag = ev => { if(editDrag?.pointerId===ev.pointerId){finishEditDrag(ev,true);return;}if (start?.pointerId !== ev.pointerId) return; roi = previousROI; start = null; setCropMode(false); run(); };
+    preview.onpointercancel = cancelDrag; preview.onlostpointercapture = cancelDrag;
+    const firstSelection=()=>editor?.entities.length?{entity:0,...(editor.entities[0].type==='circle'?{handle:'center'}:{point:0})}:null;
+    const updateEditorControls=()=>{
+      const entity=editor?.entities[selection?.entity],dirty=!!editor?.dirty,busy=!!editDrag;
+      edit.disabled=!editor||busy;edit.setAttribute('aria-pressed',String(editMode));editBar.hidden=!editMode;
+      for(const input of [contrast,details,crop,reset,...Object.values(fields)])input.disabled=editMode||dirty;
+      undoEdit.disabled=!editor?.canUndo||busy||!!draft;redoEdit.disabled=!editor?.canRedo||busy||!!draft;resetEdits.disabled=!dirty||busy||!!draft;
+      insertPoint.disabled=busy||!!draft||entity?.type!=='poly';
+      removePoint.disabled=draft?busy||!draft.length:busy||entity?.type!=='poly'||selection?.point==null||entity.pts.length<=3;
+      removeOutline.disabled=busy||!!draft||!entity;convertCircle.disabled=busy||!!draft||entity?.type!=='circle';
+      for(const button of [panView,zoomOut,zoomIn,fitPreview])button.disabled=busy;
+      drawOpening.disabled=busy||!!draft;drawOpening.hidden=!!draft;finishOpening.hidden=!draft;cancelOpening.hidden=!draft;finishOpening.disabled=busy||!draft||draft.length<3;convertCircle.hidden=entity?.type!=='circle';
+      const issue=editor&&!busy?outlineIssue(editor.entities):'';
+      accept.disabled=!editor||busy||!!draft||!!issue;
+      if(issue){status.dataset.state='error';status.textContent=issue;}
+      else if(dirty){status.dataset.state='ready';status.textContent='Outline adjusted. Check its shape, then add it to the drawing. Reset edits to change automatic tracing settings.';}
+      else if(editor&&!draft){status.dataset.state=result.warnings?.length?'warning':'ready';status.textContent=`${result.engine?.startsWith('MobileSAM')?'AI outline · ':''}${editor.entities.length} contours found.${result.suppressedOpenings?` ${result.suppressedOpenings} possible openings hidden; enable detail to inspect them.`:''} ${result.warnings?.join(' ')||'Inspect the outline or choose Edit outline to correct it.'}`;}
+      if(draft)selectedInfo.textContent=`New opening · ${draft.length} points · Enter to finish, Escape to cancel`;
+      else if(entity?.type==='circle')selectedInfo.textContent=`Circle ${selection.entity+1} · radius ${entity.r.toFixed(2)} px`;
+      else if(entity&&selection.point!=null){const p=entity.pts[selection.point];selectedInfo.textContent=`Outline ${selection.entity+1} · Point ${selection.point+1}/${entity.pts.length} · ${p.x.toFixed(2)}, ${p.y.toFixed(2)} px`;}
+      else selectedInfo.textContent='Select an outline or point in the photo.';
+    };
+    const setEditMode=on=>{
+      if(editDrag){editor?.cancel();editDrag=null;}
+      draft=null;editMode=!!on&&!!editor;stage.classList.toggle('is-editing',editMode);
+      if(!editMode){panMode=false;panView.setAttribute('aria-pressed','false');stage.classList.remove('is-panning');previewZoom=1;previewPan={x:0,y:0};}
+      if(editMode){setCropMode(false);selection=selection||firstSelection();}
+      instructions.textContent=editMode?'Drag a point to move it; double-click an edge to add a point. Circles have center and radius handles. Wheel to zoom; Shift-drag or Pan view to pan. Arrow keys nudge the selected handle.':'Cyan: detected outline · Amber: crop or edges to review. Leave background around every edge of the part.';
+      updateEditorControls();paint();
+    };
+    const editChange=fn=>{
+      if(!editor||editDrag)return;editor.begin();fn();editor.commit();updateEditorControls();paint();
+    };
+    const hitOutline=p=>{
+      const threshold=10/(displayScale()*previewZoom),order=editor.entities.map((_,i)=>i);
+      if(selection){order.splice(order.indexOf(selection.entity),1);order.unshift(selection.entity);}
+      let hit=null,best=threshold;
+      for(const index of order){const e=editor.entities[index];if(!e)continue;
+        if(e.type==='circle'){
+          const center=Math.hypot(p.x-e.c.x,p.y-e.c.y),edge=Math.abs(center-e.r);
+          if(center<best){best=center;hit={entity:index,handle:'center'};}
+          if(edge<best){best=edge;hit={entity:index,handle:'radius'};}
+        }else for(let i=0;i<e.pts.length;i++){
+          const distance=Math.hypot(p.x-e.pts[i].x,p.y-e.pts[i].y);
+          if(distance<best){best=distance;hit={entity:index,point:i};}
+        }
+      }
+      if(hit)return hit;
+      for(const index of order){const e=editor.entities[index];if(e?.type!=='poly')continue;
+        for(let i=0;i<e.pts.length;i++){const candidate=closestOnSegment(p,e.pts[i],e.pts[(i+1)%e.pts.length]);if(candidate.distance<best){best=candidate.distance;hit={entity:index,segment:i};}}
+      }
+      return hit;
+    };
+    const finishDraft=()=>{
+      if(!draft||draft.length<3)return;
+      const entity={type:'poly',closed:true,pts:draft.map(p=>({...p}))},issue=outlineIssue([entity]);
+      if(issue){status.dataset.state='error';status.textContent=issue;return;}
+      const area=entity.pts.reduce((sum,p,i)=>{const q=entity.pts[(i+1)%entity.pts.length];return sum+p.x*q.y-q.x*p.y;},0);
+      if(area>0)entity.pts.reverse();draft=null;
+      editChange(()=>{editor.entities.push(entity);selection={entity:editor.entities.length-1,point:0};});
+    };
+    const editPointerDown=ev=>{
+      if(!ev.isPrimary||editDrag||![0,1].includes(ev.button))return;ev.preventDefault();preview.focus({preventScroll:true});const p=position(ev);
+      if(panMode||ev.shiftKey||ev.altKey||ev.button===1){editDrag={kind:'pan',pointerId:ev.pointerId,x:ev.clientX,y:ev.clientY,pan:{...previewPan}};}
+      else if(draft){
+        if(draft.length>=3&&Math.hypot(p.x-draft[0].x,p.y-draft[0].y)<8/(displayScale()*previewZoom)){finishDraft();return;}
+        if(!draft.length||Math.hypot(p.x-draft.at(-1).x,p.y-draft.at(-1).y)>.5)draft.push(p);
+        updateEditorControls();paint();return;
+      }else{
+        selection=hitOutline(p);updateEditorControls();paint();
+        if(!selection||selection.segment!=null)return;
+        const e=editor.entities[selection.entity],target=e.type==='circle'?e.c:e.pts[selection.point];
+        editor.begin();editDrag={kind:'point',pointerId:ev.pointerId,offset:{x:p.x-target.x,y:p.y-target.y},radius:e.r,distance:e.type==='circle'?Math.hypot(p.x-e.c.x,p.y-e.c.y):0};
+      }
+      preview.setPointerCapture(ev.pointerId);updateEditorControls();
+    };
+    const editPointerMove=ev=>{
+      if(editDrag?.pointerId!==ev.pointerId)return;
+      if(editDrag.kind==='pan'){const scale=displayScale();previewPan={x:editDrag.pan.x+(ev.clientX-editDrag.x)/scale,y:editDrag.pan.y+(ev.clientY-editDrag.y)/scale};paint();return;}
+      const p=position(ev),e=editor.entities[selection.entity];
+      if(e.type==='circle'){
+        if(selection.handle==='radius')e.r=Math.max(.5,Math.min(e.c.x,width-e.c.x,e.c.y,height-e.c.y,editDrag.radius+Math.hypot(p.x-e.c.x,p.y-e.c.y)-editDrag.distance));
+        else e.c={x:Math.max(e.r,Math.min(width-e.r,p.x-editDrag.offset.x)),y:Math.max(e.r,Math.min(height-e.r,p.y-editDrag.offset.y))};
+      }else e.pts[selection.point]={x:Math.max(0,Math.min(width,p.x-editDrag.offset.x)),y:Math.max(0,Math.min(height,p.y-editDrag.offset.y))};
+      updateEditorControls();paint();
+    };
+    const finishEditDrag=(ev,cancel)=>{
+      const drag=editDrag;if(!drag)return;
+      if(drag.kind==='point'){if(cancel)editor.cancel();else editor.commit();}
+      else if(cancel)previewPan=drag.pan;
+      editDrag=null;if(preview.hasPointerCapture(ev.pointerId))preview.releasePointerCapture(ev.pointerId);updateEditorControls();paint();
+    };
+    const zoomPreview=(factor,anchor={x:width/2,y:height/2})=>{
+      const next=Math.max(1,Math.min(16,previewZoom*factor)),p={x:(anchor.x-previewPan.x)/previewZoom,y:(anchor.y-previewPan.y)/previewZoom};
+      previewPan={x:anchor.x-p.x*next,y:anchor.y-p.y*next};previewZoom=next;paint();
+    };
+    edit.onclick=()=>setEditMode(!editMode);
+    insertPoint.onclick=()=>{if(insertPoint.disabled)return;editChange(()=>{const e=editor.entities[selection.entity],i=selection.segment??selection.point??0,a=e.pts[i],b=e.pts[(i+1)%e.pts.length];e.pts.splice(i+1,0,{x:(a.x+b.x)/2,y:(a.y+b.y)/2});selection={entity:selection.entity,point:i+1};});};
+    removePoint.onclick=()=>{if(removePoint.disabled)return;if(draft){draft.pop();updateEditorControls();paint();return;}editChange(()=>{const e=editor.entities[selection.entity];e.pts.splice(selection.point,1);selection.point=Math.min(selection.point,e.pts.length-1);});};
+    removeOutline.onclick=()=>{if(removeOutline.disabled)return;editChange(()=>{editor.entities.splice(selection.entity,1);selection=firstSelection();});};
+    convertCircle.onclick=()=>{if(convertCircle.disabled)return;editChange(()=>{editor.entities[selection.entity]={type:'poly',closed:true,pts:circlePoints(editor.entities[selection.entity])};selection={entity:selection.entity,point:0};});};
+    drawOpening.onclick=()=>{draft=[];selection=null;panMode=false;panView.setAttribute('aria-pressed','false');updateEditorControls();paint();};
+    finishOpening.onclick=finishDraft;cancelOpening.onclick=()=>{draft=null;selection=firstSelection();updateEditorControls();paint();};
+    undoEdit.onclick=()=>{editor.undo();selection=firstSelection();updateEditorControls();paint();};
+    redoEdit.onclick=()=>{editor.redo();selection=firstSelection();updateEditorControls();paint();};
+    resetEdits.onclick=()=>{editor.reset();selection=firstSelection();status.dataset.state=result.warnings?.length?'warning':'ready';status.textContent='Automatic outline restored.';updateEditorControls();paint();};
+    panView.onclick=()=>{panMode=!panMode;panView.setAttribute('aria-pressed',String(panMode));stage.classList.toggle('is-panning',panMode);};
+    zoomOut.onclick=()=>zoomPreview(1/1.5);zoomIn.onclick=()=>zoomPreview(1.5);
+    fitPreview.onclick=()=>{previewZoom=1;previewPan={x:0,y:0};paint();};
+    preview.addEventListener('wheel',ev=>{if(!editMode||editDrag)return;ev.preventDefault();if(isMac&&!ev.ctrlKey&&!ev.metaKey){previewPan.x-=ev.deltaX/displayScale();previewPan.y-=ev.deltaY/displayScale();paint();return;}const p=position(ev);zoomPreview(Math.exp(-ev.deltaY*.002),{x:p.x*previewZoom+previewPan.x,y:p.y*previewZoom+previewPan.y});},{passive:false});
+    preview.ondblclick=ev=>{
+      if(!editMode||!editor||panMode)return;ev.preventDefault();if(draft){finishDraft();return;}
+      const p=position(ev),hit=hitOutline(p);if(!hit)return;const e=editor.entities[hit.entity];if(e.type!=='poly')return;
+      let closest=null;for(let i=0;i<e.pts.length;i++){const c=closestOnSegment(p,e.pts[i],e.pts[(i+1)%e.pts.length]);if(!closest||c.distance<closest.distance)closest={...c,index:i};}
+      if(closest.distance>10/(displayScale()*previewZoom))return;
+      const a=e.pts[closest.index],b=e.pts[(closest.index+1)%e.pts.length];
+      if(Math.min(Math.hypot(closest.point.x-a.x,closest.point.y-a.y),Math.hypot(closest.point.x-b.x,closest.point.y-b.y))<.25){status.textContent='Zoom in and double-click between two points.';return;}
+      editChange(()=>{e.pts.splice(closest.index+1,0,closest.point);selection={entity:hit.entity,point:closest.index+1};});
+    };
+    const editKeys=ev=>{
+      if(!editMode||ev.target.matches('input,textarea'))return;
+      if(draft&&['Escape','Enter','Backspace','Delete'].includes(ev.key)){
+        ev.preventDefault();ev.stopPropagation();if(ev.key==='Escape')draft=null;else if(ev.key==='Enter')finishDraft();else draft.pop();updateEditorControls();paint();return;
+      }
+      if((ev.ctrlKey||ev.metaKey)&&['z','y'].includes(ev.key.toLowerCase())){ev.preventDefault();ev.stopPropagation();if(ev.key.toLowerCase()==='y'||ev.shiftKey)redoEdit.click();else undoEdit.click();return;}
+      if(ev.target!==preview||editDrag)return;
+      if(ev.key==='Delete'||ev.key==='Backspace'){ev.preventDefault();ev.stopPropagation();removePoint.click();return;}
+      const step=ev.shiftKey?10:1,delta={ArrowLeft:[-step,0],ArrowRight:[step,0],ArrowUp:[0,-step],ArrowDown:[0,step]}[ev.key];
+      const e=editor.entities[selection?.entity];if(!delta||!e||selection.segment!=null)return;ev.preventDefault();ev.stopPropagation();
+      editChange(()=>{
+        if(e.type==='circle'){
+          if(selection.handle==='radius')e.r=Math.max(.5,Math.min(e.c.x,width-e.c.x,e.c.y,height-e.c.y,e.r+delta[0]-delta[1]));
+          else e.c={x:Math.max(e.r,Math.min(width-e.r,e.c.x+delta[0])),y:Math.max(e.r,Math.min(height-e.r,e.c.y+delta[1]))};
+        }else if(selection.point!=null){const p=e.pts[selection.point];p.x=Math.max(0,Math.min(width,p.x+delta[0]));p.y=Math.max(0,Math.min(height,p.y+delta[1]));}
+      });
+    };
+    box.addEventListener('keydown',editKeys);
+
+    crop.onclick = () => setCropMode(!cropMode);
+    reset.onclick = () => { start = null; roi = { x: 0, y: 0, w: width, h: height }; setCropMode(false); run(); };
+    for (const key of ['x','y','w','h']) fields[key].onchange = () => {
+      const candidate = Object.fromEntries(Object.entries(fields).map(([k,input]) => [k, Number(input.value)]));
+      if (Object.values(fields).some(input => input.value === '') || !Object.values(candidate).every(Number.isInteger)) { invalidateResult(); status.dataset.state = 'error'; status.textContent = 'Use whole pixel values for crop bounds.'; return; }
+      roi = candidate; setCropMode(false); run();
+    };
+    contrast.oninput = () => { value.textContent = Number(contrast.value).toFixed(2); run(); }; details.onchange = run;
+    accept.onclick = () => {
+      if (!result||editDrag||draft) return;
+      if(editor){const issue=outlineIssue(editor.entities);if(issue){status.dataset.state='error';status.textContent=issue;return;}}
+      if(editor)result.entities=editor.entities;
+      if (App.doc.underlay !== underlay) { status.dataset.state = 'error'; status.textContent = 'The image changed. Close this preview and trace the current image.'; accept.disabled = true; return; }
+      if (currentLayer()?.locked) { status.dataset.state = 'error'; status.textContent = 'The current layer is locked. Unlock it before adding the outline.'; return; }
+      if (autoTraceUnderlayApply(result, width, height)) hideModal();
+    };
+    const focusTrap = ev => {
+      if (ev.key !== 'Tab') return;
+      const controls = [...box.querySelectorAll('button,input,summary')].filter(n => !n.disabled && n.getClientRects().length);
+      const first = controls[0], last = controls.at(-1);
+      if (ev.shiftKey && document.activeElement === first) { ev.preventDefault(); last.focus(); }
+      else if (!ev.shiftKey && document.activeElement === last) { ev.preventDefault(); first.focus(); }
+    };
+    box.addEventListener('keydown', focusTrap);
+    modalCleanup = () => { alive = false; invalidateResult(); box.removeEventListener('keydown', focusTrap);box.removeEventListener('keydown',editKeys); };
+    run(); crop.focus();
+  });
+}
+function autoTraceUnderlayApply(result, width, height) {
+  const underlay = App.doc.underlay;
+  if (!underlay) return;
+  try {
+    if(![underlay.x,underlay.y,underlay.wMM,underlay.hMM,underlay.rotation??0].every(Number.isFinite)||underlay.wMM<=0||underlay.hMM<=0)
+      throw new Error('The image scale or position is invalid. Set a positive image size before adding its outline.');
+    const origin = { x: underlay.x, y: underlay.y };
+    const mapPoint = p => G.rotatePt({
+        x: underlay.x + p.x / width * underlay.wMM,
+        y: underlay.y + p.y / height * underlay.hMM,
+      }, origin, underlay.rotation || 0);
+    const sx = underlay.wMM / width, sy = underlay.hMM / height;
+    const entities = result.entities.map(e => {
+      if (e.type === 'circle' && Math.abs(sx - sy) <= Math.max(sx, sy) * 1e-3)
+        return { type: 'circle', c: mapPoint(e.c), r: e.r * (sx + sy) / 2, layer: App.doc.currentLayer };
+      const points = e.type === 'circle' ? Array.from({ length: 180 }, (_, i) => ({
+        x: e.c.x + e.r * Math.cos(i * Math.PI * 2 / 180), y: e.c.y + e.r * Math.sin(i * Math.PI * 2 / 180),
+      })) : e.pts;
+      return { type: 'poly', closed: true, layer: App.doc.currentLayer, pts: points.map(mapPoint) };
+    });
+    if (entities.some(e => e.type === 'circle'
+      ? ![e.c.x, e.c.y, e.r].every(Number.isFinite) || e.r <= 0
+      : e.pts.some(p => ![p.x, p.y].every(Number.isFinite))))
+      throw new Error('The image scale or position exceeds the supported range. Reduce it before adding the outline.');
+    const ids = [];
+    mutate(`Auto-traced ${entities.length} contours`, () => {
+      for (const entity of entities) ids.push(addEntity(entity).id);
+    });
+    setSelection(ids);
+    const circles = entities.filter(e => e.type === 'circle').length;
+    toast(`Auto-traced ${entities.length} contours · ${circles} fitted circles. Check the shape and set its scale before export.`, 6500);
+    return true;
+  } catch (err) {
+    toast(err.message || 'Auto-trace failed');
+  }
 }
 let savingProject = false;
 async function saveProject() {
@@ -764,15 +1149,25 @@ function setDirty(d) {
 }
 
 // ---------------------------------------------------------------- modals
+let modalCleanup = null;
+let modalReturnFocus = null;
 export function showModal(build) {
+  modalCleanup?.(); modalCleanup = null;
+  modalReturnFocus = document.activeElement;
   const root = $('modalRoot');
   root.hidden = false;
   const box = $('modalBox');
-  box.innerHTML = '';
+  box.innerHTML = ''; box.classList.remove('trace-modal');
+  for (const name of ['role','aria-modal','aria-labelledby']) box.removeAttribute(name);
   build(box);
   $('modalScrim').onclick = hideModal;
 }
-export function hideModal() { $('modalRoot').hidden = true; }
+export function hideModal() {
+  modalCleanup?.(); modalCleanup = null; $('modalRoot').hidden = true;
+  if (modalReturnFocus?.isConnected && modalReturnFocus !== document.body && modalReturnFocus.getClientRects().length) modalReturnFocus.focus();
+  else $('fileBtn')?.focus();
+  modalReturnFocus = null;
+}
 
 // ---- editable tool key bindings ----
 // main.js matches tools by their live `tool.key`, so rebinding = mutate tool.key + persist.
@@ -1004,7 +1399,8 @@ function wireAppBar() {
     else if (cmd === 'new') { if (confirm('Start a new drawing? The current drawing is kept in recovery history.')) { newDoc(); refreshAll(); zoomFit(); } }
     else if (cmd === 'open') openFile();
     else if (cmd === 'save') saveProject();
-    else if (cmd === 'underlay') openFile();
+    else if (cmd === 'upload-image') openImageFile();
+    else if (cmd === 'autotrace') autoTraceUnderlay();
     else if (cmd === 'underlay-clear') { setUnderlay(null, null); refreshProps(); }
     else if (cmd === 'export-dxf') doExport('dxf');
     else if (cmd === 'export-svg') doExport('svg');
@@ -1051,6 +1447,11 @@ export function refreshAll() {
 }
 
 export function initUI() {
+  localizeShortcuts(document.body);
+  // Help, tracing and menus are created lazily. Localize only newly inserted nodes.
+  new MutationObserver(records => {
+    for (const record of records) for (const node of record.addedNodes) localizeShortcuts(node);
+  }).observe(document.body, { childList: true, subtree: true });
   initKeyBindings();          // apply saved rebinds before palette tooltips render
   buildPalette();
   wireLayerTools();

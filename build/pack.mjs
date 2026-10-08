@@ -1,16 +1,25 @@
-// Package TrueLine into a portable Windows app folder.  node build/pack.mjs
+// Package portable Windows/Linux apps or macOS .app bundles.
+import './verify-models.mjs';
 import { packager } from '@electron/packager';
+import {readFileSync} from 'node:fs';
+import {parseArgs} from 'node:util';
+const {values}=parseArgs({options:{platform:{type:'string',default:'win32'},out:{type:'string',default:'dist'},arch:{type:'string',default:'x64'}}});
+if(!['win32','linux','darwin'].includes(values.platform))throw Error('Supported packaging platforms are win32, linux and darwin.');
+if(!['x64','arm64'].includes(values.arch))throw Error('Supported architectures are x64 and arm64.');
+const pkg=JSON.parse(readFileSync(new URL('../package.json',import.meta.url)));
 
 const appPaths = await packager({
   dir: '.',
-  out: 'dist',
+  out: values.out,
   overwrite: true,
-  platform: 'win32',
-  arch: 'x64',
+  platform: values.platform,
+  arch: values.arch,
   name: 'TrueLine',
-  icon: 'build/icon.ico',
+  icon: values.platform === 'darwin' ? 'build/icon.icns' : 'build/icon.ico',
+  appBundleId: 'com.trueline.cad',
+  appCategoryType: 'public.app-category.graphics-design',
   asar: false,                    // keep app files plain on disk so the static server reads them directly
-  appVersion: '3.0.0',
+  appVersion: pkg.version,
   appCopyright: 'MIT — free to use and redistribute',
   win32metadata: {
     CompanyName: 'TrueLine',
@@ -19,19 +28,10 @@ const appPaths = await packager({
     OriginalFilename: 'TrueLine.exe',
   },
   // nothing here is needed at runtime except the app source, so drop everything else
-  ignore: [
-    /^\/node_modules($|\/)/,
-    /^\/dist($|\/)/,
-    /^\/dist-test($|\/)/,
-    /^\/tests($|\/)/,
-    /^\/build($|\/)/,
-    /^\/\.git($|\/)/,
-    /^\/scratchpad($|\/)/,
-    /\.log$/,
-    /^\/build-icon-256\.png$/,
-    /^\/(ARCHITECTURE|GEOM_API|research-.*)\.(md|txt)$/,
-    /^\/(desktop-app|first-launch.*|help-.*|keybinds-.*|tour-.*|canvas)\.png$/,
-  ],
+  // Package only application files and production dependencies. In particular,
+  // never copy evaluation photos, Python environments or previous installers.
+  prune:true,
+  ignore:file=>!!file&&!/^\/(index\.html|style\.css|package\.json|package-lock\.json|LICENSE|js|fonts|models|electron|node_modules)(\/|$)/.test(file.replaceAll('\\','/')),
 });
 
 console.log('Packaged to:', appPaths.join(', '));

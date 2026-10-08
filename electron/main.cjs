@@ -1,33 +1,17 @@
 // TrueLine desktop shell.
-const { app, BrowserWindow, ipcMain, dialog } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog, Menu } = require('electron');
 const { randomUUID } = require('crypto');
-const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
-const MIME = {
-  '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript',
-  '.json': 'application/json', '.woff2': 'font/woff2', '.svg': 'image/svg+xml',
-  '.png': 'image/png',
-};
+const { createStaticServer } = require('./static-server.cjs');
 
 // tiny local static server: file:// blocks ES-module imports, http:// does not
+let serverPromise;
 function serve() {
-  return new Promise(resolve => {
-    const srv = http.createServer((req, res) => {
-      const urlPath = decodeURIComponent(req.url.split('?')[0]);
-      let fp = path.normalize(path.join(ROOT, urlPath === '/' ? 'index.html' : urlPath));
-      if (!fp.startsWith(ROOT)) { res.writeHead(403); res.end(); return; }
-      fs.readFile(fp, (err, data) => {
-        if (err) { res.writeHead(404); res.end('not found'); return; }
-        res.writeHead(200, {
-          'Content-Type': MIME[path.extname(fp)] || 'application/octet-stream',
-          'Cache-Control': 'no-store',   // always serve current files (matters for updates)
-        });
-        res.end(data);
-      });
-    });
+  return serverPromise ||= new Promise(resolve => {
+    const srv = createStaticServer(ROOT);
     // Stable origin preserves IndexedDB recovery and tablet settings across launches.
     const port = parseInt(process.env.TRUELINE_PORT || '8390', 10) || 8390;
     srv.on('error', err => { dialog.showErrorBox('TrueLine could not start', `The local app server could not start: ${err.message}`); app.quit(); });
@@ -35,7 +19,11 @@ function serve() {
   });
 }
 
-async function createWindow() {
+let openingWindow;
+function createWindow() {
+  return openingWindow ||= openWindow().finally(() => { openingWindow = null; });
+}
+async function openWindow() {
   const port = await serve();
   const win = new BrowserWindow({
     width: 1500, height: 950,
@@ -45,7 +33,16 @@ async function createWindow() {
     autoHideMenuBar: true,
     webPreferences: { contextIsolation: true, sandbox: true, preload: path.join(__dirname, 'preload.cjs') },
   });
-  win.setMenu(null);
+  if (process.platform !== 'darwin') win.setMenu(null);
+  win.webContents.on('will-prevent-unload', event => {
+    const choice = dialog.showMessageBoxSync(win, {
+      type: 'question', buttons: ['Keep Editing', 'Discard Changes'], defaultId: 0, cancelId: 0,
+      title: 'Unsaved project', message: 'Close this drawing without saving the project?',
+      detail: 'Choose Keep Editing to save your project before closing.',
+    });
+    // Electron cancels unload by default; preventDefault explicitly permits it.
+    if (choice === 1) event.preventDefault();
+  });
   win.webContents.on('before-input-event', (ev, input) => {
     if (input.key === 'F12' && input.type === 'keyDown') win.webContents.toggleDevTools();
   });
@@ -88,6 +85,35 @@ function initUpdater() {
 
 const singleInstance = app.requestSingleInstanceLock();
 if (!singleInstance) app.quit();
-app.on('second-instance', () => { const win = BrowserWindow.getAllWindows()[0]; if (win) { if (win.isMinimized()) win.restore(); win.focus(); } });
-app.whenReady().then(() => { if (singleInstance) { createWindow(); initUpdater(); } });
-app.on('window-all-closed', () => app.quit());
+app.on('second-instance', () => { const win = BrowserWindow.getAllWindows()[0]; if (win) { if (win.isMinimized()) win.restore(); win.focus(); } else if (app.isReady()) createWindow(); });
+app.whenReady().then(() => { if (singleInstance) {
+  if (process.platform === 'darwin') {
+    const key = (key, modifiers = ['meta']) => () => {
+      const win = BrowserWindow.getFocusedWindow();
+      if (!win) return;
+      win.webContents.sendInputEvent({ type: 'keyDown', keyCode: key, modifiers });
+      win.webContents.sendInputEvent({ type: 'keyUp', keyCode: key, modifiers });
+    };
+    Menu.setApplicationMenu(Menu.buildFromTemplate([
+      { role: 'appMenu' },
+      { label: 'File', submenu: [
+        { label: 'Open…', accelerator: 'Command+O', click: key('O') },
+        { label: 'Save Project', accelerator: 'Command+S', click: key('S') },
+        { type: 'separator' }, { role: 'close' },
+      ] },
+      { label: 'Edit', submenu: [
+        { label: 'Undo', accelerator: 'Command+Z', click: key('Z') },
+        { label: 'Redo', accelerator: 'Command+Shift+Z', click: key('Z', ['meta', 'shift']) },
+        { type: 'separator' },
+        { label: 'Cut', accelerator: 'Command+X', click: key('X') },
+        { label: 'Copy', accelerator: 'Command+C', click: key('C') },
+        { label: 'Paste', accelerator: 'Command+V', click: key('V') },
+        { label: 'Select All', accelerator: 'Command+A', click: key('A') },
+      ] },
+      { role: 'windowMenu' },
+    ]));
+  }
+  createWindow(); initUpdater();
+} });
+app.on('window-all-closed', () => { if (process.platform !== 'darwin') app.quit(); });
+app.on('activate', () => { if (singleInstance && !BrowserWindow.getAllWindows().length) createWindow(); });

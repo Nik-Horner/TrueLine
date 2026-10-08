@@ -11,8 +11,12 @@ const check = (name, cond, extra = '') => { results.push({ name, pass: !!cond, e
 
 (async () => {
   const APP_URL = process.env.APP_URL || 'http://127.0.0.1:8390/';
-  const browser = await puppeteer.connect({ browserURL: 'http://127.0.0.1:9223', defaultViewport: null });
+  const browser = await puppeteer.connect({ browserURL: process.env.CDP_URL || 'http://127.0.0.1:9223', defaultViewport: null });
   const page = (await browser.pages())[0];
+  // This suite owns its temporary drawing and explicitly discards it on navigation.
+  page.on('dialog', dialog => dialog.accept());
+  // Electron delegates beforeunload to its native shell; clear this suite's test drawing.
+  await page.evaluate(async () => { const m = await import('/js/app.js'); m.App.fileDirty = false; });
   await page.goto(APP_URL, { waitUntil: 'networkidle0' });
   await page.bringToFront();
   await sleep(400);

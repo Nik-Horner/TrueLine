@@ -1,0 +1,17 @@
+{
+  "name": "MobileSAM",
+  "license": "Apache-2.0",
+  "source": "https://github.com/ChaoningZhang/MobileSAM",
+  "checkpointURL": "https://raw.githubusercontent.com/ChaoningZhang/MobileSAM/master/weights/mobile_sam.pt",
+  "checkpointSHA256": "6dbb90523a35330fedd7f1d3dfc66f995213d81b29a5ca8108dbcdd4e37d6c2f",
+  "files": {
+    "encoder.onnx": {
+      "sha256": "75a715f1812ae2c6266cf3fcab2dba7bcd9cccb241fe58741f8d72078f7b6b02",
+      "bytes": 27969743
+    },
+    "decoder.onnx": {
+      "sha256": "82635e3375069c8a8359f0f323f8bc5796b1989cb4acc71ca6a5ebb8930f7275",
+      "bytes": 16496911
+    }
+  }
+}

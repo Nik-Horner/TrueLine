@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import {prepareTraceRaster} from '../js/trace-input.js';
+import {outlineIssue} from '../js/outline-editor.js';
+const opaque=new Uint8ClampedArray(16*16*4).fill(255);
+assert.equal(prepareTraceRaster(16,16,opaque),opaque,'opaque inputs need no duplicate allocation');
+const input=opaque.slice();input.set([255,0,128,0,0,0,0,128]);const saved=input.slice();
+const composited=prepareTraceRaster(16,16,input);
+assert.deepEqual([...composited.slice(0,8)],[255,255,255,255,127,127,127,255]);
+assert.deepEqual(input,saved,'never modify the caller image');
+for(const [w,h]of[[15,16],[NaN,16],[16,Infinity],[16.1,16]])assert.throws(()=>prepareTraceRaster(w,h,opaque),/16/);
+assert.throws(()=>prepareTraceRaster(4096,4096,new Uint8Array()),/megapixels/);
+for(const pixels of[new Uint8Array(1023),new Uint8Array(1025),new Float32Array(1024),null])assert.throws(()=>prepareTraceRaster(16,16,pixels),/invalid/);
+for(const entities of[null,[],[null],[{type:'line'}],[{type:'circle',r:1}],[{type:'poly',pts:null}],[{type:'poly',closed:true,pts:[null,null,null]}],[{type:'poly',closed:false,pts:[{x:0,y:0},{x:4,y:0},{x:0,y:4}]}]])assert.ok(outlineIssue(entities),'malformed geometry must be rejected without throwing');
+console.log('PASS: trace size/pixel validation, alpha compositing, input preservation and malformed geometry guards');

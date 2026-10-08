@@ -1,0 +1,47 @@
+name: Desktop Builds
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - name: Locate browser
+        shell: bash
+        run: node -e "const fs=require('fs');const candidates=['/Applications/Google Chrome.app/Contents/MacOS/Google Chrome','C:/Program Files/Google/Chrome/Application/chrome.exe','C:/Program Files (x86)/Google/Chrome/Application/chrome.exe'];const browser=candidates.find(p=>fs.existsSync(p));if(!browser)throw Error('Chrome missing');fs.appendFileSync(process.env.GITHUB_ENV,'CHROME_BIN='+browser+'\n');"
+      - run: npm run test:desktop
+      - run: npm run test:mac
+      - run: npm run test:autotrace:ui
+      - run: npm run test:autotrace:edit
+      - run: npm run verify:models
+      - name: Build Windows candidate
+        if: runner.os == 'Windows'
+        run: npm run installer -- --publish never
+      - name: Build Mac candidates
+        if: runner.os == 'macOS'
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+        run: npm run installer:mac
+      - uses: actions/upload-artifact@v4
+        with:
+          name: TrueLine-${{ runner.os }}-unsigned
+          path: |
+            dist-installer/*.exe
+            dist-installer/*.dmg
+            dist-installer/*.zip
+          if-no-files-found: error

@@ -1,0 +1,10 @@
+TrueLine includes MobileSAM, exported to ONNX for local inference.
+MobileSAM: https://github.com/ChaoningZhang/MobileSAM
+Authors: Chaoning Zhang and the MobileSAM contributors.
+License: Apache License 2.0 (see LICENSE).
+The model includes the Segment Anything architecture and weights from Meta
+Platforms, Inc. and affiliates, and the TinyViT architecture from Microsoft.
+No part-specific fine-tuning has been performed. Images remain on the device.
+The upstream checkpoint checksum and exported model checksums are recorded
+in manifest.json. ONNX Runtime Web is distributed under the MIT License;
+its notice is in js/vendor/onnx/LICENSE.
