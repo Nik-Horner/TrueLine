@@ -37,6 +37,9 @@ jobs:
         env:
           CSC_IDENTITY_AUTO_DISCOVERY: 'false'
         run: npm run installer:mac
+      - name: Enable Intel package testing on Apple Silicon
+        if: runner.os == 'macOS' && runner.arch == 'ARM64'
+        run: sudo /usr/sbin/softwareupdate --install-rosetta --agree-to-license
       - name: Test installed Mac packages
         if: runner.os == 'macOS'
         run: npm run test:mac:package
