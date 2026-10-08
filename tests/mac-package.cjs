@@ -2,7 +2,9 @@
 const fs=require('node:fs'),os=require('node:os'),path=require('node:path');
 const {execFileSync}=require('node:child_process');
 if(process.platform!=='darwin')throw Error('Run Mac package checks on macOS.');
-for(const arch of ['arm64','x64']) {
+// Each architecture is launched on its native GitHub runner; Rosetta can mask
+// architecture-specific failures or block unattended CI with system dialogs.
+for(const arch of [process.arch]) {
  const dmg=path.resolve('dist-installer',`TrueLine-${require('../package.json').version}-${arch}.dmg`);
  const temp=fs.mkdtempSync(path.join(os.tmpdir(),'trueline-dmg-')),mount=path.join(temp,'mounted'),copied=path.join(temp,'Applications','TrueLine.app');
  fs.mkdirSync(mount);fs.mkdirSync(path.dirname(copied));
