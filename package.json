@@ -1,7 +1,7 @@
 {
   "name": "trueline",
   "productName": "TrueLine",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "Trace with a pen tablet, export dimensionally-accurate DXF/SVG/PDF",
   "main": "electron/main.cjs",
   "author": "TrueLine",
@@ -27,11 +27,12 @@
     "test:autotrace:model:threads": "npm run prepare:photos && node tests/trained-thread-variations.cjs",
     "test:autotrace:release": "npm test && npm run verify:models && npm run test:autotrace:complex && npm run test:autotrace:photos && npm run test:autotrace:model && npm run test:autotrace:model:threads && npm run test:autotrace:ui && npm run test:autotrace:edit && npm run test:autotrace:model:ui",
     "pack:mac": "node build/pack.mjs --platform darwin --arch arm64 && node build/pack.mjs --platform darwin --arch x64",
-    "installer:mac": "npm run verify:models && electron-builder --mac --arm64 --x64 --publish never",
+    "installer:mac": "npm run verify:models && node build/mac-preview.mjs",
     "test:mac": "node tests/mac-desktop.cjs && node tests/mac-ui.cjs",
     "test:packaged:trace": "npm run prepare:photos && node tests/packaged-tracing.cjs",
     "prepare:photos": "node tests/prepare-photo-fixtures.mjs",
-    "test:desktop": "node tests/desktop-smoke.cjs"
+    "test:desktop": "node tests/desktop-smoke.cjs",
+    "test:mac:package": "node tests/mac-package.cjs"
   },
   "build": {
     "appId": "com.trueline.cad",
@@ -86,14 +87,15 @@
   "license": "MIT",
   "type": "module",
   "devDependencies": {
+    "@electron/osx-sign": "2.5.0",
     "@electron/packager": "^20.0.2",
     "electron": "^43.0.0",
     "electron-builder": "^26.15.3",
     "gifenc": "^1.0.3",
+    "onnxruntime-web": "1.24.3",
     "png-to-ico": "^3.0.1",
     "pngjs": "^7.0.0",
-    "puppeteer-core": "^25.3.0",
-    "onnxruntime-web": "1.24.3"
+    "puppeteer-core": "^25.3.0"
   },
   "dependencies": {
     "electron-updater": "^6.8.9"
