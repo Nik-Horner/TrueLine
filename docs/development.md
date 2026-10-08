@@ -17,12 +17,17 @@ npm run pack         # or a portable folder in dist/
 
 macOS 12 or later is required. `npm run pack:mac` builds separate Apple Silicon (arm64) and Intel (x64) `.app`
 bundles under `dist/`. Run `npm run installer:mac` on a Mac to create DMG and ZIP
-artifacts. For distribution, configure Apple Developer signing and notarization
-credentials through electron-builder; locally built unsigned bundles are development
-candidates and do not establish Gatekeeper approval. Native Mac testing is required
-before release. The Desktop Builds GitHub Actions workflow checks PRs and builds unsigned
-Windows and Mac candidates on their native operating systems without publishing. Mac auto-update also requires signed release artifacts and the
-corresponding `latest-mac.yml` update metadata.
+previews with verified local ad-hoc signatures. These signatures keep the repackaged
+Electron executables consistent; they do not establish Apple Gatekeeper approval.
+For public distribution, configure Apple Developer ID signing and notarization
+credentials and run `electron-builder --mac --arm64 --x64 --publish never` directly,
+without the preview script's signing overrides.
+
+The Desktop Builds workflow checks PRs on Windows, Apple Silicon Mac and Intel Mac
+without publishing. `npm run test:mac:package` mounts the native architecture's DMG,
+copies the app out, verifies its signature and launches it to test Command shortcuts
+and drawing/export workflows. Mac auto-update requires signed release artifacts and
+the corresponding `latest-mac.yml` update metadata.
 
 Mac menus and help use Command shortcuts, with Command+Shift+Z for redo.
 Two-finger trackpad scrolling pans the drawing and outline editor; pinch or

@@ -4,12 +4,14 @@ Trace physical parts or photos into CAD outlines for CNC, fabrication, and patte
 Free, open source, and offline. Export DXF, SVG, or a PDF at true scale.
 
 [![Download for Windows](https://img.shields.io/badge/Download-Windows-2ea44f?style=for-the-badge&logo=windows)](https://github.com/Nik-Horner/TrueLine/releases/latest/download/TrueLine-Setup.exe)
-[![Download for macOS](https://img.shields.io/badge/Download-macOS-222222?style=for-the-badge&logo=apple)](https://github.com/Nik-Horner/TrueLine/actions/runs/37725118532/artifacts/11527617534)
+[![Download for macOS](https://img.shields.io/badge/Download-macOS-222222?style=for-the-badge&logo=apple)](https://github.com/Nik-Horner/TrueLine/actions/runs/37727690760/artifacts/11528825944)
 [![MIT License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
 
-**Windows:** stable installer. **macOS 12+:** unsigned preview for Apple Silicon and Intel;
+**Windows:** stable installer. **macOS 12+:** 3.1.1 preview for Apple Silicon and Intel;
 GitHub sign-in is required to download. Unzip the download, open the `arm64` DMG for
-Apple Silicon or `x64` DMG for Intel, then drag TrueLine into Applications.
+Apple Silicon (M-series) or `x64` DMG for Intel, then drag TrueLine into Applications.
+Replace any older copy. The preview has verified local signatures but is not Apple-notarized;
+macOS may require **System Settings → Privacy & Security → Open Anyway**.
 [Latest development builds](https://github.com/Nik-Horner/TrueLine/actions/workflows/desktop-build.yml).
 
 ![TrueLine tracing a sketch into CAD geometry](assets/demo.gif)
