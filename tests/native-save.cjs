@@ -17,7 +17,7 @@ const vm = require('node:vm');
     };
     const fileSystem = { ...fs, promises: { ...fs.promises, rename: async (...args) => { if (failRename) throw new Error('Simulated disk failure'); return fs.promises.rename(...args); } } };
     vm.runInNewContext(fs.readFileSync(path.join(__dirname, '../electron/main.cjs'), 'utf8'), {
-      require: name => name === 'electron' ? electron : name === 'fs' ? fileSystem : require(name),
+      require: name => name === 'electron' ? electron : name === 'fs' ? fileSystem : name === './static-server.cjs' ? require('../electron/static-server.cjs') : require(name),
       __dirname: path.join(__dirname, '../electron'), process, URL,
     });
     const event = { sender, senderFrame: sender.mainFrame };

@@ -432,6 +432,8 @@ export function invalidateView() { dirtyFlags.grid = dirtyFlags.scene = dirtyFla
 
 function renderFrame() {
   rafQueued = false;
+  // Recovery can yield before canvas setup. Keep dirty flags for the first initialized frame.
+  if (!stackEl || !ctxG || !App.doc) return;
   if (dirtyFlags.grid) { drawGrid(); dirtyFlags.grid = false; }
   if (dirtyFlags.scene) { drawScene(); dirtyFlags.scene = false; }
   if (dirtyFlags.rulers) { drawRulers(); dirtyFlags.rulers = false; }

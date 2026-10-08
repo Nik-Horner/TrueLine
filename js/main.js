@@ -1,3 +1,4 @@
+import { isMac } from './platform.js';
 // TrueLine bootstrap + input pipeline.
 import {
   App, newDoc, loadAutosaved, initCanvases, setTool, invalidate, invalidateView,
@@ -197,7 +198,13 @@ overlayEl.addEventListener('pointerleave', () => {
 overlayEl.addEventListener('wheel', ev => {
   ev.preventDefault();
   const s = stackPos(ev);
-  zoomAt(s.x, s.y, Math.pow(1.1, -ev.deltaY / 100));
+  const units = ev.deltaMode === 1 ? 16 : ev.deltaMode === 2 ? overlayEl.clientHeight : 1;
+  if (isMac && !ev.ctrlKey && !ev.metaKey) {
+    // Two-finger scrolling pans; trackpad pinch emits Ctrl+wheel in Chromium.
+    App.view.x += ev.deltaX * units / k();
+    App.view.y += ev.deltaY * units / k();
+    invalidateView();
+  } else zoomAt(s.x, s.y, Math.pow(1.1, -ev.deltaY * units / 100));
 }, { passive: false });
 
 function eraseAt(p) {
@@ -254,9 +261,9 @@ addEventListener('keydown', ev => {
     else if (key === 's') { ev.preventDefault(); App.ui.saveProject?.(); }
     else if (key === 'o') { ev.preventDefault(); App.ui.openFile?.(); }
     else if (key === 'a') { ev.preventDefault(); setSelection(App.doc.entities.map(e => e.id)); setTool('select'); }
-    else if (key === 'c') { copySel(); }
-    else if (key === 'x') { copySel(); deleteSelection(); }
-    else if (key === 'v') { pasteClip(); }
+    else if (key === 'c') { ev.preventDefault(); copySel(); }
+    else if (key === 'x') { ev.preventDefault(); copySel(); deleteSelection(); }
+    else if (key === 'v') { ev.preventDefault(); pasteClip(); }
     else if (key === 'd') { ev.preventDefault(); duplicateSel(); }
     return;
   }
@@ -369,3 +376,6 @@ if (location.search.includes('test=1')) {
     console.log(allPass ? 'TESTS PASS' : 'TESTS FAIL');
   })();
 }
+
+// Used by integration checks and shell automation after all input handlers are installed.
+App.ready = true;

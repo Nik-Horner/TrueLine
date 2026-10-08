@@ -1,0 +1,96 @@
+{
+  "complex": [
+    {
+      "id": "foam-rectangular",
+      "title": "Flat foam plate: dozens of rectangular openings",
+      "url": "https://raw.githubusercontent.com/foostan/corneliuskbd/2fa8e256f20cf210a2121b2bd4fe5990921286ee/docs/v1/images/package-foam.jpg",
+      "source": "foam.jpg",
+      "crop": "1110x360+230+45",
+      "kind": "Flat part on a tabletop",
+      "credit": "foostan/corneliuskbd; CC BY-NC-SA 4.0"
+    },
+    {
+      "id": "foam-irregular",
+      "title": "Flat foam gasket: irregular openings and thin webs",
+      "url": "https://raw.githubusercontent.com/foostan/corneliuskbd/2fa8e256f20cf210a2121b2bd4fe5990921286ee/docs/v1/images/package-foam.jpg",
+      "source": "foam.jpg",
+      "crop": "1110x375+230+420",
+      "kind": "Flat part on a tabletop",
+      "credit": "foostan/corneliuskbd; CC BY-NC-SA 4.0"
+    },
+    {
+      "id": "white-switch-plate",
+      "title": "White switch plate on wood: cutouts, bolt holes, occlusion",
+      "url": "https://raw.githubusercontent.com/jpconstantineau/ErgoTravel/e9be40f69359cc593c21303f7be7bc1916a83468/images/alps_ergotravel_plate.jpg",
+      "source": "white-plate.jpg",
+      "kind": "Flat part photographed at an angle; one opening is occluded",
+      "credit": "jpconstantineau/ErgoTravel; image-specific license not verified"
+    },
+    {
+      "id": "sim-slot",
+      "title": "Metal SIM carrier: slot, side rail and concave profile",
+      "url": "https://raw.githubusercontent.com/realiad4ad/Real-IAD/8f774faa776cd01b974d1ed4283473190201a178/assets/images/sample_data.png",
+      "source": "realiad.png",
+      "crop": "330x300+1745+410",
+      "kind": "Real industrial photograph; projected outline",
+      "credit": "Real-IAD example collage, realiad4ad; website CC BY-SA 4.0, dataset terms separate"
+    },
+    {
+      "id": "white-bracket",
+      "title": "Notched white bracket: concave profile and opening",
+      "url": "https://raw.githubusercontent.com/stepanje/MPDD2/36464e836064851f07017e5896b03b27d2fd6068/samples.png",
+      "source": "mpdd2.png",
+      "crop": "168x168+383+41",
+      "kind": "Angled 3D bracket; projected outline only",
+      "credit": "Stepan Jezek et al., MPDD2; CC BY-NC-SA 4.0"
+    },
+    {
+      "id": "steel-bracket",
+      "title": "Dark steel bracket: two mounting holes on textured gray",
+      "url": "https://raw.githubusercontent.com/stepanje/MPDD2/36464e836064851f07017e5896b03b27d2fd6068/samples.png",
+      "source": "mpdd2.png",
+      "crop": "167x168+198+41",
+      "kind": "Angled 3D bracket; projected outline only",
+      "credit": "Stepan Jezek et al., MPDD2; CC BY-NC-SA 4.0"
+    },
+    {
+      "id": "screw",
+      "title": "Screw: threads and cast shadow",
+      "url": "https://raw.githubusercontent.com/openvinotoolkit/anomalib/9fb1337c0ac866797f4eedcaa0972d0f24a84f19/docs/source/images/uflow/results-mvtec-good.jpg",
+      "source": "mvtec.jpg",
+      "crop": "256x256+2374+0",
+      "kind": "3D screw; silhouette check, not a flat manufacturing profile",
+      "credit": "MVTec AD reproduced in anomalib; CC BY-NC-SA 4.0"
+    }
+  ],
+  "additional": [
+    {
+      "id": "sim-carrier-2",
+      "crop": "330x300+2092+410",
+      "url": "https://raw.githubusercontent.com/realiad4ad/Real-IAD/8f774faa776cd01b974d1ed4283473190201a178/assets/images/sample_data.png",
+      "source": "Real-IAD sample collage; distinct photographed views of the SIM carrier, not independent part categories.",
+      "credit": "Real-IAD example collage, website CC BY-SA 4.0; dataset terms separate"
+    },
+    {
+      "id": "sim-carrier-3",
+      "crop": "330x300+2439+410",
+      "url": "https://raw.githubusercontent.com/realiad4ad/Real-IAD/8f774faa776cd01b974d1ed4283473190201a178/assets/images/sample_data.png",
+      "source": "Real-IAD sample collage; distinct photographed views of the SIM carrier, not independent part categories.",
+      "credit": "Real-IAD example collage, website CC BY-SA 4.0; dataset terms separate"
+    },
+    {
+      "id": "sim-carrier-4",
+      "crop": "330x300+2786+410",
+      "url": "https://raw.githubusercontent.com/realiad4ad/Real-IAD/8f774faa776cd01b974d1ed4283473190201a178/assets/images/sample_data.png",
+      "source": "Real-IAD sample collage; distinct photographed views of the SIM carrier, not independent part categories.",
+      "credit": "Real-IAD example collage, website CC BY-SA 4.0; dataset terms separate"
+    },
+    {
+      "id": "sim-carrier-5",
+      "crop": "330x300+3133+410",
+      "url": "https://raw.githubusercontent.com/realiad4ad/Real-IAD/8f774faa776cd01b974d1ed4283473190201a178/assets/images/sample_data.png",
+      "source": "Real-IAD sample collage; distinct photographed views of the SIM carrier, not independent part categories.",
+      "credit": "Real-IAD example collage, website CC BY-SA 4.0; dataset terms separate"
+    }
+  ]
+}

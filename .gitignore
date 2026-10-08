@@ -1,10 +1,17 @@
 node_modules/
+.model-eval/
+tools/model-eval/MobileSAM/
+tools/model-eval/*.pt
 dist/
 dist-installer/
 dist-test/
+dist-release/
 *.log
 # dev artifacts in the repo root (README images live in assets/ and ARE tracked)
 /*.png
 /*.svg
 /*.dxf
 /*.pdf
+
+# Generated evaluation images, reports and downloaded third-party photographs.
+test-artifacts/

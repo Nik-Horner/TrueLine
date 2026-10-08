@@ -1,24 +1,42 @@
 {
   "name": "trueline",
   "productName": "TrueLine",
-  "version": "3.0.2",
+  "version": "3.1.0",
   "description": "Trace with a pen tablet, export dimensionally-accurate DXF/SVG/PDF",
   "main": "electron/main.cjs",
   "author": "TrueLine",
   "private": true,
   "scripts": {
     "start": "electron .",
-    "test": "node tests/run-tests.mjs && node tests/workflows.mjs && node tests/native-save.cjs",
+    "test": "node tests/run-tests.mjs && node tests/workflows.mjs && node tests/mask-contours.mjs && node tests/trace-input.mjs && node tests/static-server.cjs && node tests/autotrace.mjs && node tests/autotrace-edge-cases.mjs && node tests/outline-editor.mjs && node tests/native-save.cjs && node tests/mac-desktop.cjs",
     "test:upgrades": "node tests/upgrades.cjs",
     "test:app": "node tests/production.cjs dist-test",
     "pack": "node build/pack.mjs",
     "dist": "node build/pack.mjs && tar -a -c -f dist/TrueLine-win-x64.zip -C dist TrueLine-win32-x64",
-    "installer": "electron-builder --win nsis"
+    "installer": "npm run verify:models && electron-builder --win nsis",
+    "test:autotrace:ui": "node tests/autotrace-ui.cjs",
+    "test:autotrace:photos": "node tests/real-photo-cases.mjs",
+    "test:autotrace:report": "node tests/render-autotrace-report.mjs",
+    "test:autotrace:complex": "node tests/complex-photo-cases.mjs && node tests/complex-photo-accuracy.mjs && node tests/precision-photo-accuracy.mjs && node tests/screw-photo-variations.mjs && node tests/autotrace-resolution.mjs",
+    "test:autotrace:edit": "node tests/outline-editor-ui.cjs",
+    "test:autotrace:resolution": "node tests/autotrace-resolution.mjs",
+    "test:autotrace:model": "npm run prepare:photos && node tests/trained-segmentation-browser.cjs && node tests/trained-segmentation-accuracy.mjs",
+    "verify:models": "node build/verify-models.mjs",
+    "test:autotrace:model:ui": "npm run prepare:photos && node tests/trained-segmentation-ui.cjs",
+    "test:autotrace:model:report": "node tests/render-trained-report.mjs",
+    "test:autotrace:model:threads": "npm run prepare:photos && node tests/trained-thread-variations.cjs",
+    "test:autotrace:release": "npm test && npm run verify:models && npm run test:autotrace:complex && npm run test:autotrace:photos && npm run test:autotrace:model && npm run test:autotrace:model:threads && npm run test:autotrace:ui && npm run test:autotrace:edit && npm run test:autotrace:model:ui",
+    "pack:mac": "node build/pack.mjs --platform darwin --arch arm64 && node build/pack.mjs --platform darwin --arch x64",
+    "installer:mac": "npm run verify:models && electron-builder --mac --arm64 --x64 --publish never",
+    "test:mac": "node tests/mac-desktop.cjs && node tests/mac-ui.cjs",
+    "test:packaged:trace": "npm run prepare:photos && node tests/packaged-tracing.cjs",
+    "prepare:photos": "node tests/prepare-photo-fixtures.mjs",
+    "test:desktop": "node tests/desktop-smoke.cjs"
   },
   "build": {
     "appId": "com.trueline.cad",
     "productName": "TrueLine",
-    "copyright": "MIT — free to use and redistribute",
+    "copyright": "MIT \u2014 free to use and redistribute",
     "asar": false,
     "directories": {
       "output": "dist-installer",
@@ -29,7 +47,8 @@
       "style.css",
       "js/**/*",
       "fonts/**/*",
-      "electron/**/*"
+      "electron/**/*",
+      "models/**/*"
     ],
     "win": {
       "target": [
@@ -52,7 +71,17 @@
         "owner": "Nik-Horner",
         "repo": "TrueLine"
       }
-    ]
+    ],
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "category": "public.app-category.graphics-design",
+      "icon": "build/icon.icns",
+      "hardenedRuntime": true,
+      "artifactName": "TrueLine-${version}-${arch}.${ext}"
+    }
   },
   "license": "MIT",
   "type": "module",
@@ -63,7 +92,8 @@
     "gifenc": "^1.0.3",
     "png-to-ico": "^3.0.1",
     "pngjs": "^7.0.0",
-    "puppeteer-core": "^25.3.0"
+    "puppeteer-core": "^25.3.0",
+    "onnxruntime-web": "1.24.3"
   },
   "dependencies": {
     "electron-updater": "^6.8.9"
