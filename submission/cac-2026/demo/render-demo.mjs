@@ -74,7 +74,7 @@ try{
  g.fillStyle='#e8ecec';for(const points of [...part.holes,part.slot]){path(points);g.fill();g.strokeStyle='#334955';g.lineWidth=2;g.stroke();}
  return c.toDataURL().split(',')[1];},part);
  const fixture=path.join(out,'sample-mounting-plate.png');await fs.writeFile(fixture,Buffer.from(raster,'base64'));
- await startScene('01 / TRACE THE PROFILE','Lay the part on a drawing pad and begin tracing.');
+ await startScene('01 / TRACE THE PROFILE','Import a reference image and trace the outer profile.');
  await click('#fileBtn');await click('[data-cmd="upload-image"]');await(await app.$('#imagePick')).uploadFile(fixture);await app.waitForFunction(()=>m.getUnderlayImg()?.naturalWidth===1020);await app.waitForFunction(()=>document.getElementById('toast').hidden,{timeout:15000});
  await click('[data-tool="freehand"]',{record:false});
  const map=await app.evaluate(()=>({...m.App.doc.underlay}));
@@ -84,18 +84,29 @@ try{
  async function trace(points,{visible=true,preview=.65}={}){const before=await app.evaluate(()=>m.App.doc.entities.length);const noisy=points.map((p,i)=>{if(i===0||i===points.length-1)return p;return{x:p.x+Math.sin(i*1.71)*.07,y:p.y+Math.sin(i*.63)*.07};});let pos=await world(worldPart(noisy[0]));await move(pos.x,pos.y,{record:false});await page.mouse.down();
  for(let i=1;i<noisy.length;i++){pos=await world(worldPart(noisy[i]));await page.mouse.move(pos.x,pos.y);await cursor(pos.x,pos.y,true);if(visible&&i%3===0)await capture(.045);}await page.mouse.up();await hideCursor();assert(await app.evaluate(()=>Boolean(m.App.tools.get('freehand').pending)),'Actual stroke review');await capture(preview);await setCamera(null,2.6,visible);await clickText('Accept',{record:visible});assert((await app.evaluate(()=>m.App.doc.entities.length))>before,'Trace committed');await hideCursor();}
  await trace(outer);await holdScene(14);
- await startScene('02 / ADD THE OPENINGS','Trace the bolt holes and the adjustment slot.');
- for(const contour of [...holes,slot]){await setCamera(region,2.2);await trace(contour,{visible:true,preview:.35});}
+ await startScene('02 / THREE-POINT CIRCLE','Choose Circle → 3-Pt. Pick three points around the hole.');
+ await setCamera();await click('[data-tool="circle"]');await clickText('3-Pt');await capture(1);
+ const holeRegion=await app.evaluate(({a,b})=>{const r=document.getElementById('cvOverlay').getBoundingClientRect(),p=m.toScreen(a),q=m.toScreen(b);return{x:r.x+p.x,y:r.y+p.y,width:q.x-p.x,height:q.y-p.y};},{a:worldPart({x:5,y:5}),b:worldPart({x:27,y:27})});
+ await setCamera(holeRegion,10,true);
+ for(const i of [0,32,64])await pointClick(worldPart(holes[0][i]));
+ const circle=await app.evaluate(()=>m.App.doc.entities.at(-1));
+ const expectedCenter=worldPart({x:16,y:16}),expectedRadius=5*part.scale*map.wMM/part.width;
+ assert.equal(circle.type,'circle','Three-point tool created a CAD circle');
+ assert(Math.hypot(circle.c.x-expectedCenter.x,circle.c.y-expectedCenter.y)<.2&&Math.abs(circle.r-expectedRadius)<.2,'Three-point circle follows the reference hole');
+ await hideCursor();await capture(1.5);await fs.copyFile(path.join(frames,shots.at(-1).file),path.join(out,'circle-tool-preview.jpg'));await setCamera(null,2.6,true);await holdScene(9);
+ await startScene('03 / FIT THE OTHER OPENINGS','Trace the remaining holes and slot; review each fitted shape.');
+ await click('[data-tool="freehand"]',{record:false});
+ for(const contour of [...holes.slice(1),slot]){await setCamera(region,2.2);await trace(contour,{visible:true,preview:.35});}
  const traced=await app.evaluate(()=>m.App.doc.entities.map(e=>({type:e.type,closed:e.closed,r:e.r})));assert(traced.filter(e=>e.type==='circle').length===3,'Three traced bolt holes');assert(traced.length>=5,'Profile, three bolt holes and slot');
  await holdScene(13);
- await startScene('03 / REVIEW THE PART','Review the complete profile, rounded corners and openings.');
+ await startScene('04 / REVIEW THE PART','Review the complete profile, rounded corners and openings.');
  await click('#fileBtn',{record:false});await click('[data-cmd="underlay-clear"]',{record:false});await click('[data-tool="select"]',{record:false});await app.evaluate(()=>{m.setSelection([]);m.zoomFit();});await page.mouse.move(20,20);await hideCursor();await capture(1);
  await holdScene(3);
- await startScene('04 / SET THE SIZE','Use a known dimension: this sample is 80 mm tall.');
+ await startScene('05 / SET THE SIZE','Use a known dimension: this sample is 80 mm tall.');
  const initialBounds=await app.evaluate(()=>m.drawingBounds());const rx=initialBounds.minX+(initialBounds.maxX-initialBounds.minX)*.18;
  await click('[data-tool="calibrate"]');await pointClick({x:rx,y:initialBounds.minY});await pointClick({x:rx,y:initialBounds.maxY});await capture(.7);await page.keyboard.type('80',{delay:120});await capture(.8);await page.keyboard.press('Enter');await sleep(100);await hideCursor();await capture(1);await holdScene(9);
  const bounds=await app.evaluate(()=>m.drawingBounds());const height=bounds.maxY-bounds.minY;assert(Math.abs(height-80)<.01,'80 mm calibrated part height');
- await startScene('05 / EXPORT THE OUTLINE','Export the finished part as DXF, SVG or PDF.');await click('#exportMore');await capture(.6);await click('#exportMenu [data-cmd="export-dxf"]');await capture(1);await clickText('Export drawing');await hideCursor();await holdScene(6);
+ await startScene('06 / EXPORT THE OUTLINE','Export the finished part as DXF, SVG or PDF.');await click('#exportMore');await capture(.6);await click('#exportMenu [data-cmd="export-dxf"]');await capture(1);await clickText('Export drawing');await hideCursor();await holdScene(6);
  const downloaded=await fs.readdir(downloads);assert(downloaded.some(f=>f.endsWith('.dxf')),'Actual part DXF download');await fs.writeFile(path.join(out,'sample-mounting-plate.trueline.json'),await app.evaluate(()=>m.projectJSON()));
  await app.evaluate(()=>{m.setSelection([]);m.zoomFit();});await page.mouse.move(20,20);await hideCursor();await app.waitForFunction(()=>document.getElementById('toast').hidden,{timeout:15000});await sleep(100);
  const clip=await app.evaluate(()=>{const r=document.getElementById('stack').getBoundingClientRect(),b=m.drawingBounds(),a=m.toScreen({x:b.minX,y:b.minY}),z=m.toScreen({x:b.maxX,y:b.maxY}),pad=24;return{x:r.x+a.x-pad,y:r.y+a.y-pad,width:z.x-a.x+pad*2,height:z.y-a.y+pad*2};});await page.screenshot({path:path.join(out,'part-cad-outline.png'),clip:{x:camera.x+clip.x*camera.scale,y:camera.y+clip.y*camera.scale,width:clip.width*camera.scale,height:clip.height*camera.scale}});
@@ -104,9 +115,9 @@ try{
 
  // A quick second route: import an overhead image and review the automatic outline.
  await click('#fileBtn',{record:false});await click('[data-cmd="new"]',{record:false});
- await startScene('06 / PHOTO ROUTE','Or take a photo from above and import it.');
+ await startScene('07 / PHOTO ROUTE','Or take a photo from above and import it.');
  await click('#fileBtn');await click('[data-cmd="upload-image"]');await(await app.$('#imagePick')).uploadFile(fixture);await app.waitForFunction(()=>m.getUnderlayImg()?.naturalWidth===1020);await hideCursor();await holdScene(5);
- await startScene('07 / AUTO OUTLINE','Generate an outline. Review it and set scale before export.');
+ await startScene('08 / AUTO OUTLINE','Generate an outline. Review it and set scale before export.');
  await click('#fileBtn');await click('[data-cmd="autotrace"]');
  await app.waitForFunction(()=>['ready','warning'].includes(document.querySelector('.trace-status')?.dataset.state),{timeout:120000});
  const autoStatus=await app.$eval('.trace-status',e=>e.textContent);assert(/outline/i.test(autoStatus),'Actual automatic outline preview');
@@ -118,22 +129,23 @@ try{
  await card({name:'story',title:'A part with no CAD file.',sub:'My dad and I needed to recreate it.',body:'Photo tracing was frustrating. Alternatives were expensive.',eyebrow:'Why I built it',duration:5});
  await card({name:'result',title:'Free. Open source.\nMade for makers.',sub:'DXF  ·  SVG  ·  PDF',body:'Review the outline and verify measurements before fabrication.',eyebrow:'Free · Offline · Open source',duration:6});
  await card({name:'technology',title:'Built for your workflow.',sub:'JavaScript · HTML · CSS · Canvas · Electron',body:'Optional auto-outline: pretrained MobileSAM + ONNX Runtime.',eyebrow:'Built with',duration:6});
- await card({name:'contribution',title:'Designed and tested by Nik Horner.',sub:'AI wrote most of the code.\nCoding tools: Codex and Claude Code.',body:'This video was also produced with AI assistance.',eyebrow:'Development disclosure',duration:8});
+ await card({name:'contribution',title:'Tracing functionality by Nik Horner.',sub:'CAD curve fitting · hands-on testing · ML direction',body:'AI coding tools: Codex and Claude Code. AI also assisted this video.',eyebrow:'Development disclosure',duration:8});
  await card({name:'ending',title:'TrueLine',sub:'github.com/Nik-Horner/TrueLine',body:'Trace. Review. Scale. Export.',duration:3});
  // Edit chronology: show the real result up front, then one complete workflow.
- const order=['opening','story','01 / TRACE THE PROFILE','02 / ADD THE OPENINGS','03 / REVIEW THE PART','04 / SET THE SIZE','05 / EXPORT THE OUTLINE','06 / PHOTO ROUTE','07 / AUTO OUTLINE','technology','contribution','ending'];
+ const order=['opening','story','01 / TRACE THE PROFILE','02 / THREE-POINT CIRCLE','03 / FIT THE OTHER OPENINGS','04 / REVIEW THE PART','05 / SET THE SIZE','06 / EXPORT THE OUTLINE','07 / PHOTO ROUTE','08 / AUTO OUTLINE','technology','contribution','ending'];
  const reordered=order.flatMap(name=>shots.filter(s=>s.group===name));shots.splice(0,shots.length,...reordered);elapsed=0;for(const shot of shots){shot.start=elapsed;elapsed+=shot.duration;}
  captions.splice(0,captions.length,...order.map(name=>{const ss=shots.filter(s=>s.group===name),original=captions.find(c=>c.group===name);return{start:ss[0].start,end:ss.at(-1).start+ss.at(-1).duration,text:original.text};}));
  assert.deepEqual(errors,[],'No application page errors');
- await fs.writeFile(path.join(out,'capture-manifest.json'),JSON.stringify({width:1920,height:1080,duration:elapsed,frames:shots.length,application:'TrueLine',revision:7,capture:'Actual app UI operated in Chromium; original illustrated mounting plate; manual UI tracing; editorial crops and timed cuts; captioned, no audio',checks:{font:'Inter (bundled)',pageErrors:errors,manualTraceAccepted:true,geometryCount:traced.length,boltHoles:3,adjustmentSlots:1,calibratedHeightMM:height,overallWidthMM:bounds.maxX-bounds.minX,downloaded,autoOutlineStatus:autoStatus,autoOutlineEntityCount:autoCount},shots},null,2));
+ assert(elapsed>=60&&elapsed<=180,'Contest video must run 1–3 minutes');
+ await fs.writeFile(path.join(out,'capture-manifest.json'),JSON.stringify({width:1920,height:1080,duration:elapsed,frames:shots.length,application:'TrueLine',revision:8,capture:'Actual app UI operated in Chromium; original illustrated mounting plate; manual UI tracing; editorial crops and timed cuts; captioned, no audio',checks:{font:'Inter (bundled)',pageErrors:errors,manualTraceAccepted:true,geometryCount:traced.length,boltHoles:3,threePointCircleVerified:true,adjustmentSlots:1,calibratedHeightMM:height,overallWidthMM:bounds.maxX-bounds.minX,downloaded,autoOutlineStatus:autoStatus,autoOutlineEntityCount:autoCount},shots},null,2));
  function time(n){const ms=Math.round(n*1000),s=Math.floor(ms/1000);return `${String(Math.floor(s/3600)).padStart(2,'0')}:${String(Math.floor(s/60)%60).padStart(2,'0')}:${String(s%60).padStart(2,'0')},${String(ms%1000).padStart(3,'0')}`;}
  await fs.writeFile(path.join(out,'trueline-demo.srt'),captions.map((c,i)=>`${i+1}\n${time(c.start)} --> ${time(c.end)}\n${c.text}\n`).join('\n'));
  await fs.writeFile(path.join(out,'trueline-demo-transcript.txt'),captions.map(c=>`${time(c.start)} ${c.text}`).join('\n')+'\n');
  await fs.writeFile(path.join(out,'frames.ffconcat'),'ffconcat version 1.0\n'+shots.map(s=>`file 'frames/${s.file}'\nduration ${s.duration.toFixed(3)}\n`).join('')+`file 'frames/${shots.at(-1).file}'\n`);
  console.log('CAPTURE COMPLETE',JSON.stringify({seconds:elapsed,frames:shots.length,out}));
- await new Promise((resolve,reject)=>{const proc=spawn('ffmpeg',['-hide_banner','-loglevel','warning','-y','-safe','0','-i',path.join(out,'frames.ffconcat'),'-t',elapsed.toFixed(3),'-vf','scale=in_range=full:out_range=limited,format=yuv420p,fps=30','-color_range','tv','-c:v','libx264','-preset','medium','-crf','18','-pix_fmt','yuv420p','-movflags','+faststart','-an',path.join(out,'trueline-cac-demo-v7.mp4')],{stdio:'inherit'});proc.on('error',reject);proc.on('exit',code=>code===0?resolve():reject(new Error(`ffmpeg exited ${code}`)));});
- const encodedMetadata=await new Promise((resolve,reject)=>{let stdout='';const proc=spawn('ffprobe',['-v','error','-show_entries','format=duration,size:stream=codec_name,width,height,r_frame_rate,pix_fmt,color_range','-of','json',path.join(out,'trueline-cac-demo-v7.mp4')]);proc.stdout.on('data',chunk=>stdout+=chunk);proc.on('error',reject);proc.on('exit',code=>{if(code!==0)return reject(new Error('ffprobe failed'));try{resolve(JSON.parse(stdout));}catch(e){reject(e);}});});
+ await new Promise((resolve,reject)=>{const proc=spawn('ffmpeg',['-hide_banner','-loglevel','warning','-y','-safe','0','-i',path.join(out,'frames.ffconcat'),'-t',elapsed.toFixed(3),'-vf','scale=in_range=full:out_range=limited,format=yuv420p,fps=30','-color_range','tv','-c:v','libx264','-preset','medium','-crf','18','-pix_fmt','yuv420p','-movflags','+faststart','-an',path.join(out,'trueline-cac-demo-v8.mp4')],{stdio:'inherit'});proc.on('error',reject);proc.on('exit',code=>code===0?resolve():reject(new Error(`ffmpeg exited ${code}`)));});
+ const encodedMetadata=await new Promise((resolve,reject)=>{let stdout='';const proc=spawn('ffprobe',['-v','error','-show_entries','format=duration,size:stream=codec_name,width,height,r_frame_rate,pix_fmt,color_range','-of','json',path.join(out,'trueline-cac-demo-v8.mp4')]);proc.stdout.on('data',chunk=>stdout+=chunk);proc.on('error',reject);proc.on('exit',code=>{if(code!==0)return reject(new Error('ffprobe failed'));try{resolve(JSON.parse(stdout));}catch(e){reject(e);}});});
  await fs.writeFile(path.join(out,'video-metadata.json'),JSON.stringify(encodedMetadata,null,2)+'\n');
  const manifest=JSON.parse(await fs.readFile(path.join(out,'capture-manifest.json'),'utf8'));manifest.encodedDurationSeconds=Number(encodedMetadata.format.duration);manifest.encodedVideoMetadata=encodedMetadata;await fs.writeFile(path.join(out,'capture-manifest.json'),JSON.stringify(manifest,null,2)+'\n');
- console.log('VIDEO COMPLETE',path.join(out,'trueline-cac-demo-v7.mp4'));
+ console.log('VIDEO COMPLETE',path.join(out,'trueline-cac-demo-v8.mp4'));
 }catch(e){console.error(e);throw e;}finally{await browser.close();server.close();}

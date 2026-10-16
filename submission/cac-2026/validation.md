@@ -19,7 +19,7 @@ Validation targets the TrueLine source used for the demo, commit `9d5a35f70a8443
 - `DISPLAY=:99 npm run test:desktop` passed again after the final fixes: all 26 production checks.
 - Auto-trace and outline-editor UI suites passed during the audit.
 - `git diff --check` passed before the code commit.
-- Final demo output: 86 seconds, H.264 at 1920×1080 and 30 fps, with Inter typography and matching captions. It traces a complete illustrated mounting plate by hand, including three mounting holes and a slot, then demonstrates optional automatic outline detection.
+- Revision 7 demo output (superseded): 86 seconds, H.264 at 1920×1080 and 30 fps, with Inter typography and matching captions. It traces a complete illustrated mounting plate by hand, including three mounting holes and a slot, then demonstrates optional automatic outline detection.
 - Actual app checks: five CAD entities, three bolt-hole circles, one closed outer profile and one closed slot; calibrated part height 80.0000017372436 mm. The downloaded DXF parses into the same five closed entities without warnings. The automatic route also found and accepted five contours. No uncaught page errors.
 - The full video decoded without errors. Reference, tracing, finished outline, scale and export frames were inspected for readability and cropping.
 - Cover output: 600×800-pixel portrait JPEG using TrueLine's existing logo, as requested.
@@ -33,3 +33,13 @@ The demo uses an original illustrated sample part to show the workflow. It is no
 [Desktop Builds run 38848173932](https://github.com/Nik-Horner/TrueLine/actions/runs/38848173932) completed successfully on Windows, Apple Silicon macOS, and Intel macOS. All three jobs ran the new calibration/export regression. Windows installer construction and both Mac candidate builds passed; both Mac jobs also passed installed-package checks. These are CI candidate artifacts, not a published release.
 
 The Inter typography change passed the auto-trace UI suite at four viewport sizes and the calibration/export browser regression. The updated [Desktop Builds run 38850991003](https://github.com/Nik-Horner/TrueLine/actions/runs/38850991003) also passed on Windows, Apple Silicon macOS, and Intel macOS, including packaging checks.
+
+## Revision 8 local preparation — October 16, 2026
+
+- Added a dedicated three-point Circle-tool segment, using real pointer input and checking the created circle against the reference hole. One hole uses Circle → 3-Pt; two holes and the slot use fitted freehand tracing.
+- Updated creator contributions after direct clarification: tracing functionality and CAD curve representation, hands-on refinement, and the ML approach. The uncertain earlier image-processing library is not named.
+- Local `npm test` passed. The demo capture assertions passed, including the three-point circle, five entities, 80 mm calibrated height, automatic outline acceptance, no page errors, and a 1–3 minute duration.
+- Revision 8 is 95 seconds at 1920×1080 / 30 fps. Full decode passed; contact-sheet inspection checked the circle close-up, tracing, export, and creator credit.
+- DXF read-back: three circles plus two closed polylines, no parser warnings.
+- Cover uploaded to the live application; written answers saved as a draft. The final readiness checkbox remains unchecked. Public video and final submission are pending.
+- No app production code changed in this revision. Previously completed desktop CI remains historical evidence; no new installer was published.
