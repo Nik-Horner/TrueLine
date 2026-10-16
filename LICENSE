@@ -22,9 +22,10 @@ SOFTWARE.
 
 ---
 
-TrueLine bundles two fonts under the SIL Open Font License 1.1:
+TrueLine bundles three fonts under the SIL Open Font License 1.1:
   - Chakra Petch (© Cadson Demak)
   - IBM Plex Mono (© IBM Corp.)
+  - Inter (© The Inter Project Authors; see fonts/Inter-OFL.txt)
 See fonts/OFL.txt for the full font license. The OFL applies only to the font
 files in fonts/; the rest of TrueLine is under the MIT License above.
 
