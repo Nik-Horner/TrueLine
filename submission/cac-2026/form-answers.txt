@@ -15,7 +15,7 @@ Please list the link to your app's video demonstration here
 https://vimeo.com/1236443371
 
 Please briefly describe what your app does?
-TrueLine is free, open-source tracing software for makers. It helps turn physical parts and part images into editable, scaled 2D CAD outlines. Users can trace with a mouse or pen tablet, review fitted lines and curves, create circles from three edge points, and set the drawing’s scale from a known measurement. Optional image outline detection provides another way to begin a trace.
+TrueLine is free, open-source desktop tracing software for makers. It helps turn physical parts and part images into editable, scaled 2D CAD outlines. Users can trace with a mouse or pen tablet, review fitted lines and curves, or create a circle by picking three points around its edge. They can set the drawing’s scale from a known measurement and use optional image outline detection as another starting point.
 
 Drawings can be saved and exported as DXF, SVG, or PDF for fabrication, repair, and pattern making. Processing stays on the user’s device. Users must verify edges and dimensions before fabrication.
 

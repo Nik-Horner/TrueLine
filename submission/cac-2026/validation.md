@@ -43,3 +43,5 @@ The Inter typography change passed the auto-trace UI suite at four viewport size
 - DXF read-back: three circles plus two closed polylines, no parser warnings.
 - Cover uploaded to the live application; written answers saved as a draft. The final readiness checkbox remains unchecked. The video was uploaded to Vimeo with Public visibility; final submission remains pending approval.
 - No app production code changed in this revision. Previously completed desktop CI remains historical evidence; no new installer was published.
+
+Signed-out Chrome playback at https://vimeo.com/1236443371 advanced successfully. Reopening the contest draft preserved the written answers, public Vimeo link, cover, process choices, and unchecked final readiness field.
