@@ -33,7 +33,7 @@ Use the TrueLine source from PR 4, including its bundled Inter font, install dep
 node submission/cac-2026/demo/render-demo.mjs
 ```
 
-Requires Chromium (`CHROME_BIN`, default `/usr/bin/chromium`), ffmpeg and ffprobe. The script runs the actual app locally, clears its generated frame/export directories, and replaces the selected output files. Only the selected deliverables are tracked; raw frames and earlier edits are ignored. The video remains silent with burned-in captions; nothing has been uploaded or submitted.
+Requires Chromium (`CHROME_BIN`, default `/usr/bin/chromium`), ffmpeg and ffprobe. The script runs the actual app locally, clears its generated frame/export directories, and replaces the selected output files. Only the selected deliverables are tracked; raw frames and earlier edits are ignored. The video is silent with burned-in captions. The revised demo is public at https://vimeo.com/1236443371; the contest entry remains unsubmitted.
 
 ## Verified output
 

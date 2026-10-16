@@ -41,5 +41,5 @@ The Inter typography change passed the auto-trace UI suite at four viewport size
 - Local `npm test` passed. The demo capture assertions passed, including the three-point circle, five entities, 80 mm calibrated height, automatic outline acceptance, no page errors, and a 1–3 minute duration.
 - Revision 8 is 95 seconds at 1920×1080 / 30 fps. Full decode passed; contact-sheet inspection checked the circle close-up, tracing, export, and creator credit.
 - DXF read-back: three circles plus two closed polylines, no parser warnings.
-- Cover uploaded to the live application; written answers saved as a draft. The final readiness checkbox remains unchecked. Public video and final submission are pending.
+- Cover uploaded to the live application; written answers saved as a draft. The final readiness checkbox remains unchecked. The video was uploaded to Vimeo with Public visibility; final submission remains pending approval.
 - No app production code changed in this revision. Previously completed desktop CI remains historical evidence; no new installer was published.
