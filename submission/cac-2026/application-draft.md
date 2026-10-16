@@ -20,13 +20,13 @@ The app is intended for makers, students, hobbyists, and people working on repai
 
 My dad and I had a physical part but no CAD model for it. We needed a way to turn the part into a usable drawing. We tried taking a picture and tracing it in SolidWorks, but that did not work well for us. We also found a paid solution that cost about $1,500.
 
-That experience inspired TrueLine: a free tool focused on tracing, reviewing the outline, and setting its scale before exporting it. I personally designed the interface and shaped the tracing experience through testing.
+That experience inspired TrueLine: a free tool focused on tracing, reviewing the outline, and setting its scale before exporting it. I built and refined the tracing functionality and tested it with parts.
 
 ## Technical challenge and response
 
-While testing the tracing workflow, I found that a curve could turn into far too many short edges. In CAD, an arc should be represented as an arc rather than thousands of tiny line segments. That made the way a trace was represented an important problem to solve.
+One challenge was turning a traced curve into useful CAD geometry. An arc should stay an arc, rather than becoming thousands of tiny line segments. I built and refined the tracing functionality to fit suitable strokes as lines, circles, and arcs, with smoothing and a preview before acceptance.
 
-We added smoothing to improve the tracing result. TrueLine's fitting workflow can represent suitable strokes as lines, circles, and arcs, and lets the user review the fitted outline before accepting it. My contribution was identifying the problem through use and testing the tracing experience; AI wrote most of the implementation. The goal was to produce cleaner geometry that follows the intended shape, rather than simply preserving every small movement from the input.
+Earlier image-processing approaches also struggled with more complicated parts. Using my machine-learning knowledge, I helped move the image-tracing approach to a small pretrained neural network. The app now uses MobileSAM with local inference, followed by edge processing and editable outlines. I tested the results and refined the tracing behavior; users still need to review the outline and verify measurements.
 
 ## Learning and biggest takeaway
 
@@ -49,18 +49,16 @@ I would improve the photo-tracing workflow for difficult lighting and background
 
 ## AI use and personal contribution disclosure
 
-I used Codex and Claude Code extensively, and AI wrote most of TrueLine's code. My personal contributions were designing the interface and shaping the tracing experience through hands-on testing. The original need came from a project my dad and I were working on: recreating a physical part without a CAD model. Codex also assisted with submission preparation, including bug fixes, testing, demo production, and drafting these materials.
+I used Codex and Claude Code for implementation, debugging, and testing assistance; AI generated much of the app's code. My direct work focused on building and refining the tracing functionality, especially representing curves as CAD arcs rather than many short line segments. I also used my machine-learning knowledge to help choose a small neural-network approach when earlier image processing struggled with complicated parts, and tested and refined the results.
 
-TrueLine additionally uses an existing pretrained MobileSAM model through ONNX Runtime Web to help detect part outlines locally. That is a feature of the app, separate from the AI tools used to develop it.
-
-The live form explicitly allows AI use and asks for this disclosure; preserve it accurately in every submitted version. Judges assess the student's disclosed contributions under the contest rules.
+TrueLine uses the existing pretrained MobileSAM model through ONNX Runtime Web for local image segmentation; I did not train that model. Codex also helped with bug fixes, tests, demo production, and drafting these submission materials.
 
 ## Links
 
 - Source and downloads: https://github.com/Nik-Horner/TrueLine
 - Windows installer: https://github.com/Nik-Horner/TrueLine/releases/latest/download/TrueLine-Setup.exe
 - Mac preview instructions: https://github.com/Nik-Horner/TrueLine#readme
-- Public YouTube or Vimeo demo URL: **not uploaded yet**.
+- Public Vimeo demo: https://vimeo.com/1236443371.
 
 ## Private information to enter in the contest portal
 

@@ -6,7 +6,7 @@ Hello Congressional App Challenge team,
 
 I would like to enter TrueLine, a desktop application for tracing physical parts and part images into scaled 2D CAD outlines. The idea came from trying to recreate a part with my dad when we did not have its CAD model.
 
-I personally designed the interface and refined the tracing experience through hands-on testing. AI coding tools wrote most of the application code. I plan to disclose this clearly, along with all other assistance and the app's use of the pretrained MobileSAM model.
+I built and refined the tracing functionality, including CAD curve representation, and tested it hands-on. I also helped choose a small pretrained neural-network approach when earlier image processing struggled with complicated parts. AI coding tools assisted with implementation of much of the application. I plan to disclose this clearly, along with all other assistance and the app's use of the pretrained MobileSAM model.
 
 Does this development process meet the 2026 requirements for personal technical contributions and AI use? What information would you need to assess eligibility?
 

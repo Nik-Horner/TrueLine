@@ -9,41 +9,44 @@ A part with no CAD file. My dad and I needed to recreate it. Photo tracing was f
 
 3
 00:00:10,000 --> 00:00:24,000
-Lay the part on a drawing pad and begin tracing.
+Import a reference image and trace the outer profile.
 
 4
-00:00:24,000 --> 00:00:37,000
-Trace the bolt holes and the adjustment slot.
+00:00:24,000 --> 00:00:33,000
+Choose Circle → 3-Pt. Pick three points around the hole.
 
 5
-00:00:37,000 --> 00:00:40,000
-Review the complete profile, rounded corners and openings.
+00:00:33,000 --> 00:00:46,000
+Trace the remaining holes and slot; review each fitted shape.
 
 6
-00:00:40,000 --> 00:00:49,000
-Use a known dimension: this sample is 80 mm tall.
+00:00:46,000 --> 00:00:49,000
+Review the complete profile, rounded corners and openings.
 
 7
-00:00:49,000 --> 00:00:55,000
-Export the finished part as DXF, SVG or PDF.
+00:00:49,000 --> 00:00:58,000
+Use a known dimension: this sample is 80 mm tall.
 
 8
-00:00:55,000 --> 00:01:00,000
-Or take a photo from above and import it.
+00:00:58,000 --> 00:01:04,000
+Export the finished part as DXF, SVG or PDF.
 
 9
-00:01:00,000 --> 00:01:09,000
-Generate an outline. Review it and set scale before export.
+00:01:04,000 --> 00:01:09,000
+Or take a photo from above and import it.
 
 10
-00:01:09,000 --> 00:01:15,000
-Built for your workflow. JavaScript · HTML · CSS · Canvas · Electron Optional auto-outline: pretrained MobileSAM + ONNX Runtime.
+00:01:09,000 --> 00:01:18,000
+Generate an outline. Review it and set scale before export.
 
 11
-00:01:15,000 --> 00:01:23,000
-Designed and tested by Nik Horner. AI wrote most of the code.
-Coding tools: Codex and Claude Code. This video was also produced with AI assistance.
+00:01:18,000 --> 00:01:24,000
+Built for your workflow. JavaScript · HTML · CSS · Canvas · Electron Optional auto-outline: pretrained MobileSAM + ONNX Runtime.
 
 12
-00:01:23,000 --> 00:01:26,000
+00:01:24,000 --> 00:01:32,000
+Tracing functionality by Nik Horner. CAD curve fitting · hands-on testing · ML direction AI coding tools: Codex and Claude Code. AI also assisted this video.
+
+13
+00:01:32,000 --> 00:01:35,000
 TrueLine github.com/Nik-Horner/TrueLine Trace. Review. Scale. Export.
