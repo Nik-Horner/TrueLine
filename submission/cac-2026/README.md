@@ -1,12 +1,12 @@
 # TrueLine Congressional App Challenge 2026
 
-This packet prepares TrueLine's demo and written entry. **No contest entry has been submitted by this session.** The creator has an existing Full Application Draft for Nik Horner in Illinois District 11, represented by Bill Foster. The creator supplied the live form's prompts; the Chrome session itself is not accessible from this cloud workspace. The process answers are complete. Public video upload, cover upload, and the final portal submission action remain.
+This packet prepares TrueLine's demo and written entry. **No contest entry has been submitted by this session.** The creator has an existing Full Application Draft for Nik Horner in Illinois District 11, represented by Bill Foster. The local Chrome application draft is accessible. Written answers and the required cover have been prepared in the portal. Public video upload and the final portal submission action remain pending approval.
 
 ## Submission materials
 
 - [Application draft](application-draft.md): purpose, inspiration, technical details, personal contribution, and AI disclosure.
 - [Concise form answers](form-answers.txt): responses matched to the supplied live form, each below its 400-word limit.
-- [Demo video](demo/output/trueline-cac-demo-v7.mp4): 1 minute 26 seconds, 1080p: full-part tracing, scale and export, followed by a quick automatic-outline demonstration. [Production files and upload notes](demo/) accompany it.
+- [Demo video](demo/output/trueline-cac-demo-v8.mp4): 1 minute 35 seconds, 1080p: full-part tracing, scale and export, followed by a quick automatic-outline demonstration. [Production files and upload notes](demo/) accompany it.
 - [Third party credits](third-party-credits.md): bundled components and development assistance.
 - [App cover](cover/trueline-cover-600x800.jpg): TrueLine's existing logo formatted as the required 600×800 portrait JPEG.
 - [Organizer question](organizer-question.txt): an optional, unsent eligibility and deadline inquiry.
@@ -18,7 +18,7 @@ Plan to submit **before October 26, 2026 at 11:00 a.m. Chicago time**. The [2026
 
 [Entrants must be middle/high-school students](https://www.congressionalappchallenge.us/students/rules/) in a participating home or school district; teams may have up to four students, with at least half eligible in that district. U.S. residency is required. Only one entry per student is allowed. Eligible new apps date after October 30, 2025; prior versions must identify new coding. Confirm TrueLine's actual creation date; repository history alone is not proof.
 
-The rules allow disclosed AI support and require significant personal technical contributions and understanding. They set no percentage threshold. The supplied live application explicitly permits AI use and requests the tools used and the student's direct contributions. Select **Yes** and preserve the disclosure that AI wrote most of the code. Do not claim sole student coding authorship. The judges assess the disclosed work; an advance organizer inquiry is optional.
+The rules allow disclosed AI support and require significant personal technical contributions and understanding. They set no percentage threshold. The supplied live application explicitly permits AI use and requests the tools used and the student's direct contributions. Select **Yes** and disclose the implementation assistance, direct tracing work, and pretrained model accurately. Do not claim sole student coding authorship. The judges assess the disclosed work; an advance organizer inquiry is optional.
 
 ## Complete the entry
 
