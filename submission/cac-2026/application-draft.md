@@ -58,7 +58,7 @@ TrueLine uses the existing pretrained MobileSAM model through ONNX Runtime Web f
 - Source and downloads: https://github.com/Nik-Horner/TrueLine
 - Windows installer: https://github.com/Nik-Horner/TrueLine/releases/latest/download/TrueLine-Setup.exe
 - Mac preview instructions: https://github.com/Nik-Horner/TrueLine#readme
-- Public YouTube or Vimeo demo URL: **not uploaded yet**.
+- Public Vimeo demo: https://vimeo.com/1236443371.
 
 ## Private information to enter in the contest portal
 

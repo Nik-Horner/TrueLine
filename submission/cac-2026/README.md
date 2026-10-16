@@ -1,6 +1,6 @@
 # TrueLine Congressional App Challenge 2026
 
-This packet prepares TrueLine's demo and written entry. **No contest entry has been submitted by this session.** The creator has an existing Full Application Draft for Nik Horner in Illinois District 11, represented by Bill Foster. The local Chrome application draft is accessible. Written answers and the required cover have been prepared in the portal. Public video upload and the final portal submission action remain pending approval.
+This packet prepares TrueLine's demo and written entry. **No contest entry has been submitted by this session.** The creator has an existing Full Application Draft for Nik Horner in Illinois District 11, represented by Bill Foster. The local Chrome application draft is accessible. Written answers and the required cover have been prepared in the portal. The revised video is public on Vimeo: https://vimeo.com/1236443371. The final portal submission remains pending approval.
 
 ## Submission materials
 

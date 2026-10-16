@@ -12,7 +12,7 @@ Which platform(s) did you code your app for?
 Select Other: Desktop (Windows and macOS).
 
 Please list the link to your app's video demonstration here
-PENDING: upload the revised video publicly to YouTube or Vimeo, then paste its https URL.
+https://vimeo.com/1236443371
 
 Please briefly describe what your app does?
 TrueLine is free, open-source tracing software for makers. It helps turn physical parts and part images into editable, scaled 2D CAD outlines. Users can trace with a mouse or pen tablet, review fitted lines and curves, create circles from three edge points, and set the drawing’s scale from a known measurement. Optional image outline detection provides another way to begin a trace.
