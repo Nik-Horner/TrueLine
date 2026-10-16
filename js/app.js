@@ -265,7 +265,7 @@ export function bumpGeomRev() { geomRev++; }
 export function entBoundsCached(e) {
   const hit = boundsCache.get(e);
   if (hit && hit.rev === geomRev) return hit.b;
-  const b = e.type === 'dim' ? dimBounds(e) : e.type === 'text' ? textBounds(e) : G.entBounds(e);
+  const b = e.type === 'dim' ? dimBounds(e) : G.entBounds(e);
   boundsCache.set(e, { rev: geomRev, b });
   return b;
 }
@@ -375,11 +375,6 @@ function dimHit(e, p, tol) {
   for (const t of g.texts) if (G.dist(t.p, p) < e.h || G.dist(t.p, p) < tol * 2) best = 0;
   return best;
 }
-function textBounds(e) {
-  const w = e.text.length * e.h * 0.62, h = e.h;
-  return { minX: e.p.x, minY: e.p.y - h, maxX: e.p.x + w, maxY: e.p.y + h * 0.25 };
-}
-
 // decompose dim entities into primitive entities (for export)
 export function decomposeForExport(entities) {
   const out = [];

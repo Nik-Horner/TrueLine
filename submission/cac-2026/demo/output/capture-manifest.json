@@ -1,0 +1,6564 @@
+{
+  "width": 1920,
+  "height": 1080,
+  "duration": 86.00000000000026,
+  "frames": 543,
+  "application": "TrueLine",
+  "revision": 7,
+  "capture": "Actual app UI operated in Chromium; original illustrated mounting plate; manual UI tracing; editorial crops and timed cuts; captioned, no audio",
+  "checks": {
+    "font": "Inter (bundled)",
+    "pageErrors": [],
+    "manualTraceAccepted": true,
+    "geometryCount": 5,
+    "boltHoles": 3,
+    "adjustmentSlots": 1,
+    "calibratedHeightMM": 80.0000017372436,
+    "overallWidthMM": 112.1116650959006,
+    "downloaded": [
+      "untitled.dxf"
+    ],
+    "autoOutlineStatus": "AI outline · 5 contours found. Inspect the outline or choose Edit outline to correct it.",
+    "autoOutlineEntityCount": 5
+  },
+  "shots": [
+    {
+      "file": "00498.jpg",
+      "duration": 0.04,
+      "start": 0,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "opening"
+    },
+    {
+      "file": "00499.jpg",
+      "duration": 0.04,
+      "start": 0.04,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "opening"
+    },
+    {
+      "file": "00500.jpg",
+      "duration": 0.04,
+      "start": 0.08,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "opening"
+    },
+    {
+      "file": "00501.jpg",
+      "duration": 0.04,
+      "start": 0.12,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "opening"
+    },
+    {
+      "file": "00502.jpg",
+      "duration": 0.04,
+      "start": 0.16,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "opening"
+    },
+    {
+      "file": "00503.jpg",
+      "duration": 0.04,
+      "start": 0.2,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "opening"
+    },
+    {
+      "file": "00504.jpg",
+      "duration": 0.04,
+      "start": 0.24000000000000002,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "opening"
+    },
+    {
+      "file": "00505.jpg",
+      "duration": 0.04,
+      "start": 0.28,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "opening"
+    },
+    {
+      "file": "00506.jpg",
+      "duration": 4.68,
+      "start": 0.32,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "opening"
+    },
+    {
+      "file": "00507.jpg",
+      "duration": 0.04,
+      "start": 5,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "story"
+    },
+    {
+      "file": "00508.jpg",
+      "duration": 0.04,
+      "start": 5.04,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "story"
+    },
+    {
+      "file": "00509.jpg",
+      "duration": 0.04,
+      "start": 5.08,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "story"
+    },
+    {
+      "file": "00510.jpg",
+      "duration": 0.04,
+      "start": 5.12,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "story"
+    },
+    {
+      "file": "00511.jpg",
+      "duration": 0.04,
+      "start": 5.16,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "story"
+    },
+    {
+      "file": "00512.jpg",
+      "duration": 0.04,
+      "start": 5.2,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "story"
+    },
+    {
+      "file": "00513.jpg",
+      "duration": 0.04,
+      "start": 5.24,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "story"
+    },
+    {
+      "file": "00514.jpg",
+      "duration": 0.04,
+      "start": 5.28,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "story"
+    },
+    {
+      "file": "00515.jpg",
+      "duration": 4.68,
+      "start": 5.32,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "story"
+    },
+    {
+      "file": "00000.jpg",
+      "duration": 0.045,
+      "start": 10,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00001.jpg",
+      "duration": 0.045,
+      "start": 10.045,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00002.jpg",
+      "duration": 0.045,
+      "start": 10.09,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00003.jpg",
+      "duration": 0.045,
+      "start": 10.135,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00004.jpg",
+      "duration": 0.045,
+      "start": 10.18,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00005.jpg",
+      "duration": 0.045,
+      "start": 10.225,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00006.jpg",
+      "duration": 0.35,
+      "start": 10.27,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00007.jpg",
+      "duration": 0.045,
+      "start": 10.62,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00008.jpg",
+      "duration": 0.045,
+      "start": 10.665,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00009.jpg",
+      "duration": 0.045,
+      "start": 10.709999999999999,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00010.jpg",
+      "duration": 0.045,
+      "start": 10.754999999999999,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00011.jpg",
+      "duration": 0.045,
+      "start": 10.799999999999999,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00012.jpg",
+      "duration": 0.045,
+      "start": 10.844999999999999,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00013.jpg",
+      "duration": 0.35,
+      "start": 10.889999999999999,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00014.jpg",
+      "duration": 0.7,
+      "start": 11.239999999999998,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00015.jpg",
+      "duration": 0.04,
+      "start": 11.939999999999998,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": 81.16168928660353,
+        "y": 108.68970779017874,
+        "scale": 1.266110297208036
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00016.jpg",
+      "duration": 0.04,
+      "start": 11.979999999999997,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": 62.25577143191917,
+        "y": 91.24360579831998,
+        "scale": 1.3106505306655472
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00017.jpg",
+      "duration": 0.04,
+      "start": 12.019999999999996,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": 33.6957678642045,
+        "y": 64.88885598083118,
+        "scale": 1.3779347131226387
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00018.jpg",
+      "duration": 0.04,
+      "start": 12.059999999999995,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -2.104799988282892,
+        "y": 31.8526202941199,
+        "scale": 1.4622768573294154
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00019.jpg",
+      "duration": 0.04,
+      "start": 12.099999999999994,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -42.732410697285474,
+        "y": -5.637939305406405,
+        "scale": 1.557990976035982
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00020.jpg",
+      "duration": 0.04,
+      "start": 12.139999999999993,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -85.7735428345456,
+        "y": -45.3556608613402,
+        "scale": 1.6593910819924438
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00021.jpg",
+      "duration": 0.04,
+      "start": 12.179999999999993,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -128.81467497180574,
+        "y": -85.07338241727402,
+        "scale": 1.7607911879489055
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00022.jpg",
+      "duration": 0.04,
+      "start": 12.219999999999992,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -169.44228568080825,
+        "y": -122.56394201680027,
+        "scale": 1.8565053066554722
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00023.jpg",
+      "duration": 0.04,
+      "start": 12.259999999999991,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -205.24285353329572,
+        "y": -155.60017770351158,
+        "scale": 1.9408474508622489
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00024.jpg",
+      "duration": 0.04,
+      "start": 12.29999999999999,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -233.80285710101037,
+        "y": -181.9549275210004,
+        "scale": 2.0081316333193406
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00025.jpg",
+      "duration": 0.04,
+      "start": 12.33999999999999,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -252.7087749556947,
+        "y": -199.4010295128591,
+        "scale": 2.0526718667768513
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00026.jpg",
+      "duration": 0.04,
+      "start": 12.379999999999988,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00027.jpg",
+      "duration": 0.045,
+      "start": 12.419999999999987,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00028.jpg",
+      "duration": 0.045,
+      "start": 12.464999999999987,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00029.jpg",
+      "duration": 0.045,
+      "start": 12.509999999999987,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00030.jpg",
+      "duration": 0.045,
+      "start": 12.554999999999987,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00031.jpg",
+      "duration": 0.045,
+      "start": 12.599999999999987,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00032.jpg",
+      "duration": 0.045,
+      "start": 12.644999999999987,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00033.jpg",
+      "duration": 0.045,
+      "start": 12.689999999999987,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00034.jpg",
+      "duration": 0.045,
+      "start": 12.734999999999987,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00035.jpg",
+      "duration": 0.045,
+      "start": 12.779999999999987,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00036.jpg",
+      "duration": 0.045,
+      "start": 12.824999999999987,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00037.jpg",
+      "duration": 0.045,
+      "start": 12.869999999999987,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00038.jpg",
+      "duration": 0.045,
+      "start": 12.914999999999987,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00039.jpg",
+      "duration": 0.045,
+      "start": 12.959999999999987,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00040.jpg",
+      "duration": 0.045,
+      "start": 13.004999999999987,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00041.jpg",
+      "duration": 0.045,
+      "start": 13.049999999999986,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00042.jpg",
+      "duration": 0.045,
+      "start": 13.094999999999986,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00043.jpg",
+      "duration": 0.045,
+      "start": 13.139999999999986,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00044.jpg",
+      "duration": 0.045,
+      "start": 13.184999999999986,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00045.jpg",
+      "duration": 0.045,
+      "start": 13.229999999999986,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00046.jpg",
+      "duration": 0.045,
+      "start": 13.274999999999986,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00047.jpg",
+      "duration": 0.045,
+      "start": 13.319999999999986,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00048.jpg",
+      "duration": 0.045,
+      "start": 13.364999999999986,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00049.jpg",
+      "duration": 0.045,
+      "start": 13.409999999999986,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00050.jpg",
+      "duration": 0.045,
+      "start": 13.454999999999986,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00051.jpg",
+      "duration": 0.045,
+      "start": 13.499999999999986,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00052.jpg",
+      "duration": 0.045,
+      "start": 13.544999999999986,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00053.jpg",
+      "duration": 0.045,
+      "start": 13.589999999999986,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00054.jpg",
+      "duration": 0.045,
+      "start": 13.634999999999986,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00055.jpg",
+      "duration": 0.045,
+      "start": 13.679999999999986,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00056.jpg",
+      "duration": 0.045,
+      "start": 13.724999999999985,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00057.jpg",
+      "duration": 0.045,
+      "start": 13.769999999999985,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00058.jpg",
+      "duration": 0.045,
+      "start": 13.814999999999985,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00059.jpg",
+      "duration": 0.045,
+      "start": 13.859999999999985,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00060.jpg",
+      "duration": 0.045,
+      "start": 13.904999999999985,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00061.jpg",
+      "duration": 0.045,
+      "start": 13.949999999999985,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00062.jpg",
+      "duration": 0.045,
+      "start": 13.994999999999985,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00063.jpg",
+      "duration": 0.045,
+      "start": 14.039999999999985,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00064.jpg",
+      "duration": 0.045,
+      "start": 14.084999999999985,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00065.jpg",
+      "duration": 0.045,
+      "start": 14.129999999999985,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00066.jpg",
+      "duration": 0.045,
+      "start": 14.174999999999985,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00067.jpg",
+      "duration": 0.045,
+      "start": 14.219999999999985,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00068.jpg",
+      "duration": 0.045,
+      "start": 14.264999999999985,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00069.jpg",
+      "duration": 0.045,
+      "start": 14.309999999999985,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00070.jpg",
+      "duration": 0.045,
+      "start": 14.354999999999984,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00071.jpg",
+      "duration": 0.045,
+      "start": 14.399999999999984,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00072.jpg",
+      "duration": 0.045,
+      "start": 14.444999999999984,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00073.jpg",
+      "duration": 0.045,
+      "start": 14.489999999999984,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00074.jpg",
+      "duration": 0.045,
+      "start": 14.534999999999984,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00075.jpg",
+      "duration": 0.045,
+      "start": 14.579999999999984,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00076.jpg",
+      "duration": 0.045,
+      "start": 14.624999999999984,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00077.jpg",
+      "duration": 0.045,
+      "start": 14.669999999999984,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00078.jpg",
+      "duration": 0.045,
+      "start": 14.714999999999984,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00079.jpg",
+      "duration": 0.045,
+      "start": 14.759999999999984,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00080.jpg",
+      "duration": 0.045,
+      "start": 14.804999999999984,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00081.jpg",
+      "duration": 0.045,
+      "start": 14.849999999999984,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00082.jpg",
+      "duration": 0.045,
+      "start": 14.894999999999984,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00083.jpg",
+      "duration": 0.045,
+      "start": 14.939999999999984,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00084.jpg",
+      "duration": 0.045,
+      "start": 14.984999999999983,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00085.jpg",
+      "duration": 0.045,
+      "start": 15.029999999999983,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00086.jpg",
+      "duration": 0.045,
+      "start": 15.074999999999983,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00087.jpg",
+      "duration": 0.045,
+      "start": 15.119999999999983,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00088.jpg",
+      "duration": 0.045,
+      "start": 15.164999999999983,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00089.jpg",
+      "duration": 0.045,
+      "start": 15.209999999999983,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00090.jpg",
+      "duration": 0.045,
+      "start": 15.254999999999983,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00091.jpg",
+      "duration": 0.045,
+      "start": 15.299999999999983,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00092.jpg",
+      "duration": 0.045,
+      "start": 15.344999999999983,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00093.jpg",
+      "duration": 0.045,
+      "start": 15.389999999999983,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00094.jpg",
+      "duration": 0.045,
+      "start": 15.434999999999983,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00095.jpg",
+      "duration": 0.045,
+      "start": 15.479999999999983,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00096.jpg",
+      "duration": 0.045,
+      "start": 15.524999999999983,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00097.jpg",
+      "duration": 0.045,
+      "start": 15.569999999999983,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00098.jpg",
+      "duration": 0.045,
+      "start": 15.614999999999982,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00099.jpg",
+      "duration": 0.045,
+      "start": 15.659999999999982,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00100.jpg",
+      "duration": 0.045,
+      "start": 15.704999999999982,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00101.jpg",
+      "duration": 0.045,
+      "start": 15.749999999999982,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00102.jpg",
+      "duration": 0.045,
+      "start": 15.794999999999982,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00103.jpg",
+      "duration": 0.045,
+      "start": 15.839999999999982,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00104.jpg",
+      "duration": 0.045,
+      "start": 15.884999999999982,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00105.jpg",
+      "duration": 0.045,
+      "start": 15.929999999999982,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00106.jpg",
+      "duration": 0.045,
+      "start": 15.974999999999982,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00107.jpg",
+      "duration": 0.045,
+      "start": 16.019999999999982,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00108.jpg",
+      "duration": 0.045,
+      "start": 16.064999999999984,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00109.jpg",
+      "duration": 0.045,
+      "start": 16.109999999999985,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00110.jpg",
+      "duration": 0.045,
+      "start": 16.154999999999987,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00111.jpg",
+      "duration": 0.045,
+      "start": 16.19999999999999,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00112.jpg",
+      "duration": 0.045,
+      "start": 16.24499999999999,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00113.jpg",
+      "duration": 0.045,
+      "start": 16.289999999999992,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00114.jpg",
+      "duration": 0.045,
+      "start": 16.334999999999994,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00115.jpg",
+      "duration": 0.045,
+      "start": 16.379999999999995,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00116.jpg",
+      "duration": 0.045,
+      "start": 16.424999999999997,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00117.jpg",
+      "duration": 0.045,
+      "start": 16.47,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00118.jpg",
+      "duration": 0.045,
+      "start": 16.515,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00119.jpg",
+      "duration": 0.65,
+      "start": 16.560000000000002,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00120.jpg",
+      "duration": 0.04,
+      "start": 17.21,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -252.7087749556947,
+        "y": -199.40102951285914,
+        "scale": 2.0526718667768518
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00121.jpg",
+      "duration": 0.04,
+      "start": 17.25,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -233.80285710101037,
+        "y": -181.95492752100037,
+        "scale": 2.00813163331934
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00122.jpg",
+      "duration": 0.04,
+      "start": 17.29,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -205.2428535332957,
+        "y": -155.60017770351158,
+        "scale": 1.9408474508622489
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00123.jpg",
+      "duration": 0.04,
+      "start": 17.33,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -169.4422856808083,
+        "y": -122.5639420168003,
+        "scale": 1.8565053066554722
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00124.jpg",
+      "duration": 0.04,
+      "start": 17.369999999999997,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -128.81467497180572,
+        "y": -85.07338241727399,
+        "scale": 1.7607911879489055
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00125.jpg",
+      "duration": 0.04,
+      "start": 17.409999999999997,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -85.7735428345456,
+        "y": -45.3556608613402,
+        "scale": 1.6593910819924438
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00126.jpg",
+      "duration": 0.04,
+      "start": 17.449999999999996,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -42.732410697285445,
+        "y": -5.637939305406377,
+        "scale": 1.557990976035982
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00127.jpg",
+      "duration": 0.04,
+      "start": 17.489999999999995,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": -2.1047999882829345,
+        "y": 31.852620294119873,
+        "scale": 1.4622768573294154
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00128.jpg",
+      "duration": 0.04,
+      "start": 17.529999999999994,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": 33.69576786420453,
+        "y": 64.88885598083118,
+        "scale": 1.3779347131226387
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00129.jpg",
+      "duration": 0.04,
+      "start": 17.569999999999993,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": 62.255771431919186,
+        "y": 91.24360579832,
+        "scale": 1.3106505306655472
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00130.jpg",
+      "duration": 0.04,
+      "start": 17.609999999999992,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": 81.16168928660352,
+        "y": 108.68970779017872,
+        "scale": 1.266110297208036
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00131.jpg",
+      "duration": 0.04,
+      "start": 17.64999999999999,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00132.jpg",
+      "duration": 0.045,
+      "start": 17.68999999999999,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00133.jpg",
+      "duration": 0.045,
+      "start": 17.734999999999992,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00134.jpg",
+      "duration": 0.045,
+      "start": 17.779999999999994,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00135.jpg",
+      "duration": 0.045,
+      "start": 17.824999999999996,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00136.jpg",
+      "duration": 0.045,
+      "start": 17.869999999999997,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00137.jpg",
+      "duration": 0.045,
+      "start": 17.915,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00138.jpg",
+      "duration": 0.4,
+      "start": 17.96,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00139.jpg",
+      "duration": 5.640000000000006,
+      "start": 18.36,
+      "caption": "Lay the part on a drawing pad and begin tracing.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "01 / TRACE THE PROFILE"
+    },
+    {
+      "file": "00140.jpg",
+      "duration": 0.04,
+      "start": 24.000000000000007,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00141.jpg",
+      "duration": 0.04,
+      "start": 24.040000000000006,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00142.jpg",
+      "duration": 0.04,
+      "start": 24.080000000000005,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00143.jpg",
+      "duration": 0.04,
+      "start": 24.120000000000005,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00144.jpg",
+      "duration": 0.04,
+      "start": 24.160000000000004,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00145.jpg",
+      "duration": 0.04,
+      "start": 24.200000000000003,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00146.jpg",
+      "duration": 0.04,
+      "start": 24.240000000000002,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00147.jpg",
+      "duration": 0.04,
+      "start": 24.28,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00148.jpg",
+      "duration": 0.045,
+      "start": 24.32,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00149.jpg",
+      "duration": 0.045,
+      "start": 24.365000000000002,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00150.jpg",
+      "duration": 0.045,
+      "start": 24.410000000000004,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00151.jpg",
+      "duration": 0.045,
+      "start": 24.455000000000005,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00152.jpg",
+      "duration": 0.045,
+      "start": 24.500000000000007,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00153.jpg",
+      "duration": 0.045,
+      "start": 24.54500000000001,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00154.jpg",
+      "duration": 0.045,
+      "start": 24.59000000000001,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00155.jpg",
+      "duration": 0.045,
+      "start": 24.635000000000012,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00156.jpg",
+      "duration": 0.045,
+      "start": 24.680000000000014,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00157.jpg",
+      "duration": 0.045,
+      "start": 24.725000000000016,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00158.jpg",
+      "duration": 0.045,
+      "start": 24.770000000000017,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00159.jpg",
+      "duration": 0.045,
+      "start": 24.81500000000002,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00160.jpg",
+      "duration": 0.045,
+      "start": 24.86000000000002,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00161.jpg",
+      "duration": 0.045,
+      "start": 24.905000000000022,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00162.jpg",
+      "duration": 0.045,
+      "start": 24.950000000000024,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00163.jpg",
+      "duration": 0.045,
+      "start": 24.995000000000026,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00164.jpg",
+      "duration": 0.045,
+      "start": 25.040000000000028,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00165.jpg",
+      "duration": 0.045,
+      "start": 25.08500000000003,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00166.jpg",
+      "duration": 0.045,
+      "start": 25.13000000000003,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00167.jpg",
+      "duration": 0.045,
+      "start": 25.175000000000033,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00168.jpg",
+      "duration": 0.045,
+      "start": 25.220000000000034,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00169.jpg",
+      "duration": 0.045,
+      "start": 25.265000000000036,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00170.jpg",
+      "duration": 0.045,
+      "start": 25.310000000000038,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00171.jpg",
+      "duration": 0.045,
+      "start": 25.35500000000004,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00172.jpg",
+      "duration": 0.045,
+      "start": 25.40000000000004,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00173.jpg",
+      "duration": 0.045,
+      "start": 25.445000000000043,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00174.jpg",
+      "duration": 0.045,
+      "start": 25.490000000000045,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00175.jpg",
+      "duration": 0.045,
+      "start": 25.535000000000046,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00176.jpg",
+      "duration": 0.045,
+      "start": 25.580000000000048,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00177.jpg",
+      "duration": 0.045,
+      "start": 25.62500000000005,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00178.jpg",
+      "duration": 0.045,
+      "start": 25.67000000000005,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00179.jpg",
+      "duration": 0.045,
+      "start": 25.715000000000053,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00180.jpg",
+      "duration": 0.35,
+      "start": 25.760000000000055,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00181.jpg",
+      "duration": 0.04,
+      "start": 26.110000000000056,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -252.7087749556947,
+        "y": -199.40102951285914,
+        "scale": 2.0526718667768518
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00182.jpg",
+      "duration": 0.04,
+      "start": 26.150000000000055,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -233.80285710101037,
+        "y": -181.95492752100037,
+        "scale": 2.00813163331934
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00183.jpg",
+      "duration": 0.04,
+      "start": 26.190000000000055,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -205.2428535332957,
+        "y": -155.60017770351158,
+        "scale": 1.9408474508622489
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00184.jpg",
+      "duration": 0.04,
+      "start": 26.230000000000054,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -169.4422856808083,
+        "y": -122.5639420168003,
+        "scale": 1.8565053066554722
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00185.jpg",
+      "duration": 0.04,
+      "start": 26.270000000000053,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -128.81467497180572,
+        "y": -85.07338241727399,
+        "scale": 1.7607911879489055
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00186.jpg",
+      "duration": 0.04,
+      "start": 26.310000000000052,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -85.7735428345456,
+        "y": -45.3556608613402,
+        "scale": 1.6593910819924438
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00187.jpg",
+      "duration": 0.04,
+      "start": 26.35000000000005,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -42.732410697285445,
+        "y": -5.637939305406377,
+        "scale": 1.557990976035982
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00188.jpg",
+      "duration": 0.04,
+      "start": 26.39000000000005,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -2.1047999882829345,
+        "y": 31.852620294119873,
+        "scale": 1.4622768573294154
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00189.jpg",
+      "duration": 0.04,
+      "start": 26.43000000000005,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 33.69576786420453,
+        "y": 64.88885598083118,
+        "scale": 1.3779347131226387
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00190.jpg",
+      "duration": 0.04,
+      "start": 26.47000000000005,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 62.255771431919186,
+        "y": 91.24360579832,
+        "scale": 1.3106505306655472
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00191.jpg",
+      "duration": 0.04,
+      "start": 26.510000000000048,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 81.16168928660352,
+        "y": 108.68970779017872,
+        "scale": 1.266110297208036
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00192.jpg",
+      "duration": 0.04,
+      "start": 26.550000000000047,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00193.jpg",
+      "duration": 0.045,
+      "start": 26.590000000000046,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00194.jpg",
+      "duration": 0.045,
+      "start": 26.635000000000048,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00195.jpg",
+      "duration": 0.045,
+      "start": 26.68000000000005,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00196.jpg",
+      "duration": 0.045,
+      "start": 26.72500000000005,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00197.jpg",
+      "duration": 0.045,
+      "start": 26.770000000000053,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00198.jpg",
+      "duration": 0.045,
+      "start": 26.815000000000055,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00199.jpg",
+      "duration": 0.4,
+      "start": 26.860000000000056,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00200.jpg",
+      "duration": 0.045,
+      "start": 27.260000000000055,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00201.jpg",
+      "duration": 0.045,
+      "start": 27.305000000000057,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00202.jpg",
+      "duration": 0.045,
+      "start": 27.35000000000006,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00203.jpg",
+      "duration": 0.045,
+      "start": 27.39500000000006,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00204.jpg",
+      "duration": 0.045,
+      "start": 27.44000000000006,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00205.jpg",
+      "duration": 0.045,
+      "start": 27.485000000000063,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00206.jpg",
+      "duration": 0.045,
+      "start": 27.530000000000065,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00207.jpg",
+      "duration": 0.045,
+      "start": 27.575000000000067,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00208.jpg",
+      "duration": 0.045,
+      "start": 27.62000000000007,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00209.jpg",
+      "duration": 0.045,
+      "start": 27.66500000000007,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00210.jpg",
+      "duration": 0.045,
+      "start": 27.710000000000072,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00211.jpg",
+      "duration": 0.045,
+      "start": 27.755000000000074,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00212.jpg",
+      "duration": 0.045,
+      "start": 27.800000000000075,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00213.jpg",
+      "duration": 0.045,
+      "start": 27.845000000000077,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00214.jpg",
+      "duration": 0.045,
+      "start": 27.89000000000008,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00215.jpg",
+      "duration": 0.045,
+      "start": 27.93500000000008,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00216.jpg",
+      "duration": 0.045,
+      "start": 27.980000000000082,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00217.jpg",
+      "duration": 0.045,
+      "start": 28.025000000000084,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00218.jpg",
+      "duration": 0.045,
+      "start": 28.070000000000086,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00219.jpg",
+      "duration": 0.045,
+      "start": 28.115000000000087,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00220.jpg",
+      "duration": 0.045,
+      "start": 28.16000000000009,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00221.jpg",
+      "duration": 0.045,
+      "start": 28.20500000000009,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00222.jpg",
+      "duration": 0.045,
+      "start": 28.250000000000092,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00223.jpg",
+      "duration": 0.045,
+      "start": 28.295000000000094,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00224.jpg",
+      "duration": 0.045,
+      "start": 28.340000000000096,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00225.jpg",
+      "duration": 0.045,
+      "start": 28.385000000000097,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00226.jpg",
+      "duration": 0.045,
+      "start": 28.4300000000001,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00227.jpg",
+      "duration": 0.045,
+      "start": 28.4750000000001,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00228.jpg",
+      "duration": 0.045,
+      "start": 28.520000000000103,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00229.jpg",
+      "duration": 0.045,
+      "start": 28.565000000000104,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00230.jpg",
+      "duration": 0.045,
+      "start": 28.610000000000106,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00231.jpg",
+      "duration": 0.045,
+      "start": 28.655000000000108,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00232.jpg",
+      "duration": 0.35,
+      "start": 28.70000000000011,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00233.jpg",
+      "duration": 0.04,
+      "start": 29.05000000000011,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -252.7087749556947,
+        "y": -199.40102951285914,
+        "scale": 2.0526718667768518
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00234.jpg",
+      "duration": 0.04,
+      "start": 29.09000000000011,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -233.80285710101037,
+        "y": -181.95492752100037,
+        "scale": 2.00813163331934
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00235.jpg",
+      "duration": 0.04,
+      "start": 29.13000000000011,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -205.2428535332957,
+        "y": -155.60017770351158,
+        "scale": 1.9408474508622489
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00236.jpg",
+      "duration": 0.04,
+      "start": 29.17000000000011,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -169.4422856808083,
+        "y": -122.5639420168003,
+        "scale": 1.8565053066554722
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00237.jpg",
+      "duration": 0.04,
+      "start": 29.210000000000107,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -128.81467497180572,
+        "y": -85.07338241727399,
+        "scale": 1.7607911879489055
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00238.jpg",
+      "duration": 0.04,
+      "start": 29.250000000000107,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -85.7735428345456,
+        "y": -45.3556608613402,
+        "scale": 1.6593910819924438
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00239.jpg",
+      "duration": 0.04,
+      "start": 29.290000000000106,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -42.732410697285445,
+        "y": -5.637939305406377,
+        "scale": 1.557990976035982
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00240.jpg",
+      "duration": 0.04,
+      "start": 29.330000000000105,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -2.1047999882829345,
+        "y": 31.852620294119873,
+        "scale": 1.4622768573294154
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00241.jpg",
+      "duration": 0.04,
+      "start": 29.370000000000104,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 33.69576786420453,
+        "y": 64.88885598083118,
+        "scale": 1.3779347131226387
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00242.jpg",
+      "duration": 0.04,
+      "start": 29.410000000000103,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 62.255771431919186,
+        "y": 91.24360579832,
+        "scale": 1.3106505306655472
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00243.jpg",
+      "duration": 0.04,
+      "start": 29.450000000000102,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 81.16168928660352,
+        "y": 108.68970779017872,
+        "scale": 1.266110297208036
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00244.jpg",
+      "duration": 0.04,
+      "start": 29.4900000000001,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00245.jpg",
+      "duration": 0.045,
+      "start": 29.5300000000001,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00246.jpg",
+      "duration": 0.045,
+      "start": 29.575000000000102,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00247.jpg",
+      "duration": 0.045,
+      "start": 29.620000000000104,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00248.jpg",
+      "duration": 0.045,
+      "start": 29.665000000000106,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00249.jpg",
+      "duration": 0.045,
+      "start": 29.710000000000107,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00250.jpg",
+      "duration": 0.045,
+      "start": 29.75500000000011,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00251.jpg",
+      "duration": 0.4,
+      "start": 29.80000000000011,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00252.jpg",
+      "duration": 0.045,
+      "start": 30.20000000000011,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00253.jpg",
+      "duration": 0.045,
+      "start": 30.24500000000011,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00254.jpg",
+      "duration": 0.045,
+      "start": 30.290000000000113,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00255.jpg",
+      "duration": 0.045,
+      "start": 30.335000000000115,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00256.jpg",
+      "duration": 0.045,
+      "start": 30.380000000000116,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00257.jpg",
+      "duration": 0.045,
+      "start": 30.425000000000118,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00258.jpg",
+      "duration": 0.045,
+      "start": 30.47000000000012,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00259.jpg",
+      "duration": 0.045,
+      "start": 30.51500000000012,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00260.jpg",
+      "duration": 0.045,
+      "start": 30.560000000000123,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00261.jpg",
+      "duration": 0.045,
+      "start": 30.605000000000125,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00262.jpg",
+      "duration": 0.045,
+      "start": 30.650000000000126,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00263.jpg",
+      "duration": 0.045,
+      "start": 30.695000000000128,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00264.jpg",
+      "duration": 0.045,
+      "start": 30.74000000000013,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00265.jpg",
+      "duration": 0.045,
+      "start": 30.78500000000013,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00266.jpg",
+      "duration": 0.045,
+      "start": 30.830000000000133,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00267.jpg",
+      "duration": 0.045,
+      "start": 30.875000000000135,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00268.jpg",
+      "duration": 0.045,
+      "start": 30.920000000000137,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00269.jpg",
+      "duration": 0.045,
+      "start": 30.96500000000014,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00270.jpg",
+      "duration": 0.045,
+      "start": 31.01000000000014,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00271.jpg",
+      "duration": 0.045,
+      "start": 31.055000000000142,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00272.jpg",
+      "duration": 0.045,
+      "start": 31.100000000000144,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00273.jpg",
+      "duration": 0.045,
+      "start": 31.145000000000145,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00274.jpg",
+      "duration": 0.045,
+      "start": 31.190000000000147,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00275.jpg",
+      "duration": 0.045,
+      "start": 31.23500000000015,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00276.jpg",
+      "duration": 0.045,
+      "start": 31.28000000000015,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00277.jpg",
+      "duration": 0.045,
+      "start": 31.325000000000152,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00278.jpg",
+      "duration": 0.045,
+      "start": 31.370000000000154,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00279.jpg",
+      "duration": 0.045,
+      "start": 31.415000000000155,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00280.jpg",
+      "duration": 0.045,
+      "start": 31.460000000000157,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00281.jpg",
+      "duration": 0.045,
+      "start": 31.50500000000016,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00282.jpg",
+      "duration": 0.045,
+      "start": 31.55000000000016,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00283.jpg",
+      "duration": 0.045,
+      "start": 31.595000000000162,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00284.jpg",
+      "duration": 0.35,
+      "start": 31.640000000000164,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00285.jpg",
+      "duration": 0.04,
+      "start": 31.990000000000165,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -252.7087749556947,
+        "y": -199.40102951285914,
+        "scale": 2.0526718667768518
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00286.jpg",
+      "duration": 0.04,
+      "start": 32.030000000000165,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -233.80285710101037,
+        "y": -181.95492752100037,
+        "scale": 2.00813163331934
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00287.jpg",
+      "duration": 0.04,
+      "start": 32.070000000000164,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -205.2428535332957,
+        "y": -155.60017770351158,
+        "scale": 1.9408474508622489
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00288.jpg",
+      "duration": 0.04,
+      "start": 32.11000000000016,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -169.4422856808083,
+        "y": -122.5639420168003,
+        "scale": 1.8565053066554722
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00289.jpg",
+      "duration": 0.04,
+      "start": 32.15000000000016,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -128.81467497180572,
+        "y": -85.07338241727399,
+        "scale": 1.7607911879489055
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00290.jpg",
+      "duration": 0.04,
+      "start": 32.19000000000016,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -85.7735428345456,
+        "y": -45.3556608613402,
+        "scale": 1.6593910819924438
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00291.jpg",
+      "duration": 0.04,
+      "start": 32.23000000000016,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -42.732410697285445,
+        "y": -5.637939305406377,
+        "scale": 1.557990976035982
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00292.jpg",
+      "duration": 0.04,
+      "start": 32.27000000000016,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -2.1047999882829345,
+        "y": 31.852620294119873,
+        "scale": 1.4622768573294154
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00293.jpg",
+      "duration": 0.04,
+      "start": 32.31000000000016,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 33.69576786420453,
+        "y": 64.88885598083118,
+        "scale": 1.3779347131226387
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00294.jpg",
+      "duration": 0.04,
+      "start": 32.35000000000016,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 62.255771431919186,
+        "y": 91.24360579832,
+        "scale": 1.3106505306655472
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00295.jpg",
+      "duration": 0.04,
+      "start": 32.39000000000016,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 81.16168928660352,
+        "y": 108.68970779017872,
+        "scale": 1.266110297208036
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00296.jpg",
+      "duration": 0.04,
+      "start": 32.430000000000156,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00297.jpg",
+      "duration": 0.045,
+      "start": 32.470000000000155,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00298.jpg",
+      "duration": 0.045,
+      "start": 32.51500000000016,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00299.jpg",
+      "duration": 0.045,
+      "start": 32.56000000000016,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00300.jpg",
+      "duration": 0.045,
+      "start": 32.60500000000016,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00301.jpg",
+      "duration": 0.045,
+      "start": 32.65000000000016,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00302.jpg",
+      "duration": 0.045,
+      "start": 32.695000000000164,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00303.jpg",
+      "duration": 0.4,
+      "start": 32.740000000000165,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00304.jpg",
+      "duration": 0.045,
+      "start": 33.140000000000164,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00305.jpg",
+      "duration": 0.045,
+      "start": 33.185000000000166,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00306.jpg",
+      "duration": 0.045,
+      "start": 33.23000000000017,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00307.jpg",
+      "duration": 0.045,
+      "start": 33.27500000000017,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00308.jpg",
+      "duration": 0.045,
+      "start": 33.32000000000017,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00309.jpg",
+      "duration": 0.045,
+      "start": 33.36500000000017,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00310.jpg",
+      "duration": 0.045,
+      "start": 33.410000000000174,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00311.jpg",
+      "duration": 0.045,
+      "start": 33.455000000000176,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00312.jpg",
+      "duration": 0.045,
+      "start": 33.50000000000018,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00313.jpg",
+      "duration": 0.045,
+      "start": 33.54500000000018,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00314.jpg",
+      "duration": 0.045,
+      "start": 33.59000000000018,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00315.jpg",
+      "duration": 0.045,
+      "start": 33.63500000000018,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00316.jpg",
+      "duration": 0.045,
+      "start": 33.680000000000184,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00317.jpg",
+      "duration": 0.045,
+      "start": 33.725000000000186,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00318.jpg",
+      "duration": 0.045,
+      "start": 33.77000000000019,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00319.jpg",
+      "duration": 0.045,
+      "start": 33.81500000000019,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00320.jpg",
+      "duration": 0.045,
+      "start": 33.86000000000019,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00321.jpg",
+      "duration": 0.045,
+      "start": 33.90500000000019,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00322.jpg",
+      "duration": 0.045,
+      "start": 33.950000000000195,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00323.jpg",
+      "duration": 0.045,
+      "start": 33.995000000000196,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00324.jpg",
+      "duration": 0.045,
+      "start": 34.0400000000002,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00325.jpg",
+      "duration": 0.045,
+      "start": 34.0850000000002,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00326.jpg",
+      "duration": 0.045,
+      "start": 34.1300000000002,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00327.jpg",
+      "duration": 0.045,
+      "start": 34.1750000000002,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00328.jpg",
+      "duration": 0.045,
+      "start": 34.220000000000205,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00329.jpg",
+      "duration": 0.045,
+      "start": 34.26500000000021,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00330.jpg",
+      "duration": 0.045,
+      "start": 34.31000000000021,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00331.jpg",
+      "duration": 0.045,
+      "start": 34.35500000000021,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00332.jpg",
+      "duration": 0.045,
+      "start": 34.40000000000021,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00333.jpg",
+      "duration": 0.045,
+      "start": 34.44500000000021,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00334.jpg",
+      "duration": 0.045,
+      "start": 34.490000000000215,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00335.jpg",
+      "duration": 0.045,
+      "start": 34.53500000000022,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00336.jpg",
+      "duration": 0.35,
+      "start": 34.58000000000022,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -259.5470856690912,
+        "y": -205.7113217226804,
+        "scale": 2.0687821639848876
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00337.jpg",
+      "duration": 0.04,
+      "start": 34.93000000000022,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -252.7087749556947,
+        "y": -199.40102951285914,
+        "scale": 2.0526718667768518
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00338.jpg",
+      "duration": 0.04,
+      "start": 34.97000000000022,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -233.80285710101037,
+        "y": -181.95492752100037,
+        "scale": 2.00813163331934
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00339.jpg",
+      "duration": 0.04,
+      "start": 35.01000000000022,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -205.2428535332957,
+        "y": -155.60017770351158,
+        "scale": 1.9408474508622489
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00340.jpg",
+      "duration": 0.04,
+      "start": 35.05000000000022,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -169.4422856808083,
+        "y": -122.5639420168003,
+        "scale": 1.8565053066554722
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00341.jpg",
+      "duration": 0.04,
+      "start": 35.09000000000022,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -128.81467497180572,
+        "y": -85.07338241727399,
+        "scale": 1.7607911879489055
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00342.jpg",
+      "duration": 0.04,
+      "start": 35.130000000000216,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -85.7735428345456,
+        "y": -45.3556608613402,
+        "scale": 1.6593910819924438
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00343.jpg",
+      "duration": 0.04,
+      "start": 35.170000000000215,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -42.732410697285445,
+        "y": -5.637939305406377,
+        "scale": 1.557990976035982
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00344.jpg",
+      "duration": 0.04,
+      "start": 35.210000000000214,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": -2.1047999882829345,
+        "y": 31.852620294119873,
+        "scale": 1.4622768573294154
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00345.jpg",
+      "duration": 0.04,
+      "start": 35.25000000000021,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 33.69576786420453,
+        "y": 64.88885598083118,
+        "scale": 1.3779347131226387
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00346.jpg",
+      "duration": 0.04,
+      "start": 35.29000000000021,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 62.255771431919186,
+        "y": 91.24360579832,
+        "scale": 1.3106505306655472
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00347.jpg",
+      "duration": 0.04,
+      "start": 35.33000000000021,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 81.16168928660352,
+        "y": 108.68970779017872,
+        "scale": 1.266110297208036
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00348.jpg",
+      "duration": 0.04,
+      "start": 35.37000000000021,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00349.jpg",
+      "duration": 0.045,
+      "start": 35.41000000000021,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00350.jpg",
+      "duration": 0.045,
+      "start": 35.45500000000021,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00351.jpg",
+      "duration": 0.045,
+      "start": 35.50000000000021,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00352.jpg",
+      "duration": 0.045,
+      "start": 35.545000000000215,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00353.jpg",
+      "duration": 0.045,
+      "start": 35.59000000000022,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00354.jpg",
+      "duration": 0.045,
+      "start": 35.63500000000022,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00355.jpg",
+      "duration": 0.4,
+      "start": 35.68000000000022,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00356.jpg",
+      "duration": 0.9199999999998454,
+      "start": 36.08000000000022,
+      "caption": "Trace the bolt holes and the adjustment slot.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "02 / ADD THE OPENINGS"
+    },
+    {
+      "file": "00357.jpg",
+      "duration": 0.04,
+      "start": 37.000000000000064,
+      "caption": "Review the complete profile, rounded corners and openings.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "03 / REVIEW THE PART"
+    },
+    {
+      "file": "00358.jpg",
+      "duration": 0.04,
+      "start": 37.04000000000006,
+      "caption": "Review the complete profile, rounded corners and openings.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "03 / REVIEW THE PART"
+    },
+    {
+      "file": "00359.jpg",
+      "duration": 0.04,
+      "start": 37.08000000000006,
+      "caption": "Review the complete profile, rounded corners and openings.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "03 / REVIEW THE PART"
+    },
+    {
+      "file": "00360.jpg",
+      "duration": 0.04,
+      "start": 37.12000000000006,
+      "caption": "Review the complete profile, rounded corners and openings.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "03 / REVIEW THE PART"
+    },
+    {
+      "file": "00361.jpg",
+      "duration": 0.04,
+      "start": 37.16000000000006,
+      "caption": "Review the complete profile, rounded corners and openings.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "03 / REVIEW THE PART"
+    },
+    {
+      "file": "00362.jpg",
+      "duration": 0.04,
+      "start": 37.20000000000006,
+      "caption": "Review the complete profile, rounded corners and openings.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "03 / REVIEW THE PART"
+    },
+    {
+      "file": "00363.jpg",
+      "duration": 0.04,
+      "start": 37.24000000000006,
+      "caption": "Review the complete profile, rounded corners and openings.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "03 / REVIEW THE PART"
+    },
+    {
+      "file": "00364.jpg",
+      "duration": 0.04,
+      "start": 37.28000000000006,
+      "caption": "Review the complete profile, rounded corners and openings.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "03 / REVIEW THE PART"
+    },
+    {
+      "file": "00365.jpg",
+      "duration": 1,
+      "start": 37.32000000000006,
+      "caption": "Review the complete profile, rounded corners and openings.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "03 / REVIEW THE PART"
+    },
+    {
+      "file": "00366.jpg",
+      "duration": 1.6800000000000068,
+      "start": 38.32000000000006,
+      "caption": "Review the complete profile, rounded corners and openings.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "03 / REVIEW THE PART"
+    },
+    {
+      "file": "00367.jpg",
+      "duration": 0.04,
+      "start": 40.000000000000064,
+      "caption": "Use a known dimension: this sample is 80 mm tall.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "04 / SET THE SIZE"
+    },
+    {
+      "file": "00368.jpg",
+      "duration": 0.04,
+      "start": 40.04000000000006,
+      "caption": "Use a known dimension: this sample is 80 mm tall.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "04 / SET THE SIZE"
+    },
+    {
+      "file": "00369.jpg",
+      "duration": 0.04,
+      "start": 40.08000000000006,
+      "caption": "Use a known dimension: this sample is 80 mm tall.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "04 / SET THE SIZE"
+    },
+    {
+      "file": "00370.jpg",
+      "duration": 0.04,
+      "start": 40.12000000000006,
+      "caption": "Use a known dimension: this sample is 80 mm tall.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "04 / SET THE SIZE"
+    },
+    {
+      "file": "00371.jpg",
+      "duration": 0.04,
+      "start": 40.16000000000006,
+      "caption": "Use a known dimension: this sample is 80 mm tall.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "04 / SET THE SIZE"
+    },
+    {
+      "file": "00372.jpg",
+      "duration": 0.04,
+      "start": 40.20000000000006,
+      "caption": "Use a known dimension: this sample is 80 mm tall.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "04 / SET THE SIZE"
+    },
+    {
+      "file": "00373.jpg",
+      "duration": 0.04,
+      "start": 40.24000000000006,
+      "caption": "Use a known dimension: this sample is 80 mm tall.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "04 / SET THE SIZE"
+    },
+    {
+      "file": "00374.jpg",
+      "duration": 0.04,
+      "start": 40.28000000000006,
+      "caption": "Use a known dimension: this sample is 80 mm tall.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "04 / SET THE SIZE"
+    },
+    {
+      "file": "00375.jpg",
+      "duration": 0.045,
+      "start": 40.32000000000006,
+      "caption": "Use a known dimension: this sample is 80 mm tall.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "04 / SET THE SIZE"
+    },
+    {
+      "file": "00376.jpg",
+      "duration": 0.045,
+      "start": 40.36500000000006,
+      "caption": "Use a known dimension: this sample is 80 mm tall.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "04 / SET THE SIZE"
+    },
+    {
+      "file": "00377.jpg",
+      "duration": 0.045,
+      "start": 40.41000000000006,
+      "caption": "Use a known dimension: this sample is 80 mm tall.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "04 / SET THE SIZE"
+    },
+    {
+      "file": "00378.jpg",
+      "duration": 0.045,
+      "start": 40.45500000000006,
+      "caption": "Use a known dimension: this sample is 80 mm tall.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "04 / SET THE SIZE"
+    },
+    {
+      "file": "00379.jpg",
+      "duration": 0.045,
+      "start": 40.500000000000064,
+      "caption": "Use a known dimension: this sample is 80 mm tall.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "04 / SET THE SIZE"
+    },
+    {
+      "file": "00380.jpg",
+      "duration": 0.045,
+      "start": 40.545000000000066,
+      "caption": "Use a known dimension: this sample is 80 mm tall.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "04 / SET THE SIZE"
+    },
+    {
+      "file": "00381.jpg",
+      "duration": 0.35,
+      "start": 40.59000000000007,
+      "caption": "Use a known dimension: this sample is 80 mm tall.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "04 / SET THE SIZE"
+    },
+    {
+      "file": "00382.jpg",
+      "duration": 0.045,
+      "start": 40.94000000000007,
+      "caption": "Use a known dimension: this sample is 80 mm tall.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "04 / SET THE SIZE"
+    },
+    {
+      "file": "00383.jpg",
+      "duration": 0.045,
+      "start": 40.98500000000007,
+      "caption": "Use a known dimension: this sample is 80 mm tall.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "04 / SET THE SIZE"
+    },
+    {
+      "file": "00384.jpg",
+      "duration": 0.045,
+      "start": 41.03000000000007,
+      "caption": "Use a known dimension: this sample is 80 mm tall.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "04 / SET THE SIZE"
+    },
+    {
+      "file": "00385.jpg",
+      "duration": 0.045,
+      "start": 41.075000000000074,
+      "caption": "Use a known dimension: this sample is 80 mm tall.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "04 / SET THE SIZE"
+    },
+    {
+      "file": "00386.jpg",
+      "duration": 0.045,
+      "start": 41.120000000000076,
+      "caption": "Use a known dimension: this sample is 80 mm tall.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "04 / SET THE SIZE"
+    },
+    {
+      "file": "00387.jpg",
+      "duration": 0.045,
+      "start": 41.16500000000008,
+      "caption": "Use a known dimension: this sample is 80 mm tall.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "04 / SET THE SIZE"
+    },
+    {
+      "file": "00388.jpg",
+      "duration": 0.7,
+      "start": 41.21000000000008,
+      "caption": "Use a known dimension: this sample is 80 mm tall.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "04 / SET THE SIZE"
+    },
+    {
+      "file": "00389.jpg",
+      "duration": 0.045,
+      "start": 41.91000000000008,
+      "caption": "Use a known dimension: this sample is 80 mm tall.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "04 / SET THE SIZE"
+    },
+    {
+      "file": "00390.jpg",
+      "duration": 0.045,
+      "start": 41.955000000000084,
+      "caption": "Use a known dimension: this sample is 80 mm tall.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "04 / SET THE SIZE"
+    },
+    {
+      "file": "00391.jpg",
+      "duration": 0.045,
+      "start": 42.000000000000085,
+      "caption": "Use a known dimension: this sample is 80 mm tall.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "04 / SET THE SIZE"
+    },
+    {
+      "file": "00392.jpg",
+      "duration": 0.045,
+      "start": 42.04500000000009,
+      "caption": "Use a known dimension: this sample is 80 mm tall.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "04 / SET THE SIZE"
+    },
+    {
+      "file": "00393.jpg",
+      "duration": 0.045,
+      "start": 42.09000000000009,
+      "caption": "Use a known dimension: this sample is 80 mm tall.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "04 / SET THE SIZE"
+    },
+    {
+      "file": "00394.jpg",
+      "duration": 0.045,
+      "start": 42.13500000000009,
+      "caption": "Use a known dimension: this sample is 80 mm tall.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "04 / SET THE SIZE"
+    },
+    {
+      "file": "00395.jpg",
+      "duration": 0.7,
+      "start": 42.18000000000009,
+      "caption": "Use a known dimension: this sample is 80 mm tall.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "04 / SET THE SIZE"
+    },
+    {
+      "file": "00396.jpg",
+      "duration": 0.7,
+      "start": 42.880000000000095,
+      "caption": "Use a known dimension: this sample is 80 mm tall.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "04 / SET THE SIZE"
+    },
+    {
+      "file": "00397.jpg",
+      "duration": 0.8,
+      "start": 43.5800000000001,
+      "caption": "Use a known dimension: this sample is 80 mm tall.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "04 / SET THE SIZE"
+    },
+    {
+      "file": "00398.jpg",
+      "duration": 1,
+      "start": 44.380000000000095,
+      "caption": "Use a known dimension: this sample is 80 mm tall.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "04 / SET THE SIZE"
+    },
+    {
+      "file": "00399.jpg",
+      "duration": 3.619999999999976,
+      "start": 45.380000000000095,
+      "caption": "Use a known dimension: this sample is 80 mm tall.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "04 / SET THE SIZE"
+    },
+    {
+      "file": "00400.jpg",
+      "duration": 0.04,
+      "start": 49.00000000000007,
+      "caption": "Export the finished part as DXF, SVG or PDF.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "05 / EXPORT THE OUTLINE"
+    },
+    {
+      "file": "00401.jpg",
+      "duration": 0.04,
+      "start": 49.04000000000007,
+      "caption": "Export the finished part as DXF, SVG or PDF.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "05 / EXPORT THE OUTLINE"
+    },
+    {
+      "file": "00402.jpg",
+      "duration": 0.04,
+      "start": 49.08000000000007,
+      "caption": "Export the finished part as DXF, SVG or PDF.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "05 / EXPORT THE OUTLINE"
+    },
+    {
+      "file": "00403.jpg",
+      "duration": 0.04,
+      "start": 49.12000000000007,
+      "caption": "Export the finished part as DXF, SVG or PDF.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "05 / EXPORT THE OUTLINE"
+    },
+    {
+      "file": "00404.jpg",
+      "duration": 0.04,
+      "start": 49.16000000000007,
+      "caption": "Export the finished part as DXF, SVG or PDF.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "05 / EXPORT THE OUTLINE"
+    },
+    {
+      "file": "00405.jpg",
+      "duration": 0.04,
+      "start": 49.20000000000007,
+      "caption": "Export the finished part as DXF, SVG or PDF.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "05 / EXPORT THE OUTLINE"
+    },
+    {
+      "file": "00406.jpg",
+      "duration": 0.04,
+      "start": 49.240000000000066,
+      "caption": "Export the finished part as DXF, SVG or PDF.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "05 / EXPORT THE OUTLINE"
+    },
+    {
+      "file": "00407.jpg",
+      "duration": 0.04,
+      "start": 49.280000000000065,
+      "caption": "Export the finished part as DXF, SVG or PDF.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "05 / EXPORT THE OUTLINE"
+    },
+    {
+      "file": "00408.jpg",
+      "duration": 0.045,
+      "start": 49.320000000000064,
+      "caption": "Export the finished part as DXF, SVG or PDF.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "05 / EXPORT THE OUTLINE"
+    },
+    {
+      "file": "00409.jpg",
+      "duration": 0.045,
+      "start": 49.365000000000066,
+      "caption": "Export the finished part as DXF, SVG or PDF.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "05 / EXPORT THE OUTLINE"
+    },
+    {
+      "file": "00410.jpg",
+      "duration": 0.045,
+      "start": 49.41000000000007,
+      "caption": "Export the finished part as DXF, SVG or PDF.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "05 / EXPORT THE OUTLINE"
+    },
+    {
+      "file": "00411.jpg",
+      "duration": 0.045,
+      "start": 49.45500000000007,
+      "caption": "Export the finished part as DXF, SVG or PDF.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "05 / EXPORT THE OUTLINE"
+    },
+    {
+      "file": "00412.jpg",
+      "duration": 0.045,
+      "start": 49.50000000000007,
+      "caption": "Export the finished part as DXF, SVG or PDF.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "05 / EXPORT THE OUTLINE"
+    },
+    {
+      "file": "00413.jpg",
+      "duration": 0.045,
+      "start": 49.54500000000007,
+      "caption": "Export the finished part as DXF, SVG or PDF.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "05 / EXPORT THE OUTLINE"
+    },
+    {
+      "file": "00414.jpg",
+      "duration": 0.35,
+      "start": 49.590000000000074,
+      "caption": "Export the finished part as DXF, SVG or PDF.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "05 / EXPORT THE OUTLINE"
+    },
+    {
+      "file": "00415.jpg",
+      "duration": 0.6,
+      "start": 49.940000000000076,
+      "caption": "Export the finished part as DXF, SVG or PDF.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "05 / EXPORT THE OUTLINE"
+    },
+    {
+      "file": "00416.jpg",
+      "duration": 0.045,
+      "start": 50.54000000000008,
+      "caption": "Export the finished part as DXF, SVG or PDF.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "05 / EXPORT THE OUTLINE"
+    },
+    {
+      "file": "00417.jpg",
+      "duration": 0.045,
+      "start": 50.58500000000008,
+      "caption": "Export the finished part as DXF, SVG or PDF.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "05 / EXPORT THE OUTLINE"
+    },
+    {
+      "file": "00418.jpg",
+      "duration": 0.045,
+      "start": 50.63000000000008,
+      "caption": "Export the finished part as DXF, SVG or PDF.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "05 / EXPORT THE OUTLINE"
+    },
+    {
+      "file": "00419.jpg",
+      "duration": 0.045,
+      "start": 50.67500000000008,
+      "caption": "Export the finished part as DXF, SVG or PDF.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "05 / EXPORT THE OUTLINE"
+    },
+    {
+      "file": "00420.jpg",
+      "duration": 0.045,
+      "start": 50.720000000000084,
+      "caption": "Export the finished part as DXF, SVG or PDF.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "05 / EXPORT THE OUTLINE"
+    },
+    {
+      "file": "00421.jpg",
+      "duration": 0.045,
+      "start": 50.765000000000086,
+      "caption": "Export the finished part as DXF, SVG or PDF.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "05 / EXPORT THE OUTLINE"
+    },
+    {
+      "file": "00422.jpg",
+      "duration": 0.35,
+      "start": 50.81000000000009,
+      "caption": "Export the finished part as DXF, SVG or PDF.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "05 / EXPORT THE OUTLINE"
+    },
+    {
+      "file": "00423.jpg",
+      "duration": 1,
+      "start": 51.16000000000009,
+      "caption": "Export the finished part as DXF, SVG or PDF.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "05 / EXPORT THE OUTLINE"
+    },
+    {
+      "file": "00424.jpg",
+      "duration": 0.045,
+      "start": 52.16000000000009,
+      "caption": "Export the finished part as DXF, SVG or PDF.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "05 / EXPORT THE OUTLINE"
+    },
+    {
+      "file": "00425.jpg",
+      "duration": 0.045,
+      "start": 52.20500000000009,
+      "caption": "Export the finished part as DXF, SVG or PDF.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "05 / EXPORT THE OUTLINE"
+    },
+    {
+      "file": "00426.jpg",
+      "duration": 0.045,
+      "start": 52.25000000000009,
+      "caption": "Export the finished part as DXF, SVG or PDF.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "05 / EXPORT THE OUTLINE"
+    },
+    {
+      "file": "00427.jpg",
+      "duration": 0.045,
+      "start": 52.295000000000094,
+      "caption": "Export the finished part as DXF, SVG or PDF.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "05 / EXPORT THE OUTLINE"
+    },
+    {
+      "file": "00428.jpg",
+      "duration": 0.045,
+      "start": 52.340000000000096,
+      "caption": "Export the finished part as DXF, SVG or PDF.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "05 / EXPORT THE OUTLINE"
+    },
+    {
+      "file": "00429.jpg",
+      "duration": 0.045,
+      "start": 52.3850000000001,
+      "caption": "Export the finished part as DXF, SVG or PDF.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "05 / EXPORT THE OUTLINE"
+    },
+    {
+      "file": "00430.jpg",
+      "duration": 0.4,
+      "start": 52.4300000000001,
+      "caption": "Export the finished part as DXF, SVG or PDF.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "05 / EXPORT THE OUTLINE"
+    },
+    {
+      "file": "00431.jpg",
+      "duration": 2.1699999999999733,
+      "start": 52.8300000000001,
+      "caption": "Export the finished part as DXF, SVG or PDF.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "05 / EXPORT THE OUTLINE"
+    },
+    {
+      "file": "00432.jpg",
+      "duration": 0.04,
+      "start": 55.00000000000007,
+      "caption": "Or take a photo from above and import it.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "06 / PHOTO ROUTE"
+    },
+    {
+      "file": "00433.jpg",
+      "duration": 0.04,
+      "start": 55.04000000000007,
+      "caption": "Or take a photo from above and import it.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "06 / PHOTO ROUTE"
+    },
+    {
+      "file": "00434.jpg",
+      "duration": 0.04,
+      "start": 55.08000000000007,
+      "caption": "Or take a photo from above and import it.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "06 / PHOTO ROUTE"
+    },
+    {
+      "file": "00435.jpg",
+      "duration": 0.04,
+      "start": 55.12000000000007,
+      "caption": "Or take a photo from above and import it.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "06 / PHOTO ROUTE"
+    },
+    {
+      "file": "00436.jpg",
+      "duration": 0.04,
+      "start": 55.16000000000007,
+      "caption": "Or take a photo from above and import it.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "06 / PHOTO ROUTE"
+    },
+    {
+      "file": "00437.jpg",
+      "duration": 0.04,
+      "start": 55.20000000000007,
+      "caption": "Or take a photo from above and import it.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "06 / PHOTO ROUTE"
+    },
+    {
+      "file": "00438.jpg",
+      "duration": 0.04,
+      "start": 55.240000000000066,
+      "caption": "Or take a photo from above and import it.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "06 / PHOTO ROUTE"
+    },
+    {
+      "file": "00439.jpg",
+      "duration": 0.04,
+      "start": 55.280000000000065,
+      "caption": "Or take a photo from above and import it.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "06 / PHOTO ROUTE"
+    },
+    {
+      "file": "00440.jpg",
+      "duration": 0.045,
+      "start": 55.320000000000064,
+      "caption": "Or take a photo from above and import it.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "06 / PHOTO ROUTE"
+    },
+    {
+      "file": "00441.jpg",
+      "duration": 0.045,
+      "start": 55.365000000000066,
+      "caption": "Or take a photo from above and import it.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "06 / PHOTO ROUTE"
+    },
+    {
+      "file": "00442.jpg",
+      "duration": 0.045,
+      "start": 55.41000000000007,
+      "caption": "Or take a photo from above and import it.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "06 / PHOTO ROUTE"
+    },
+    {
+      "file": "00443.jpg",
+      "duration": 0.045,
+      "start": 55.45500000000007,
+      "caption": "Or take a photo from above and import it.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "06 / PHOTO ROUTE"
+    },
+    {
+      "file": "00444.jpg",
+      "duration": 0.045,
+      "start": 55.50000000000007,
+      "caption": "Or take a photo from above and import it.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "06 / PHOTO ROUTE"
+    },
+    {
+      "file": "00445.jpg",
+      "duration": 0.045,
+      "start": 55.54500000000007,
+      "caption": "Or take a photo from above and import it.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "06 / PHOTO ROUTE"
+    },
+    {
+      "file": "00446.jpg",
+      "duration": 0.35,
+      "start": 55.590000000000074,
+      "caption": "Or take a photo from above and import it.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "06 / PHOTO ROUTE"
+    },
+    {
+      "file": "00447.jpg",
+      "duration": 0.045,
+      "start": 55.940000000000076,
+      "caption": "Or take a photo from above and import it.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "06 / PHOTO ROUTE"
+    },
+    {
+      "file": "00448.jpg",
+      "duration": 0.045,
+      "start": 55.98500000000008,
+      "caption": "Or take a photo from above and import it.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "06 / PHOTO ROUTE"
+    },
+    {
+      "file": "00449.jpg",
+      "duration": 0.045,
+      "start": 56.03000000000008,
+      "caption": "Or take a photo from above and import it.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "06 / PHOTO ROUTE"
+    },
+    {
+      "file": "00450.jpg",
+      "duration": 0.045,
+      "start": 56.07500000000008,
+      "caption": "Or take a photo from above and import it.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "06 / PHOTO ROUTE"
+    },
+    {
+      "file": "00451.jpg",
+      "duration": 0.045,
+      "start": 56.12000000000008,
+      "caption": "Or take a photo from above and import it.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "06 / PHOTO ROUTE"
+    },
+    {
+      "file": "00452.jpg",
+      "duration": 0.045,
+      "start": 56.165000000000084,
+      "caption": "Or take a photo from above and import it.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "06 / PHOTO ROUTE"
+    },
+    {
+      "file": "00453.jpg",
+      "duration": 0.35,
+      "start": 56.210000000000086,
+      "caption": "Or take a photo from above and import it.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "06 / PHOTO ROUTE"
+    },
+    {
+      "file": "00454.jpg",
+      "duration": 3.4399999999999835,
+      "start": 56.56000000000009,
+      "caption": "Or take a photo from above and import it.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "06 / PHOTO ROUTE"
+    },
+    {
+      "file": "00455.jpg",
+      "duration": 0.04,
+      "start": 60.00000000000007,
+      "caption": "Generate an outline. Review it and set scale before export.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "07 / AUTO OUTLINE"
+    },
+    {
+      "file": "00456.jpg",
+      "duration": 0.04,
+      "start": 60.04000000000007,
+      "caption": "Generate an outline. Review it and set scale before export.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "07 / AUTO OUTLINE"
+    },
+    {
+      "file": "00457.jpg",
+      "duration": 0.04,
+      "start": 60.08000000000007,
+      "caption": "Generate an outline. Review it and set scale before export.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "07 / AUTO OUTLINE"
+    },
+    {
+      "file": "00458.jpg",
+      "duration": 0.04,
+      "start": 60.12000000000007,
+      "caption": "Generate an outline. Review it and set scale before export.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "07 / AUTO OUTLINE"
+    },
+    {
+      "file": "00459.jpg",
+      "duration": 0.04,
+      "start": 60.16000000000007,
+      "caption": "Generate an outline. Review it and set scale before export.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "07 / AUTO OUTLINE"
+    },
+    {
+      "file": "00460.jpg",
+      "duration": 0.04,
+      "start": 60.20000000000007,
+      "caption": "Generate an outline. Review it and set scale before export.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "07 / AUTO OUTLINE"
+    },
+    {
+      "file": "00461.jpg",
+      "duration": 0.04,
+      "start": 60.240000000000066,
+      "caption": "Generate an outline. Review it and set scale before export.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "07 / AUTO OUTLINE"
+    },
+    {
+      "file": "00462.jpg",
+      "duration": 0.04,
+      "start": 60.280000000000065,
+      "caption": "Generate an outline. Review it and set scale before export.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "07 / AUTO OUTLINE"
+    },
+    {
+      "file": "00463.jpg",
+      "duration": 0.045,
+      "start": 60.320000000000064,
+      "caption": "Generate an outline. Review it and set scale before export.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "07 / AUTO OUTLINE"
+    },
+    {
+      "file": "00464.jpg",
+      "duration": 0.045,
+      "start": 60.365000000000066,
+      "caption": "Generate an outline. Review it and set scale before export.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "07 / AUTO OUTLINE"
+    },
+    {
+      "file": "00465.jpg",
+      "duration": 0.045,
+      "start": 60.41000000000007,
+      "caption": "Generate an outline. Review it and set scale before export.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "07 / AUTO OUTLINE"
+    },
+    {
+      "file": "00466.jpg",
+      "duration": 0.045,
+      "start": 60.45500000000007,
+      "caption": "Generate an outline. Review it and set scale before export.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "07 / AUTO OUTLINE"
+    },
+    {
+      "file": "00467.jpg",
+      "duration": 0.045,
+      "start": 60.50000000000007,
+      "caption": "Generate an outline. Review it and set scale before export.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "07 / AUTO OUTLINE"
+    },
+    {
+      "file": "00468.jpg",
+      "duration": 0.045,
+      "start": 60.54500000000007,
+      "caption": "Generate an outline. Review it and set scale before export.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "07 / AUTO OUTLINE"
+    },
+    {
+      "file": "00469.jpg",
+      "duration": 0.35,
+      "start": 60.590000000000074,
+      "caption": "Generate an outline. Review it and set scale before export.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "07 / AUTO OUTLINE"
+    },
+    {
+      "file": "00470.jpg",
+      "duration": 0.045,
+      "start": 60.940000000000076,
+      "caption": "Generate an outline. Review it and set scale before export.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "07 / AUTO OUTLINE"
+    },
+    {
+      "file": "00471.jpg",
+      "duration": 0.045,
+      "start": 60.98500000000008,
+      "caption": "Generate an outline. Review it and set scale before export.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "07 / AUTO OUTLINE"
+    },
+    {
+      "file": "00472.jpg",
+      "duration": 0.045,
+      "start": 61.03000000000008,
+      "caption": "Generate an outline. Review it and set scale before export.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "07 / AUTO OUTLINE"
+    },
+    {
+      "file": "00473.jpg",
+      "duration": 0.045,
+      "start": 61.07500000000008,
+      "caption": "Generate an outline. Review it and set scale before export.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "07 / AUTO OUTLINE"
+    },
+    {
+      "file": "00474.jpg",
+      "duration": 0.045,
+      "start": 61.12000000000008,
+      "caption": "Generate an outline. Review it and set scale before export.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "07 / AUTO OUTLINE"
+    },
+    {
+      "file": "00475.jpg",
+      "duration": 0.045,
+      "start": 61.165000000000084,
+      "caption": "Generate an outline. Review it and set scale before export.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "07 / AUTO OUTLINE"
+    },
+    {
+      "file": "00476.jpg",
+      "duration": 0.35,
+      "start": 61.210000000000086,
+      "caption": "Generate an outline. Review it and set scale before export.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "07 / AUTO OUTLINE"
+    },
+    {
+      "file": "00477.jpg",
+      "duration": 0.04,
+      "start": 61.56000000000009,
+      "caption": "Generate an outline. Review it and set scale before export.",
+      "camera": {
+        "x": 73.07351553966836,
+        "y": 110.47906038998113,
+        "scale": 1.2714035038725051
+      },
+      "group": "07 / AUTO OUTLINE"
+    },
+    {
+      "file": "00478.jpg",
+      "duration": 0.04,
+      "start": 61.60000000000009,
+      "caption": "Generate an outline. Review it and set scale before export.",
+      "camera": {
+        "x": 31.806176149339706,
+        "y": 97.97999205639957,
+        "scale": 1.3305778969317843
+      },
+      "group": "07 / AUTO OUTLINE"
+    },
+    {
+      "file": "00479.jpg",
+      "duration": 0.04,
+      "start": 61.640000000000086,
+      "caption": "Generate an outline. Review it and set scale before export.",
+      "camera": {
+        "x": -30.53384718498657,
+        "y": 79.09842074396784,
+        "scale": 1.4199690013404824
+      },
+      "group": "07 / AUTO OUTLINE"
+    },
+    {
+      "file": "00480.jpg",
+      "duration": 0.04,
+      "start": 61.680000000000085,
+      "caption": "Generate an outline. Review it and set scale before export.",
+      "camera": {
+        "x": -108.67838347731103,
+        "y": 55.4299721973985,
+        "scale": 1.532022639261245
+      },
+      "group": "07 / AUTO OUTLINE"
+    },
+    {
+      "file": "00481.jpg",
+      "duration": 0.04,
+      "start": 61.720000000000084,
+      "caption": "Generate an outline. Review it and set scale before export.",
+      "camera": {
+        "x": -197.35926174163433,
+        "y": 28.57027216140405,
+        "scale": 1.6591846328567172
+      },
+      "group": "07 / AUTO OUTLINE"
+    },
+    {
+      "file": "00482.jpg",
+      "duration": 0.04,
+      "start": 61.76000000000008,
+      "caption": "Generate an outline. Review it and set scale before export.",
+      "camera": {
+        "x": -291.308310991957,
+        "y": 0.1149463806970914,
+        "scale": 1.7939008042895441
+      },
+      "group": "07 / AUTO OUTLINE"
+    },
+    {
+      "file": "00483.jpg",
+      "duration": 0.04,
+      "start": 61.80000000000008,
+      "caption": "Generate an outline. Review it and set scale before export.",
+      "camera": {
+        "x": -385.25736024227973,
+        "y": -28.34037940000991,
+        "scale": 1.9286169757223712
+      },
+      "group": "07 / AUTO OUTLINE"
+    },
+    {
+      "file": "00484.jpg",
+      "duration": 0.04,
+      "start": 61.84000000000008,
+      "caption": "Generate an outline. Review it and set scale before export.",
+      "camera": {
+        "x": -473.93823850660294,
+        "y": -55.2000794360043,
+        "scale": 2.055778969317843
+      },
+      "group": "07 / AUTO OUTLINE"
+    },
+    {
+      "file": "00485.jpg",
+      "duration": 0.04,
+      "start": 61.88000000000008,
+      "caption": "Generate an outline. Review it and set scale before export.",
+      "camera": {
+        "x": -552.0827747989274,
+        "y": -78.86852798257365,
+        "scale": 2.167832607238606
+      },
+      "group": "07 / AUTO OUTLINE"
+    },
+    {
+      "file": "00486.jpg",
+      "duration": 0.04,
+      "start": 61.92000000000008,
+      "caption": "Generate an outline. Review it and set scale before export.",
+      "camera": {
+        "x": -614.4227981332538,
+        "y": -97.75009929500541,
+        "scale": 2.257223711647304
+      },
+      "group": "07 / AUTO OUTLINE"
+    },
+    {
+      "file": "00487.jpg",
+      "duration": 0.04,
+      "start": 61.96000000000008,
+      "caption": "Generate an outline. Review it and set scale before export.",
+      "camera": {
+        "x": -655.6901375235824,
+        "y": -110.24916762858695,
+        "scale": 2.3163981047065834
+      },
+      "group": "07 / AUTO OUTLINE"
+    },
+    {
+      "file": "00488.jpg",
+      "duration": 0.04,
+      "start": 62.00000000000008,
+      "caption": "Generate an outline. Review it and set scale before export.",
+      "camera": {
+        "x": -670.616621983914,
+        "y": -114.77010723860582,
+        "scale": 2.3378016085790883
+      },
+      "group": "07 / AUTO OUTLINE"
+    },
+    {
+      "file": "00489.jpg",
+      "duration": 1.8,
+      "start": 62.04000000000008,
+      "caption": "Generate an outline. Review it and set scale before export.",
+      "camera": {
+        "x": -670.616621983914,
+        "y": -114.77010723860582,
+        "scale": 2.3378016085790883
+      },
+      "group": "07 / AUTO OUTLINE"
+    },
+    {
+      "file": "00490.jpg",
+      "duration": 0.045,
+      "start": 63.840000000000074,
+      "caption": "Generate an outline. Review it and set scale before export.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "07 / AUTO OUTLINE"
+    },
+    {
+      "file": "00491.jpg",
+      "duration": 0.045,
+      "start": 63.885000000000076,
+      "caption": "Generate an outline. Review it and set scale before export.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "07 / AUTO OUTLINE"
+    },
+    {
+      "file": "00492.jpg",
+      "duration": 0.045,
+      "start": 63.93000000000008,
+      "caption": "Generate an outline. Review it and set scale before export.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "07 / AUTO OUTLINE"
+    },
+    {
+      "file": "00493.jpg",
+      "duration": 0.045,
+      "start": 63.97500000000008,
+      "caption": "Generate an outline. Review it and set scale before export.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "07 / AUTO OUTLINE"
+    },
+    {
+      "file": "00494.jpg",
+      "duration": 0.045,
+      "start": 64.02000000000008,
+      "caption": "Generate an outline. Review it and set scale before export.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "07 / AUTO OUTLINE"
+    },
+    {
+      "file": "00495.jpg",
+      "duration": 0.045,
+      "start": 64.06500000000008,
+      "caption": "Generate an outline. Review it and set scale before export.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "07 / AUTO OUTLINE"
+    },
+    {
+      "file": "00496.jpg",
+      "duration": 0.4,
+      "start": 64.11000000000008,
+      "caption": "Generate an outline. Review it and set scale before export.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "07 / AUTO OUTLINE"
+    },
+    {
+      "file": "00497.jpg",
+      "duration": 4.489999999999988,
+      "start": 64.51000000000009,
+      "caption": "Generate an outline. Review it and set scale before export.",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "07 / AUTO OUTLINE"
+    },
+    {
+      "file": "00525.jpg",
+      "duration": 0.04,
+      "start": 69.00000000000009,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "technology"
+    },
+    {
+      "file": "00526.jpg",
+      "duration": 0.04,
+      "start": 69.04000000000009,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "technology"
+    },
+    {
+      "file": "00527.jpg",
+      "duration": 0.04,
+      "start": 69.0800000000001,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "technology"
+    },
+    {
+      "file": "00528.jpg",
+      "duration": 0.04,
+      "start": 69.1200000000001,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "technology"
+    },
+    {
+      "file": "00529.jpg",
+      "duration": 0.04,
+      "start": 69.16000000000011,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "technology"
+    },
+    {
+      "file": "00530.jpg",
+      "duration": 0.04,
+      "start": 69.20000000000012,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "technology"
+    },
+    {
+      "file": "00531.jpg",
+      "duration": 0.04,
+      "start": 69.24000000000012,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "technology"
+    },
+    {
+      "file": "00532.jpg",
+      "duration": 0.04,
+      "start": 69.28000000000013,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "technology"
+    },
+    {
+      "file": "00533.jpg",
+      "duration": 5.68,
+      "start": 69.32000000000014,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "technology"
+    },
+    {
+      "file": "00534.jpg",
+      "duration": 0.04,
+      "start": 75.00000000000014,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "contribution"
+    },
+    {
+      "file": "00535.jpg",
+      "duration": 0.04,
+      "start": 75.04000000000015,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "contribution"
+    },
+    {
+      "file": "00536.jpg",
+      "duration": 0.04,
+      "start": 75.08000000000015,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "contribution"
+    },
+    {
+      "file": "00537.jpg",
+      "duration": 0.04,
+      "start": 75.12000000000016,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "contribution"
+    },
+    {
+      "file": "00538.jpg",
+      "duration": 0.04,
+      "start": 75.16000000000017,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "contribution"
+    },
+    {
+      "file": "00539.jpg",
+      "duration": 0.04,
+      "start": 75.20000000000017,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "contribution"
+    },
+    {
+      "file": "00540.jpg",
+      "duration": 0.04,
+      "start": 75.24000000000018,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "contribution"
+    },
+    {
+      "file": "00541.jpg",
+      "duration": 0.04,
+      "start": 75.28000000000019,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "contribution"
+    },
+    {
+      "file": "00542.jpg",
+      "duration": 7.68,
+      "start": 75.32000000000019,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "contribution"
+    },
+    {
+      "file": "00543.jpg",
+      "duration": 0.04,
+      "start": 83.0000000000002,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "ending"
+    },
+    {
+      "file": "00544.jpg",
+      "duration": 0.04,
+      "start": 83.0400000000002,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "ending"
+    },
+    {
+      "file": "00545.jpg",
+      "duration": 0.04,
+      "start": 83.08000000000021,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "ending"
+    },
+    {
+      "file": "00546.jpg",
+      "duration": 0.04,
+      "start": 83.12000000000022,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "ending"
+    },
+    {
+      "file": "00547.jpg",
+      "duration": 0.04,
+      "start": 83.16000000000022,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "ending"
+    },
+    {
+      "file": "00548.jpg",
+      "duration": 0.04,
+      "start": 83.20000000000023,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "ending"
+    },
+    {
+      "file": "00549.jpg",
+      "duration": 0.04,
+      "start": 83.24000000000024,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "ending"
+    },
+    {
+      "file": "00550.jpg",
+      "duration": 0.04,
+      "start": 83.28000000000024,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "ending"
+    },
+    {
+      "file": "00551.jpg",
+      "duration": 2.68,
+      "start": 83.32000000000025,
+      "caption": "",
+      "camera": {
+        "x": 88,
+        "y": 115,
+        "scale": 1.25
+      },
+      "group": "ending"
+    }
+  ],
+  "encodedDurationSeconds": 86,
+  "encodedVideoMetadata": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1920,
+        "height": 1080,
+        "pix_fmt": "yuv420p",
+        "color_range": "tv",
+        "r_frame_rate": "30/1",
+        "side_data_list": [
+          {}
+        ]
+      }
+    ],
+    "format": {
+      "duration": "86.000000",
+      "size": "4614175"
+    }
+  }
+}

@@ -208,8 +208,9 @@ export function entBounds(e) {
     }
   } else if (e.type === 'point') eat(e.p);
   else if (e.type === 'text') {
-    eat(e.p);
-    eat({ x: e.p.x + (e.text ? e.text.length : 1) * (e.h || 3) * 0.62, y: e.p.y - (e.h || 3) });
+    const h = e.h || 3, w = (e.text ? e.text.length : 1) * h * 0.62;
+    for (const p of [{ x: e.p.x, y: e.p.y + h * 0.25 }, { x: e.p.x + w, y: e.p.y + h * 0.25 }, { x: e.p.x + w, y: e.p.y - h }, { x: e.p.x, y: e.p.y - h }])
+      eat(rotatePt(p, e.p, e.rot || 0));
   } else eat({ x: 0, y: 0 });
   return { minX, minY, maxX, maxY };
 }

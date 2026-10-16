@@ -1,0 +1,20 @@
+{
+  "width": 600,
+  "height": 800,
+  "format": "JPEG",
+  "source": "build/icon.png",
+  "sourceSHA256": "20cdda6a2abd7c740f97e8caae7427ea252c19fba3df033993710def544e0812",
+  "sourceDimensions": {
+    "width": 256,
+    "height": 256
+  },
+  "displayedLogo": {
+    "width": 400,
+    "height": 400,
+    "left": 100,
+    "top": 200
+  },
+  "background": "#0b0e13",
+  "capture": "Original TrueLine logo centered on its existing brand background; no redrawing, extra text, or generated artwork",
+  "pageErrors": []
+}

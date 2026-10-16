@@ -19,6 +19,7 @@
     "test:autotrace:report": "node tests/render-autotrace-report.mjs",
     "test:autotrace:complex": "node tests/complex-photo-cases.mjs && node tests/complex-photo-accuracy.mjs && node tests/precision-photo-accuracy.mjs && node tests/screw-photo-variations.mjs && node tests/autotrace-resolution.mjs",
     "test:autotrace:edit": "node tests/outline-editor-ui.cjs",
+    "test:scale-export": "node tests/scale-export-ui.cjs",
     "test:autotrace:resolution": "node tests/autotrace-resolution.mjs",
     "test:autotrace:model": "npm run prepare:photos && node tests/trained-segmentation-browser.cjs && node tests/trained-segmentation-accuracy.mjs",
     "verify:models": "node build/verify-models.mjs",
