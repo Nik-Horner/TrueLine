@@ -562,9 +562,10 @@ function textPrompt(screenPt, initial, cb) {
 // ---------------------------------------------------------------- exports
 function svgOut() {
   const ents = decomposeForExport(visibleEntities());
-  const b = drawingBounds(ents.filter(e => e.type !== 'text')) || { minX: 0, minY: 0, maxX: 100, maxY: 100 };
+  const b = drawingBounds(ents) || { minX: 0, minY: 0, maxX: 100, maxY: 100 };
   const m = 5;
   const f = n => +n.toFixed(4);
+  const xml = value => String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;' })[char]);
   const layers = {};
   for (const e of ents) (layers[e.layer] = layers[e.layer] || []).push(e);
   let out = '';
@@ -599,10 +600,10 @@ function svgOut() {
         body += `<circle cx="${f(e.p.x)}" cy="${f(e.p.y)}" r="0.5" fill="currentColor"/>`;
       } else if (e.type === 'text') {
         const deg = (e.rot || 0) * 180 / Math.PI;
-        body += `<text x="${f(e.p.x)}" y="${f(e.p.y)}" font-size="${f(e.h)}" font-family="monospace" fill="${layer.color}" stroke="none"${deg ? ` transform="rotate(${f(deg)} ${f(e.p.x)} ${f(e.p.y)})"` : ''}>${e.text.replace(/&/g, '&amp;').replace(/</g, '&lt;')}</text>`;
+        body += `<text x="${f(e.p.x)}" y="${f(e.p.y)}" font-size="${f(e.h)}" font-family="monospace" fill="${xml(layer.color)}" stroke="none"${deg ? ` transform="rotate(${f(deg)} ${f(e.p.x)} ${f(e.p.y)})"` : ''}>${xml(e.text)}</text>`;
       }
     }
-    out += `<g id="${layer.name.replace(/"/g, '')}" stroke="${layer.color}" color="${layer.color}">${body}</g>`;
+    out += `<g id="${xml(layer.name)}" stroke="${xml(layer.color)}" color="${xml(layer.color)}">${body}</g>`;
   }
   const w = f(b.maxX - b.minX + 2 * m), h = f(b.maxY - b.minY + 2 * m);
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}mm" height="${h}mm" viewBox="${f(b.minX - m)} ${f(b.minY - m)} ${w} ${h}" fill="none" stroke-width="0.25">${out}</svg>`;
@@ -611,7 +612,7 @@ function svgOut() {
 function pdfOut() {
   // decompose everything to primitives; each arc its own subpath so direction is unambiguous
   const ents = decomposeForExport(visibleEntities());
-  const b = drawingBounds(ents.filter(e => e.type !== 'text')) || { minX: 0, minY: 0, maxX: 100, maxY: 100 };
+  const b = drawingBounds(ents) || { minX: 0, minY: 0, maxX: 100, maxY: 100 };
   const m = 10;
   const W = b.maxX - b.minX + 2 * m, H = b.maxY - b.minY + 2 * m;
   const tx = p => ({ x: p.x - b.minX + m, y: p.y - b.minY + m });

@@ -1068,10 +1068,19 @@ reg({
   onMove(p) { this.cur = p; invalidate('overlay'); },
   onUp() {},
   onInput(parsed) {
-    if (!this.a || !this.b || !parsed.len) return;
+    if (!this.a || !this.b) return;
+    if (!Number.isFinite(parsed.len) || parsed.len <= 0) {
+      App.ui.toast?.('Enter a positive, finite real length to set the scale.');
+      return;
+    }
     const measured = G.dist(this.a, this.b);
-    if (measured < 1e-9) return;
+    if (!Number.isFinite(measured) || measured < 1e-9) return;
     const f = parsed.len / measured;                 // scale so the clicked feature = its real length
+    const calibration = App.CAL / f;
+    if (!Number.isFinite(f) || f <= 0 || !Number.isFinite(calibration) || calibration <= 0) {
+      App.ui.toast?.('That scale exceeds the supported range. Enter a smaller real length.');
+      return;
+    }
     const hasContent = App.doc.entities.length > 0 || App.doc.underlay;
     if (hasContent) {
       mutate(`Set scale ×${f.toFixed(3)}`, () => {
@@ -1088,7 +1097,7 @@ reg({
     } else {
       App.ui.toast?.('Tablet scale set — everything you trace is now true size.');
     }
-    setCalibration(App.CAL / f);                     // keep the readout + future strokes consistent
+    setCalibration(calibration);                     // keep the readout + future strokes consistent
     this.a = this.b = null;
     App.ui.updateCalChip?.();
     App.ui.setDirty?.(true);

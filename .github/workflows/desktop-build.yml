@@ -28,6 +28,7 @@ jobs:
       - run: npm run test:mac
       - run: npm run test:autotrace:ui
       - run: npm run test:autotrace:edit
+      - run: npm run test:scale-export
       - run: npm run verify:models
       - name: Build Windows candidate
         if: runner.os == 'Windows'
