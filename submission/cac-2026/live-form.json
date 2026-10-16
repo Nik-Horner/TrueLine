@@ -1,0 +1,99 @@
+{
+  "context": "Matched to the Full Application Draft supplied by the creator for Nik Horner, Illinois District 11 (Bill Foster). No portal edits or submission performed.",
+  "fields": [
+    {
+      "prompt": "What is your app called?",
+      "answer": "TrueLine"
+    },
+    {
+      "prompt": "Which programming language(s) did you use to create your app?",
+      "answer": "Select JavaScript. HTML and CSS can be named in the written description as markup and styling technologies."
+    },
+    {
+      "prompt": "Which platform(s) did you code your app for?",
+      "answer": "Select Other: Desktop (Windows and macOS)."
+    },
+    {
+      "prompt": "Please list the link to your app's video demonstration here",
+      "answer": "PENDING: upload the revised video publicly to YouTube or Vimeo, then paste its https URL."
+    },
+    {
+      "prompt": "Please briefly describe what your app does?",
+      "answer": "TrueLine is free, open-source tracing software for makers. It helps turn physical parts and part images into editable, scaled 2D CAD outlines. Users can trace with a mouse or pen tablet, review fitted lines and curves, and set the drawing\u2019s scale from a known measurement. Optional image outline detection provides another way to begin a trace.\n\nDrawings can be saved and exported as DXF, SVG, or PDF for fabrication, repair, and pattern making. Processing stays on the user\u2019s device. Users must verify edges and dimensions before fabrication.",
+      "limit": 400,
+      "words": 87
+    },
+    {
+      "prompt": "What inspired you to create this app?",
+      "answer": "My dad and I had a physical part but no CAD model for it. We tried taking a picture and tracing it in SolidWorks, but that did not work well for us. We found a paid solution that cost about $1,500. That experience inspired TrueLine: a free tool focused on tracing, reviewing the outline, and setting its scale before exporting it. I designed the interface and shaped the tracing experience through testing.",
+      "limit": 400,
+      "words": 72
+    },
+    {
+      "prompt": "What technical difficulties did you face programming your app?",
+      "answer": "While testing, I found that tracing a curve created far too many short edges. An arc in CAD should be an arc, rather than thousands of tiny line segments. We added smoothing to improve the result. TrueLine's fitting workflow can represent suitable strokes as lines, circles, and arcs, with a preview before acceptance. My role was identifying the problem and testing the tracing experience; AI wrote most of the implementation. The goal was cleaner geometry that follows the intended shape.",
+      "limit": 400,
+      "words": 80
+    },
+    {
+      "prompt": "What improvements would you make if you were to create a 2.0 version of your app?",
+      "answer": "I would improve photo tracing for difficult lighting and backgrounds, make uncertain edges easier to review, and test it with more real parts. I would also make it easier for a new user to verify scale with a second known measurement before exporting.",
+      "limit": 400,
+      "words": 43,
+      "note": "Proposed product direction for the creator to review."
+    },
+    {
+      "prompt": "Did you use AI in the creation, development, or functionality of your app?",
+      "answer": "Yes"
+    },
+    {
+      "prompt": "If you used AI, tell us how you used it and what your team contributed directly.",
+      "answer": "I used Codex and Claude Code extensively, and AI wrote most of TrueLine's code. I personally designed the interface and refined the tracing experience through hands-on testing. Codex also assisted with bug fixes, testing, the demonstration video, and drafting submission materials. TrueLine uses the existing pretrained MobileSAM model through ONNX Runtime Web for local image segmentation; I did not train that model.",
+      "limit": 400,
+      "words": 62
+    },
+    {
+      "prompt": "What did you learn or take away from participating in the Congressional App Challenge?",
+      "answer": "The tracing problem taught me that more points and edges do not automatically produce a better CAD drawing. The geometry needs to represent the intended shape, and an arc should remain a usable arc. Testing the output helped me identify what needed to improve.",
+      "limit": 400,
+      "words": 44
+    },
+    {
+      "prompt": "Please include a cover photo from your app",
+      "answer": "Upload cover/trueline-cover-600x800.jpg (600\u00d7800 pixels, portrait JPEG)."
+    },
+    {
+      "prompt": "Optional project link",
+      "answer": "https://github.com/Nik-Horner/TrueLine"
+    },
+    {
+      "prompt": "Congressional Certification opt-in",
+      "answer": "Leave unchecked unless you personally want this optional program."
+    },
+    {
+      "prompt": "Where did you do most of the coding for your app?",
+      "answer": "At Home"
+    },
+    {
+      "prompt": "On what date did you complete the coding for your app?",
+      "answer": "10/15/2026",
+      "note": "Date the code fixes for this submission candidate were completed, in Chicago time."
+    },
+    {
+      "prompt": "Did you create this app as part of a project for school, a coding club, or a similar organization?",
+      "answer": "No \u2014 independent project."
+    },
+    {
+      "prompt": "School/organization and teacher/mentor details",
+      "answer": "Leave these conditional fields blank; this was an independent project."
+    },
+    {
+      "prompt": "App Challenge Ambassador email",
+      "answer": "Leave blank unless someone actually referred you through that program."
+    },
+    {
+      "prompt": "Application Ready to Submit",
+      "answer": "Select Yes only after required fields, public video, and cover are complete. Click Save to reach the Submission Page, then complete its final submission action and retain confirmation."
+    }
+  ]
+}

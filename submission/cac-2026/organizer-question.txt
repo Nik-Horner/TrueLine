@@ -1,0 +1,19 @@
+Subject: 2026 eligibility question about AI-assisted development
+Contact page: https://www.congressionalappchallenge.us/contact-us/
+Use the Student, Parent, and Educator Questions link. No recipient email has been assumed.
+
+Hello Congressional App Challenge team,
+
+I would like to enter TrueLine, a desktop application for tracing physical parts and part images into scaled 2D CAD outlines. The idea came from trying to recreate a part with my dad when we did not have its CAD model.
+
+I personally designed the interface and refined the tracing experience through hands-on testing. AI coding tools wrote most of the application code. I plan to disclose this clearly, along with all other assistance and the app's use of the pretrained MobileSAM model.
+
+Does this development process meet the 2026 requirements for personal technical contributions and AI use? What information would you need to assess eligibility?
+
+I also noticed that the registration page lists October 26 at 9:00 pm ET, while the 2026 rulebook lists noon EDT that day. Please confirm the submission cutoff.
+
+Thank you.
+
+[Add entrant name and congressional district]
+
+Draft only. No message has been sent.

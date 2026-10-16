@@ -1,0 +1,40 @@
+TITLE
+TrueLine — Free, Open-Source Tracing for Makers | Congressional App Challenge
+
+DESCRIPTION
+TrueLine is free, open-source tracing software for makers. Lay a part on a drawing pad and begin tracing, review fitted lines and curves, set a known real measurement, and export editable CAD outlines as DXF, SVG or PDF.
+
+The idea began when my dad and I had a physical part without a CAD model. Photo tracing in SolidWorks did not work well for us, and another solution cost about $1,500. I designed the interface and refined the tracing experience through testing.
+
+The first route traces a complete mounting plate: its asymmetric outer profile, three bolt holes and adjustment slot, followed by an 80 mm scale measurement and actual DXF export. The second route demonstrates automatic outline detection: import an overhead image, generate an outline, review it, and set scale before export.
+
+The reference is an original illustration used to demonstrate both workflows. No physical tablet or camera was filmed, and processing waits are shortened. Verify edges and independent physical measurements before fabrication.
+
+The application uses JavaScript, HTML/CSS, Canvas and Electron. Optional auto-outline uses pretrained MobileSAM and ONNX Runtime with TrueLine's tracing/cleanup workflow. The model was not trained or fine-tuned by the student. Projects and processing stay on the user's device.
+
+Development disclosure: I designed and tested the UI and tracing workflow. AI wrote most of the code using Codex and Claude Code. This video was also produced with AI assistance using actual application interactions, with camera crops, presentation text and timing edits for clarity.
+
+Creator: Nik Horner
+Source: https://github.com/Nik-Horner/TrueLine
+
+CHAPTERS
+0:00 Free tracing software for makers
+0:05 The problem
+0:10 Lay the part on a drawing pad and trace
+0:24 Trace the holes and slot
+0:37 Review
+0:40 Set the scale
+0:49 Export
+0:55 Overhead-photo route
+1:00 Auto-outline preview and acceptance
+1:09 Tools
+1:15 Development disclosure
+1:23 TrueLine
+
+UPLOAD FILES
+Video: output/trueline-cac-demo-v7.mp4
+Thumbnail: output/trueline-demo-poster.jpg
+Subtitles: output/trueline-demo.srt
+Application cover: ../cover/trueline-cover-600x800.jpg
+
+Set YouTube or Vimeo visibility to PUBLIC, then paste its https URL into the existing application. No upload or submission has been performed. If this is a team entry, add all participant names before submission.

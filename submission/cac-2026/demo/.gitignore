@@ -1,0 +1,17 @@
+# Keep only the selected final deliverables; omit raw frames and earlier edits.
+output/*
+!output/trueline-cac-demo-v7.mp4
+!output/trueline-demo-poster.jpg
+!output/trueline-demo.srt
+!output/trueline-demo-transcript.txt
+!output/part-reference.png
+!output/part-cad-outline.png
+!output/sample-mounting-plate.png
+!output/sample-mounting-plate.trueline.json
+!output/auto-outline-preview.jpg
+!output/capture-manifest.json
+!output/video-metadata.json
+!output/exports/
+output/exports/*
+!output/exports/untitled.dxf
+output-v*/

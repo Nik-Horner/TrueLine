@@ -1,0 +1,4 @@
+# Local delivery bundles and superseded preparation files.
+*.zip
+cac-2026/code-changes.patch
+cac-2026/cover/prior-screenshot-candidate/
