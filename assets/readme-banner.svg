@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="360" viewBox="0 0 1280 360" role="img" aria-labelledby="title desc">
+  <title id="title">TrueLine — Real parts. Clean outlines.</title>
+  <desc id="desc">A dark drafting grid with an amber TrueLine wordmark and a cyan technical outline of a mounting plate.</desc>
+  <defs>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#202c38" stroke-width="1"/></pattern>
+    <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#101821"/><stop offset="1" stop-color="#0b1016"/></linearGradient>
+  </defs>
+  <rect width="1280" height="360" rx="16" fill="url(#bg)"/>
+  <rect width="1280" height="360" rx="16" fill="url(#grid)"/>
+  <path d="M60 72l15-27 14 27-14 25H60" fill="none" stroke="#ffb21b" stroke-width="3" stroke-linejoin="round"/>
+  <text x="106" y="82" fill="#f1f5f9" font-family="Arial, Helvetica, sans-serif" font-size="40" font-weight="700" letter-spacing="-1">TrueLine</text>
+  <text x="60" y="166" fill="#f1f5f9" font-family="Arial, Helvetica, sans-serif" font-size="44" font-weight="700" letter-spacing="-1">Real parts.</text>
+  <text x="60" y="219" fill="#ffb21b" font-family="Arial, Helvetica, sans-serif" font-size="44" font-weight="700" letter-spacing="-1">Clean outlines.</text>
+  <text x="62" y="275" fill="#a8b6c7" font-family="Arial, Helvetica, sans-serif" font-size="18">Trace · Calibrate · Export</text>
+  <text x="62" y="309" fill="#788b9e" font-family="Arial, Helvetica, sans-serif" font-size="13" letter-spacing="2">OPEN SOURCE / LOCAL PROCESSING / 2D CAD</text>
+  <g fill="none" stroke="#61d4e8" stroke-width="2">
+    <rect x="780" y="88" width="370" height="202" rx="39" fill="#0d1820"/>
+    <circle cx="827" cy="135" r="14"/><circle cx="1103" cy="135" r="14"/>
+    <circle cx="827" cy="243" r="14"/><circle cx="1103" cy="243" r="14"/>
+    <circle cx="924" cy="189" r="39"/><rect x="1004" y="169" width="84" height="40" rx="20"/>
+    <path d="M780 77V43m370 34V43M780 56h370" stroke="#547f8c" stroke-width="1"/>
+    <path d="M791 51l-11 5 11 5m348-10 11 5-11 5" stroke-width="1"/>
+    <path d="M965 80v220M770 189h390" stroke="#31515e" stroke-width="1" stroke-dasharray="5 7"/>
+  </g>
+  <text x="965" y="46" text-anchor="middle" fill="#61d4e8" font-family="monospace" font-size="14">140.00 mm</text>
+  <text x="965" y="326" text-anchor="middle" fill="#788b9e" font-family="monospace" font-size="13" letter-spacing="3">DXF / SVG / PDF</text>
+</svg>
