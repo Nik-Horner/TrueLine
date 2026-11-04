@@ -229,6 +229,25 @@ const server = http.createServer((req, res) => {
       await page.screenshot({path:path.join(root,'test-artifacts','autotrace-review-uncertainty.png')});
       await clickText('Cancel');assert.equal(await count(),0);
     }
+    // A rounded part must keep exact arcs through preview, editing and scaling.
+    for(const stretch of [false,true]){
+      await page.evaluate(async stretch=>{
+        m.newDoc();const c=document.createElement('canvas');c.width=480;c.height=360;
+        const ctx=c.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,480,360);
+        ctx.fillStyle='#222';ctx.beginPath();ctx.roundRect(80,100,320,160,80);ctx.fill();
+        const img=new Image();img.src=c.toDataURL();await img.decode();
+        m.setUnderlay({dataURL:img.src,x:10,y:20,wMM:240,hMM:stretch?270:180,rotation:.3,opacity:.5,visible:true},img);
+      },stretch);
+      await open();await ready();await clickText('Edit outline');
+      await clickText('Insert point');
+      assert.equal(await run(()=>document.querySelector('.trace-accept').disabled),false,'splitting a fitted segment stays valid');
+      if(!stretch)await page.screenshot({path:path.join(root,'test-artifacts','photo-cad-preview.png')});
+      await clickText('Add outline');
+      const poly=await run(()=>m.App.doc.entities[0]);
+      assert.equal(poly.type,'poly');
+      assert.equal(poly.pts.some(p=>p.bulge),!stretch,'uniform scale preserves arcs; stretching samples the curve');
+      if(!stretch)assert.ok(poly.pts.length<=24,'adding a photo keeps its compact CAD representation');
+    }
     assert.deepEqual(errors, []);
     console.log('PASS: auto-trace Chromium checks (preview, cancel, accept, undo/redo, crop offsets, rotation, nonuniform scale, tiny/invalid/reverse/cancelled crops, locked/stale targets, worker cancellation, rapid changes, keyboard focus, PNG/JPEG/WebP/alpha/EXIF uploads, large-image downsampling and 4 viewport sizes)');
   } finally { await browser.close(); server.close(); }

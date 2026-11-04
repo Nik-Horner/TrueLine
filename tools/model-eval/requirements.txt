@@ -1,0 +1,8 @@
+torch==2.15.0
+torchvision==0.29.2
+timm==0.9.2
+numpy==2.5.4
+opencv-python-headless==5.0.0.93
+pillow==13.0.0
+onnx==1.23.2
+onnxscript==0.7.2

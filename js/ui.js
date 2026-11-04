@@ -14,7 +14,7 @@ import { writePDF } from './pdf.js';
 import { startTour, tourDone } from './tour.js';
 import * as G from './geom.js';
 import { clearOlderRevisions } from './recovery.js';
-import { createOutlineEditor, circlePoints, closestOnSegment, outlineIssue } from './outline-editor.js';
+import { createOutlineEditor, circlePoints, closestOnSegment, outlineIssue, outlinePoints, splitOutlineSegment } from './outline-editor.js';
 
 const $ = id => document.getElementById(id);
 function el(tag, attrs = {}, ...kids) {
@@ -784,7 +784,7 @@ function autoTraceUnderlay() {
     box.classList.add('trace-modal');
     box.setAttribute('role', 'dialog'); box.setAttribute('aria-modal', 'true'); box.setAttribute('aria-labelledby', 'trace-title');
     const close = el('button', { class: 'trace-close', 'aria-label': 'Close auto-trace', html: '×', onclick: hideModal });
-    box.append(el('header', { class: 'trace-header' }, el('div', {}, el('h3', { id: 'trace-title', html: 'Auto-trace image' }), el('p', { html: 'Select a part, then check its outline before adding it.' })), close));
+    box.append(el('header', { class: 'trace-header' }, el('div', {}, el('h3', { id: 'trace-title', html: 'Auto-trace image' }), el('p', { html: 'For best results, photograph the part with flash on a clean white background. Other backgrounds and shadows can reduce accuracy. Check the outline before adding it.' })), close));
     const body = el('div', { class: 'trace-body' }); box.append(body);
     const crop = el('button', { class: 'trace-button', html: 'Crop part', 'aria-pressed': 'false' });
     const reset = el('button', { class: 'trace-button', html: 'Reset crop' });
@@ -817,7 +817,7 @@ function autoTraceUnderlay() {
     bounds.append(fieldRow); body.append(bounds);
     const status = el('div', { class: 'trace-status', role: 'status', 'aria-live': 'polite' }); body.append(status);
     const accept = el('button', { class: 'trace-button trace-accept', html: 'Add outline', disabled: '' });
-    box.append(el('footer', { class: 'trace-footer' }, el('span', {}, 'Processed on this device · Check scale before export.'), el('div', { class: 'trace-actions' }, el('button', { class: 'trace-button', html: 'Cancel', onclick: hideModal }), accept)));
+    box.append(el('footer', { class: 'trace-footer' }, el('span', {}, 'Processed on this device · Correct perspective and check scale before export.'), el('div', { class: 'trace-actions' }, el('button', { class: 'trace-button', html: 'Cancel', onclick: hideModal }), accept)));
     let roi = { x: 0, y: 0, w: width, h: height }, start = null, previousROI = null, result = null, cropMode = false;
     let worker = null, request = 0, timer = null, deadline = null, alive = true;
     let editor=null,editMode=false,selection=null,editDrag=null,draft=null,panMode=false,previewZoom=1,previewPan={x:0,y:0};
@@ -837,7 +837,13 @@ function autoTraceUnderlay() {
       for (const e of editor?.entities || result?.entities || []) {
         ctx.beginPath();
         if (e.type === 'circle') ctx.arc(e.c.x, e.c.y, e.r, 0, Math.PI * 2);
-        else { e.pts.forEach((p, i) => i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y)); ctx.closePath(); }
+        else {
+          ctx.moveTo(e.pts[0].x,e.pts[0].y);
+          e.pts.forEach((p,i)=>{const next=e.pts[(i+1)%e.pts.length],arc=p.bulge&&G.bulgeToArc(p,next,p.bulge);
+            if(arc){const start=Math.atan2(p.y-arc.c.y,p.x-arc.c.x);ctx.arc(arc.c.x,arc.c.y,arc.r,start,start+4*Math.atan(p.bulge),p.bulge<0);}
+            else ctx.lineTo(next.x,next.y);
+          });ctx.closePath();
+        }
         ctx.stroke();
       }
       ctx.strokeStyle='#ffbd4a';
@@ -876,7 +882,7 @@ function autoTraceUnderlay() {
           if (error) { status.dataset.state = 'error'; status.textContent = error; return; }
           const issue=local&&Array.isArray(local.entities)?outlineIssue(local.entities):'No valid outline was returned.';
           if(issue){status.dataset.state='error';status.textContent='The automatic outline is invalid. Crop around the part and try again. '+issue;return;}
-          const offset = p => ({ x: p.x + roi.x, y: p.y + roi.y });
+          const offset = p => ({ ...p, x: p.x + roi.x, y: p.y + roi.y });
           result = { ...local, entities: local.entities.map(e => e.type === 'circle' ? { ...e, c: offset(e.c) } : { ...e, pts: e.pts.map(offset) }) };
           if(local.quality)result.quality={...local.quality,weakSegments:(local.quality.weakSegments||[]).map(segment=>segment.map(offset))};
           status.dataset.state = local.warnings?.length?'warning':'ready';
@@ -1002,7 +1008,7 @@ function autoTraceUnderlay() {
       if(e.type==='circle'){
         if(selection.handle==='radius')e.r=Math.max(.5,Math.min(e.c.x,width-e.c.x,e.c.y,height-e.c.y,editDrag.radius+Math.hypot(p.x-e.c.x,p.y-e.c.y)-editDrag.distance));
         else e.c={x:Math.max(e.r,Math.min(width-e.r,p.x-editDrag.offset.x)),y:Math.max(e.r,Math.min(height-e.r,p.y-editDrag.offset.y))};
-      }else e.pts[selection.point]={x:Math.max(0,Math.min(width,p.x-editDrag.offset.x)),y:Math.max(0,Math.min(height,p.y-editDrag.offset.y))};
+      }else e.pts[selection.point]={...e.pts[selection.point],x:Math.max(0,Math.min(width,p.x-editDrag.offset.x)),y:Math.max(0,Math.min(height,p.y-editDrag.offset.y))};
       updateEditorControls();paint();
     };
     const finishEditDrag=(ev,cancel)=>{
@@ -1016,7 +1022,7 @@ function autoTraceUnderlay() {
       previewPan={x:anchor.x-p.x*next,y:anchor.y-p.y*next};previewZoom=next;paint();
     };
     edit.onclick=()=>setEditMode(!editMode);
-    insertPoint.onclick=()=>{if(insertPoint.disabled)return;editChange(()=>{const e=editor.entities[selection.entity],i=selection.segment??selection.point??0,a=e.pts[i],b=e.pts[(i+1)%e.pts.length];e.pts.splice(i+1,0,{x:(a.x+b.x)/2,y:(a.y+b.y)/2});selection={entity:selection.entity,point:i+1};});};
+    insertPoint.onclick=()=>{if(insertPoint.disabled)return;editChange(()=>{const e=editor.entities[selection.entity],i=selection.segment??selection.point??0,a=e.pts[i],b=e.pts[(i+1)%e.pts.length];const arc=a.bulge&&G.bulgeToArc(a,b,a.bulge),angle=arc?Math.atan2(a.y-arc.c.y,a.x-arc.c.x)+2*Math.atan(a.bulge):0;splitOutlineSegment(e,i,arc?{x:arc.c.x+arc.r*Math.cos(angle),y:arc.c.y+arc.r*Math.sin(angle)}:{x:(a.x+b.x)/2,y:(a.y+b.y)/2});selection={entity:selection.entity,point:i+1};});};
     removePoint.onclick=()=>{if(removePoint.disabled)return;if(draft){draft.pop();updateEditorControls();paint();return;}editChange(()=>{const e=editor.entities[selection.entity];e.pts.splice(selection.point,1);selection.point=Math.min(selection.point,e.pts.length-1);});};
     removeOutline.onclick=()=>{if(removeOutline.disabled)return;editChange(()=>{editor.entities.splice(selection.entity,1);selection=firstSelection();});};
     convertCircle.onclick=()=>{if(convertCircle.disabled)return;editChange(()=>{editor.entities[selection.entity]={type:'poly',closed:true,pts:circlePoints(editor.entities[selection.entity])};selection={entity:selection.entity,point:0};});};
@@ -1036,7 +1042,7 @@ function autoTraceUnderlay() {
       if(closest.distance>10/(displayScale()*previewZoom))return;
       const a=e.pts[closest.index],b=e.pts[(closest.index+1)%e.pts.length];
       if(Math.min(Math.hypot(closest.point.x-a.x,closest.point.y-a.y),Math.hypot(closest.point.x-b.x,closest.point.y-b.y))<.25){status.textContent='Zoom in and double-click between two points.';return;}
-      editChange(()=>{e.pts.splice(closest.index+1,0,closest.point);selection={entity:hit.entity,point:closest.index+1};});
+      editChange(()=>{splitOutlineSegment(e,closest.index,closest.point);selection={entity:hit.entity,point:closest.index+1};});
     };
     const editKeys=ev=>{
       if(!editMode||ev.target.matches('input,textarea'))return;
@@ -1097,13 +1103,14 @@ function autoTraceUnderlayApply(result, width, height) {
         y: underlay.y + p.y / height * underlay.hMM,
       }, origin, underlay.rotation || 0);
     const sx = underlay.wMM / width, sy = underlay.hMM / height;
+    const uniform = Math.abs(sx-sy)<=Math.max(sx,sy)*1e-3;
     const entities = result.entities.map(e => {
-      if (e.type === 'circle' && Math.abs(sx - sy) <= Math.max(sx, sy) * 1e-3)
+      if (e.type === 'circle' && uniform)
         return { type: 'circle', c: mapPoint(e.c), r: e.r * (sx + sy) / 2, layer: App.doc.currentLayer };
       const points = e.type === 'circle' ? Array.from({ length: 180 }, (_, i) => ({
         x: e.c.x + e.r * Math.cos(i * Math.PI * 2 / 180), y: e.c.y + e.r * Math.sin(i * Math.PI * 2 / 180),
-      })) : e.pts;
-      return { type: 'poly', closed: true, layer: App.doc.currentLayer, pts: points.map(mapPoint) };
+      })) : uniform ? e.pts : outlinePoints(e);
+      return { type: 'poly', closed: true, layer: App.doc.currentLayer, pts: points.map(p=>({...mapPoint(p),...(uniform&&p.bulge?{bulge:p.bulge}:{})})) };
     });
     if (entities.some(e => e.type === 'circle'
       ? ![e.c.x, e.c.y, e.r].every(Number.isFinite) || e.r <= 0

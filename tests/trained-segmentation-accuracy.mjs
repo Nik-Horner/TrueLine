@@ -1,10 +1,12 @@
 // References are evaluation-only and never imported by the app or model.
 import assert from 'node:assert/strict';
 import{readFileSync,writeFileSync}from'node:fs';
+import{pathToFileURL}from'node:url';
+import{resolve,sep}from'node:path';
 import{execFileSync as exec}from'node:child_process';
 import{autoTraceRaster}from'../js/autotrace.js';
 import{outlineIssue}from'../js/outline-editor.js';
-const root=new URL('../',import.meta.url),dir=new URL('test-artifacts/model-evaluation/',root),read=name=>JSON.parse(readFileSync(new URL(name,root)));
+const root=new URL('../',import.meta.url),dir=process.env.MODEL_OUTPUT_DIR?pathToFileURL(resolve(process.env.MODEL_OUTPUT_DIR)+sep):new URL('test-artifacts/model-evaluation/',root),read=name=>JSON.parse(readFileSync(new URL(name,root)));
 const refs=read('tests/fixtures/precision-reference.json'),additional=read('tests/fixtures/additional-part-reference.json'),screw=read('tests/fixtures/screw-reference.json').points;
 const inside=(x,y,c)=>{let v=false;for(let i=0,j=c.length-1;i<c.length;j=i++){const a=c[i],b=c[j];if((a.y>y)!==(b.y>y)&&x<(b.x-a.x)*(y-a.y)/(b.y-a.y)+a.x)v=!v;}return v;};
 const distance=(p,a,b)=>{const dx=b.x-a.x,dy=b.y-a.y,t=Math.max(0,Math.min(1,((p.x-a.x)*dx+(p.y-a.y)*dy)/(dx*dx+dy*dy||1)));return Math.hypot(p.x-a.x-t*dx,p.y-a.y-t*dy);};
@@ -44,10 +46,10 @@ for(const id of ['screw','steel-bracket','foam-rectangular','foam-irregular','wh
  rows.push(row);console.log(JSON.stringify(row));
  const group=[];for(const label of ['source','classic','trained']){
   const photo=label==='source'?input:new URL(id+'-'+label+'-overlay.png',dir).pathname,panel=new URL(id+'-'+label+'-panel.png',dir).pathname;
-  exec('magick',[photo,'-resize','450x330','-background','#172536','-gravity','center','-extent','470x390','-font','DejaVu-Sans','-fill','#e7edf6','-pointsize','17','-gravity','northwest','-annotate','+12+26',label==='source'?'SOURCE PHOTO':label==='classic'?'PREVIOUS DETECTOR':'TRAINED MODEL + IMAGE EDGES',panel]);group.push(panel);
+  exec('magick',[photo,'-resize','450x330','-background','#172536','-gravity','center','-extent','470x390','-font',process.env.REPORT_FONT||'DejaVu-Sans','-fill','#e7edf6','-pointsize','17','-gravity','northwest','-annotate','+12+26',label==='source'?'SOURCE PHOTO':label==='classic'?'PREVIOUS DETECTOR':'TRAINED MODEL + IMAGE EDGES',panel]);group.push(panel);
  }
  const comparison=new URL(id+'-comparison.png',dir).pathname;
- exec('magick',[...group,'+append','-background','#0c1420','-gravity','north','-splice','0x50','-font','DejaVu-Sans','-fill','#e7edf6','-pointsize','22','-gravity','northwest','-annotate','+20+31',id,comparison]);panels.push(comparison);
+ exec('magick',[...group,'+append','-background','#0c1420','-gravity','north','-splice','0x50','-font',process.env.REPORT_FONT||'DejaVu-Sans','-fill','#e7edf6','-pointsize','22','-gravity','northwest','-annotate','+20+31',id,comparison]);panels.push(comparison);
 }
 const annotated=rows.filter(r=>r.trained.silhouetteIoU!=null),mean=label=>annotated.reduce((s,r)=>s+r[label].silhouetteIoU,0)/annotated.length;
 const metrics={method:'Six manually annotated silhouettes (source-pixel uncertainty approximately +/-2 to 3 pixels), 25 annotated visible plate openings, 97 foam opening checks, and four further carrier capture views. Carrier views are the same category; both foam crops share one photo. No reference or benchmark labels enter inference. Results measure photographed shapes, not physical dimensions.',cases:rows,meanClassicSilhouetteIoU:mean('classic'),meanTrainedSilhouetteIoU:mean('trained')};
