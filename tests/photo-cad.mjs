@@ -73,4 +73,31 @@ for(const bulge of [1,-1]){
   assert.equal(r.entities.length,6,'local material recovers center and all four bolt holes on paper inside wood scene');
   assert.equal(r.entities.filter(e=>e.type==='circle').length,4,'recovered bolt holes are CAD circles');
 }
+// A rounded-rectangle gasket is designed from tangent lines and quarter arcs.
+for(const angle of [0,.31,1.6]){
+  const w=720,rgba=new Uint8ClampedArray(w*w*4);
+  const rounded=(x,y,hx,hy,r)=>{const dx=Math.abs(x)-(hx-r),dy=Math.abs(y)-(hy-r);return Math.hypot(Math.max(dx,0),Math.max(dy,0))+Math.min(Math.max(dx,dy),0)<=r;};
+  for(let y=0;y<w;y++)for(let x=0;x<w;x++){
+    const u=(x-360)*Math.cos(angle)+(y-360)*Math.sin(angle),v=-(x-360)*Math.sin(angle)+(y-360)*Math.cos(angle);
+    const color=rounded(u,v,250,240,60)&&!rounded(u,v,210,200,20)?20:245,i=(y*w+x)*4;
+    rgba[i]=rgba[i+1]=rgba[i+2]=color;rgba[i+3]=255;
+  }
+  const result=autoTraceRaster(w,w,rgba);
+  assert.equal(result.entities.length,2);
+  for(const e of result.entities){
+    assert.equal(e.type,'poly');assert.equal(e.pts.length,8,'rounded rectangle has eight CAD segments');
+    assert.equal(e.pts.filter(p=>p.bulge).length,4,'rounded rectangle has four quarter arcs');
+    const [hx,hy,radius]=e===result.entities[0]?[250,240,60]:[210,200,20];
+    for(const point of outlinePoints(e)){
+      const u=(point.x-360)*Math.cos(angle)+(point.y-360)*Math.sin(angle),v=-(point.x-360)*Math.sin(angle)+(point.y-360)*Math.cos(angle);
+      const dx=Math.abs(u)-(hx-radius),dy=Math.abs(v)-(hy-radius);
+      assert.ok(Math.abs(Math.hypot(Math.max(dx,0),Math.max(dy,0))+Math.min(Math.max(dx,dy),0)-radius)<2.5,'fitted arcs retain the known design boundary');
+    }
+    for(let i=0;i<e.pts.length;i++){
+      const a=e.pts[(i+e.pts.length-1)%e.pts.length],b=e.pts[i],c=e.pts[(i+1)%e.pts.length];
+      const incoming=Math.atan2(b.y-a.y,b.x-a.x)+2*Math.atan(a.bulge||0),outgoing=Math.atan2(c.y-b.y,c.x-b.x)-2*Math.atan(b.bulge||0);
+      assert.ok(Math.abs(Math.atan2(Math.sin(outgoing-incoming),Math.cos(outgoing-incoming)))<1e-8,'every rounded-rectangle join is tangent');
+    }
+  }
+}
 console.log('PASS: CAD fitting, rotations, holes, narrow notches, trained masks, fidelity, DXF and arc editing');

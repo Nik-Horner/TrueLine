@@ -714,6 +714,58 @@ export function traceTrainedMask(width,height,rgba,mask,proposal,options={}) {
     quality:{...proposal.quality,...evidence,uncertainOpenings:uncertain.length,uncertainOpeningLoops:uncertain,selectionUnstable:false,trainedMask:true},warnings};
 }
 
+// A rounded rectangle has four straight edges and four tangent quarter-arcs.
+function fitRoundedRectangle(points,tolerance) {
+  const simplified=simplifyClosed(points,1),directions=[];
+  for(let i=0;i<simplified.length;i++){
+    const a=simplified[i],b=simplified[(i+1)%simplified.length];
+    if(Math.hypot(b.x-a.x,b.y-a.y)<30)continue;
+    const angle=Math.atan2(b.y-a.y,b.x-a.x),normalized=((angle%(Math.PI/2))+Math.PI/2)%(Math.PI/2);
+    if(!directions.some(v=>Math.abs(Math.atan2(Math.sin(4*(v-normalized)),Math.cos(4*(v-normalized))))<.02))directions.push(normalized);
+  }
+  // Long measured straight runs give a less pixel-biased orientation than
+  // individual staircase edges.
+  if(simplified.length<300)for(let i=0;i<simplified.length;i++){
+    let best=null;
+    for(let j=i+1;j<simplified.length;j++){
+      const a=simplified[i],b=simplified[j];if(Math.hypot(b.x-a.x,b.y-a.y)<100)continue;
+      const line={type:'line',a,b};
+      if(simplified.slice(i+1,j).every(p=>closestPointOnEntity(line,p).d<=tolerance))best=b;
+    }
+    if(best){const a=simplified[i],angle=Math.atan2(best.y-a.y,best.x-a.x),normalized=((angle%(Math.PI/2))+Math.PI/2)%(Math.PI/2);
+      if(!directions.some(v=>Math.abs(Math.atan2(Math.sin(4*(v-normalized)),Math.cos(4*(v-normalized))))<.004))directions.push(normalized);
+    }
+  }
+  if(!directions.length||directions.length>40)return null;
+  const samples=[];
+  for(let i=0;i<points.length;i++){
+    const a=points[i],b=points[(i+1)%points.length],n=Math.max(1,Math.ceil(Math.hypot(b.x-a.x,b.y-a.y)/4));
+    for(let j=0;j<n;j++)samples.push({x:a.x+(b.x-a.x)*j/n,y:a.y+(b.y-a.y)*j/n});
+  }
+  let best=null,bestError=tolerance*1.2;
+  for(const direction of directions)for(const delta of [-.008,-.006,-.004,-.002,0,.002,.004,.006,.008]){
+    const angle=direction+delta,ux=Math.cos(angle),uy=Math.sin(angle),vx=-uy,vy=ux,projected=samples.map(p=>({x:p.x*ux+p.y*uy,y:p.x*vx+p.y*vy}));
+    let x0=Infinity,x1=-Infinity,y0=Infinity,y1=-Infinity;
+    for(const p of projected){x0=Math.min(x0,p.x);x1=Math.max(x1,p.x);y0=Math.min(y0,p.y);y1=Math.max(y1,p.y);}
+    const hx=(x1-x0)/2,hy=(y1-y0)/2,cx=(x0+x1)/2,cy=(y0+y1)/2;
+    if(Math.min(hx,hy)<10)continue;
+    for(let radius=2;radius<Math.min(hx,hy)*.8;radius+=.5){
+      let error=0;
+      for(const p of projected){const x=Math.abs(p.x-cx)-hx+radius,y=Math.abs(p.y-cy)-hy+radius;
+        error=Math.max(error,Math.abs(Math.hypot(Math.max(x,0),Math.max(y,0))+Math.min(Math.max(x,y),0)-radius));
+        if(error>bestError)break;
+      }
+      if(error>bestError)continue;
+      const map=(x,y,bulge)=>({x:x*ux+y*vx,y:x*uy+y*vy,...(bulge?{bulge}:{})}),b=Math.tan(Math.PI/8),r=radius;
+      best={type:'poly',closed:true,pts:[map(x0+r,y0),map(x1-r,y0,b),map(x1,y0+r),map(x1,y1-r,b),map(x1-r,y1),map(x0+r,y1,b),map(x0,y1-r),map(x0,y0+r,b)]};
+      bestError=error;
+    }
+  }
+  if(!best)return null;
+  const measured=polyToSegments({type:'poly',pts:points,closed:true});
+  return outlinePoints(best).every(p=>measured.some(s=>closestPointOnEntity(s,p).d<=tolerance*1.2))&&!outlineIssue([best])?best:null;
+}
+
 // Recognize a straight-sided capsule as two tangent semicircles and two lines.
 function fitCapsule(points, tolerance) {
   const samples=[];
@@ -751,6 +803,8 @@ function fitPhotoOutline(points) {
   const fallback={type:'poly',pts:points,closed:true};
   const bounds=points.reduce((b,p)=>({x0:Math.min(b.x0,p.x),x1:Math.max(b.x1,p.x),y0:Math.min(b.y0,p.y),y1:Math.max(b.y1,p.y)}),{x0:Infinity,x1:-Infinity,y0:Infinity,y1:-Infinity});
   const tolerance=Math.max(1.25,Math.min(3,Math.max(bounds.x1-bounds.x0,bounds.y1-bounds.y0)*.003));
+  const rectangle=fitRoundedRectangle(points,tolerance);
+  if(rectangle)return rectangle;
   const capsule=fitCapsule(points,tolerance);
   if(capsule)return capsule;
   const path=[...points,points[0]], pts=[];
