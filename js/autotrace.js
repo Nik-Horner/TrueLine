@@ -1,7 +1,7 @@
 // Offline photo outline extraction. The image is segmented against its border
 // background, then converted to closed pixel-boundary contours.
 
-import {closestPointOnEntity, polyToSegments} from './geom.js';
+import {bulgeToArc, filletSegments, closestPointOnEntity, polyToSegments} from './geom.js';
 import {outlineIssue, outlinePoints} from './outline-editor.js';
 import {maskContours} from './mask-contours.js';
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
@@ -362,13 +362,22 @@ function traceRaster(width, height, rgba, options = {}, scaleChecks = 0) {
     tones.sort((a,b)=>a-b);
     const low=tones[Math.floor(tones.length*.1)],high=tones[Math.floor(tones.length*.75)];
     if(low<70&&(high<100||high>low*2.5)){
-      const cutoff=high<100?Math.min(120,Math.max(60,high+25)):Math.min(120,otsu(histogram,tones.length)),dark=new Uint8Array(n);
-      for(let i=0;i<n;i++){const j=i*4;dark[i]=component.mask[i]&&.299*rgba[j]+.587*rgba[j+1]+.114*rgba[j+2]<=cutoff?1:0;}
+      const cutoff=high<100?Math.min(120,Math.max(60,high+25)):Math.min(120,otsu(histogram,tones.length)),dark=new Uint8Array(n),colors=[[],[],[]];
+      for(let i=0;i<n;i+=Math.max(1,Math.floor(n/6000)))if(component.mask[i]){
+        const j=i*4,tone=.299*rgba[j]+.587*rgba[j+1]+.114*rgba[j+2];
+        if(tone<=low+15)for(let c=0;c<3;c++)colors[c].push(rgba[j+c]);
+      }
+      const channels=colors.map(c=>c.length?median(c):0),sum=channels.reduce((a,b)=>a+b,0);
+      const grow=sum>0&&(Math.max(...channels)-Math.min(...channels))/sum<.2;
+      for(let i=0;i<n;i++){const j=i*4;dark[i]=(grow||component.mask[i])&&.299*rgba[j]+.587*rgba[j+1]+.114*rgba[j+2]<=cutoff?1:0;}
       const candidate=largestInteriorComponent(denoiseMask(dark,width,height,true),width,height);
-      if(candidate&&candidate.pixels>component.pixels*.04){component=candidate;segmentation='material-dark';}
+      if(candidate&&candidate.pixels>component.pixels*.04){
+        let overlap=0;for(let i=0;i<n;i++)if(candidate.mask[i]&&component.mask[i])overlap++;
+        if(overlap>candidate.pixels*.2){component=candidate;segmentation=grow?'material-dark-grown':'material-dark';}
+      }
     }
   }
-  if (component&&segmentation!=='material-dark') {
+  if (component&&!segmentation.startsWith('material-dark')) {
     const samples=[],backgrounds=[],brightness=[],lightness=[];
     for(let i=0;i<n;i+=Math.max(1,Math.floor(n/3000))){
       if(!component.mask[i])continue;const j=i*4,bg=model.at(i%width,(i/width)|0),sum=rgba[j]+rgba[j+1]+rgba[j+2],bgSum=bg[0]+bg[1]+bg[2];
@@ -550,7 +559,7 @@ function traceRaster(width, height, rgba, options = {}, scaleChecks = 0) {
           })();
           const matchesBackground=distances[i]<Math.max(10,model.noise*2,threshold*.5)&&(!smallPatch||rgba[j+3]<32||scale>.8||tone>typicalMaterialTone*2);
           if(matchesBackground || hueBackground)colorSupported++;
-          if (matchesBackground || shadowBackground || hueBackground || (materialLightFloor && tone<materialLightFloor) || (segmentation==='material-dark'&&tone>Math.max(typicalMaterialTone*2,typicalMaterialTone+35))) background++;
+          if (matchesBackground || shadowBackground || hueBackground || (materialLightFloor && tone<materialLightFloor) || (segmentation.startsWith('material-dark')&&tone>Math.max(typicalMaterialTone*2,typicalMaterialTone+35))) background++;
         }
     }
     const keep=samples>0&&background/samples>=.7;
@@ -679,12 +688,12 @@ export function traceTrainedMask(width,height,rgba,mask,proposal,options={}) {
   }
   const inside=p=>{let yes=false;for(let i=0,j=outer.length-1;i<outer.length;j=i++){const a=outer[i],b=outer[j];if((a.y>p.y)!==(b.y>p.y)&&p.x<(b.x-a.x)*(p.y-a.y)/(b.y-a.y)+a.x)yes=!yes;}return yes;};
   const learnedEdges=autoTraceRaster(width,height,rgba,{...options,materialMask:component.mask});
-  if(learnedEdges.segmentation==='material-color'){
-    if(options.materialLogits)outer=refineColoredBoundary(outer,width,height,rgba,component.mask,options.materialLogits,backgroundModel(width,height,rgba));
+  if(learnedEdges.segmentation==='material-color'||learnedEdges.segmentation==='material-dark-grown'){
+    if(options.materialLogits&&learnedEdges.segmentation==='material-color')outer=refineColoredBoundary(outer,width,height,rgba,component.mask,options.materialLogits,backgroundModel(width,height,rgba));
     const edgeOuter=learnedEdges.contours[0],bounds=c=>c.reduce((b,p)=>({x0:Math.min(b.x0,p.x),y0:Math.min(b.y0,p.y),x1:Math.max(b.x1,p.x),y1:Math.max(b.y1,p.y)}),{x0:width,y0:height,x1:0,y1:0});
     const a=bounds(outer),b=bounds(edgeOuter),overlap=Math.max(0,Math.min(a.x1,b.x1)-Math.max(a.x0,b.x0))*Math.max(0,Math.min(a.y1,b.y1)-Math.max(a.y0,b.y0)),area=c=>Math.abs(signedArea(c));
     const evidence=c=>measureBoundaryEvidence([c],width,height,rgba,backgroundModel(width,height,rgba)).weakBoundaryFraction;
-    if(overlap/Math.max(1,(a.x1-a.x0)*(a.y1-a.y0))>.85&&area(edgeOuter)>area(outer)*.65&&area(edgeOuter)<area(outer)*1.35&&evidence(edgeOuter)<evidence(outer))outer=edgeOuter;
+    if(overlap/Math.max(1,(a.x1-a.x0)*(a.y1-a.y0))>.85&&area(edgeOuter)>area(outer)*.65&&area(edgeOuter)<area(outer)*(learnedEdges.segmentation==='material-dark-grown'?10:1.35)&&evidence(edgeOuter)<(learnedEdges.segmentation==='material-dark-grown'?Math.min(.1,evidence(outer)+.02):evidence(outer)))outer=edgeOuter;
   }
   const maskHoles=loops.slice(1).filter(c=>Math.abs(signedArea(c))>=Math.max(9,width*height*.00002))
     .map(c=>refineEdges(c,width,height,rgba,true,backgroundModel(width,height,rgba)))
@@ -716,7 +725,7 @@ export function traceTrainedMask(width,height,rgba,mask,proposal,options={}) {
 
 // A rounded rectangle has four straight edges and four tangent quarter-arcs.
 function fitRoundedRectangle(points,tolerance) {
-  const simplified=simplifyClosed(points,1),directions=[];
+  const simplified=simplifyClosed(points,Math.max(1,tolerance*.8)),directions=[];
   for(let i=0;i<simplified.length;i++){
     const a=simplified[i],b=simplified[(i+1)%simplified.length];
     if(Math.hypot(b.x-a.x,b.y-a.y)<30)continue;
@@ -856,6 +865,27 @@ function fitPhotoOutline(points) {
   // still supports the resulting curve. Corners remain corners.
   const tangentFit=structuredClone(fit), angle=(a,b)=>Math.atan2(b.y-a.y,b.x-a.x);
   const wrap=a=>Math.atan2(Math.sin(a),Math.cos(a));
+  // Reconstruct a true fillet when an arc lies between two straight runs.
+  for(let i=0;i<tangentFit.pts.length;i++){
+    const p=tangentFit.pts[i],q=tangentFit.pts[(i+1)%pts.length],prev=tangentFit.pts[(i+pts.length-1)%pts.length],after=tangentFit.pts[(i+2)%pts.length];
+    if(!p.bulge||prev.bulge||q.bulge||Math.abs(4*Math.atan(p.bulge))>Math.PI)continue;
+    const arc=bulgeToArc(p,q,p.bulge);if(!arc)continue;
+    const turn=wrap(angle(q,after)-angle(prev,p));
+    if(Math.abs(turn)<.05||Math.sign(turn)!==Math.sign(p.bulge))continue;
+    const old={px:p.x,py:p.y,qx:q.x,qy:q.y,bulge:p.bulge};let best=null,bestError=Infinity;
+    for(const factor of [1,.95,1.05,.9,1.1,.8,1.2]){
+      const fillet=filletSegments({type:'line',a:prev,b:p},prev,{type:'line',a:q,b:after},after,arc.r*factor);
+      if(fillet.error)continue;
+      p.x=fillet.e1.b.x;p.y=fillet.e1.b.y;q.x=fillet.e2.a.x;q.y=fillet.e2.a.y;p.bulge=Math.tan(turn/4);
+      if(valid(tangentFit,tolerance*1.8)){
+        const segments=polyToSegments(tangentFit);
+        const error=points.reduce((sum,v)=>sum+Math.min(...segments.map(seg=>closestPointOnEntity(seg,v).d**2)),0);
+        if(error<bestError){bestError=error;best={px:p.x,py:p.y,qx:q.x,qy:q.y,bulge:p.bulge};}
+      }
+      p.x=old.px;p.y=old.py;q.x=old.qx;q.y=old.qy;p.bulge=old.bulge;
+    }
+    if(best){p.x=best.px;p.y=best.py;q.x=best.qx;q.y=best.qy;p.bulge=best.bulge;}
+  }
   for(let i=0;i<tangentFit.pts.length;i++){
     const p=tangentFit.pts[i],q=tangentFit.pts[(i+1)%pts.length],prev=tangentFit.pts[(i+pts.length-1)%pts.length];
     const after=tangentFit.pts[(i+2)%pts.length];

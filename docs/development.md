@@ -154,17 +154,22 @@ openings and ambiguous saddle topology against known synthetic fields.
 ### Photo CAD fitting and local fine-tuning
 
 Photo contours now share a bounded line/arc fitting pass in both image-edge and
-trained-mask paths. Connected polyline bulges preserve actual CAD arcs through
+trained-mask paths. Rounded rectangles and slots can become tangent CAD
+primitives, and supported line-to-arc fillets are constructed tangentially. Connected polyline bulges preserve actual CAD arcs through
 preview edits, crop offsets, image rotation and DXF/SVG/PDF export. Nonuniform
 image scaling samples arcs because a stretched circle is an ellipse. Fits that
 cross themselves or exceed the contour-error check retain the original outline.
 Complete near-circles tolerate small photographic deviations; this is a fitted
-shape, not a correction for perspective or proof of physical dimensions.
+shape, not a correction for perspective or proof of physical dimensions. Use
+the existing perspective correction and a measured scale for a flat part, then
+verify critical dimensions before using the exported drawing.
 
 Learned masks also guide local dark-material extraction, so holes on a sheet of
 paper need not match wood at the image border. Image-supported mask openings are
-retained, and a large opening replaces small stray contours inside it. Existing
-source-resolution apertures take precedence over comparable neural boundaries.
+retained, and a large opening replaces small stray contours inside it. A partial learned
+mask can be expanded to the overlapping dark part when the source image supports
+it. Existing source-resolution apertures take precedence over comparable neural
+boundaries.
 
 `npm test` includes rotated CAD profiles, narrow notches, trained masks, local
 paper/wood separation, hole recovery, arc edits, fidelity and DXF regressions.
@@ -196,7 +201,12 @@ MODEL_DECODER=test-artifacts/finetune/onnx/decoder.onnx \
 The browser runner also accepts `MODEL_INPUT_DIR` and `MODEL_CASES` for local
 photo captures. Set `CHROME_BIN` to the installed Chromium executable; the
 accuracy renderer accepts `REPORT_FONT` as an installed font path on macOS.
-Three initial decoder experiments improved synthetic validation but lost real
-openings, including variants using the reviewed paper-gasket photograph. They
-were rejected: **bundled model weights remain unchanged**. Successful synthetic
-validation alone must never trigger replacement of the packaged model.
+Three initial decoder experiments used incorrect box-prompt embeddings and lost
+real openings. A fourth experiment corrected the training prompt and included
+the reviewed paper-gasket photo, but still missed openings on the supplied
+captures. All four were rejected: **bundled model weights remain unchanged**.
+Successful synthetic validation alone must never trigger replacement of the
+packaged model. The training script asserts that its box embeddings match the
+ONNX decoder's inference embeddings before fitting. Later experiments matching
+portrait padding and training only the mask-quality head also failed real-photo
+checks. All remain local experiments; no candidate has been promoted.

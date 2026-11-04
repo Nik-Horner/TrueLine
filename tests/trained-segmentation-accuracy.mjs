@@ -1,10 +1,12 @@
 // References are evaluation-only and never imported by the app or model.
 import assert from 'node:assert/strict';
 import{readFileSync,writeFileSync}from'node:fs';
+import{pathToFileURL}from'node:url';
+import{resolve,sep}from'node:path';
 import{execFileSync as exec}from'node:child_process';
 import{autoTraceRaster}from'../js/autotrace.js';
 import{outlineIssue}from'../js/outline-editor.js';
-const root=new URL('../',import.meta.url),dir=new URL('test-artifacts/model-evaluation/',root),read=name=>JSON.parse(readFileSync(new URL(name,root)));
+const root=new URL('../',import.meta.url),dir=process.env.MODEL_OUTPUT_DIR?pathToFileURL(resolve(process.env.MODEL_OUTPUT_DIR)+sep):new URL('test-artifacts/model-evaluation/',root),read=name=>JSON.parse(readFileSync(new URL(name,root)));
 const refs=read('tests/fixtures/precision-reference.json'),additional=read('tests/fixtures/additional-part-reference.json'),screw=read('tests/fixtures/screw-reference.json').points;
 const inside=(x,y,c)=>{let v=false;for(let i=0,j=c.length-1;i<c.length;j=i++){const a=c[i],b=c[j];if((a.y>y)!==(b.y>y)&&x<(b.x-a.x)*(y-a.y)/(b.y-a.y)+a.x)v=!v;}return v;};
 const distance=(p,a,b)=>{const dx=b.x-a.x,dy=b.y-a.y,t=Math.max(0,Math.min(1,((p.x-a.x)*dx+(p.y-a.y)*dy)/(dx*dx+dy*dy||1)));return Math.hypot(p.x-a.x-t*dx,p.y-a.y-t*dy);};

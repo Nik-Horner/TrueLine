@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {autoTraceRaster,traceTrainedMask} from '../js/autotrace.js';
 import {outlineIssue,outlinePoints,splitOutlineSegment,closestOnSegment} from '../js/outline-editor.js';
-import {polyToSegments,closestPointOnEntity,polyAreaPerimeter} from '../js/geom.js';
+import {bulgeToArc,polyToSegments,closestPointOnEntity,polyAreaPerimeter} from '../js/geom.js';
 import {readDXF,writeDXF} from '../js/dxf.js';
 
 for(const angle of [0,.31,.87,1.6])for(const shape of ['bracket','capsule','notch']){
@@ -72,9 +72,32 @@ for(const bulge of [1,-1]){
   const r=traceTrainedMask(w,w,rgba,mask,proposal);
   assert.equal(r.entities.length,6,'local material recovers center and all four bolt holes on paper inside wood scene');
   assert.equal(r.entities.filter(e=>e.type==='circle').length,4,'recovered bolt holes are CAD circles');
+  const partial=Uint8Array.from(mask,(v,i)=>v&&(i%w)>240?1:0);
+  const recovered=traceTrainedMask(w,w,rgba,partial,proposal);
+  assert.equal(recovered.entities.length,6,'a partial neural mask can recover the whole high-contrast gasket');
+  assert.ok(Math.min(...recovered.contours[0].map(p=>p.x))<95,'recovered outside includes the missing side');
 }
+// A bracket's concave fillet must meet both straight legs tangentially.
+for(const angle of [0,.31]){
+  const w=600,rgba=new Uint8ClampedArray(w*w*4);
+  for(let y=0;y<w;y++)for(let x=0;x<w;x++){
+    const u=(x-300)*Math.cos(angle)+(y-300)*Math.sin(angle)+300,v=-(x-300)*Math.sin(angle)+(y-300)*Math.cos(angle)+300;
+    const solid=(u>=70&&u<=200&&v>=70&&v<=530)||(u>=70&&u<=530&&v>=70&&v<=200)||
+      (u>=200&&u<=235&&v>=200&&v<=235&&Math.hypot(u-235,v-235)>=35);
+    const i=(y*w+x)*4;rgba[i]=rgba[i+1]=rgba[i+2]=solid?20:245;rgba[i+3]=255;
+  }
+  const result=autoTraceRaster(w,w,rgba),p=result.entities[0].pts,i=p.findIndex(v=>v.bulge),a=p[(i+p.length-1)%p.length],b=p[i],c=p[(i+1)%p.length],d=p[(i+2)%p.length];
+  assert.ok(i>=0&&b.bulge<0,'retain the concave fillet');
+  const arc=bulgeToArc(b,c,b.bulge);
+  const cx=300-65*Math.cos(angle)+65*Math.sin(angle),cy=300-65*Math.sin(angle)-65*Math.cos(angle);
+  assert.ok(Math.hypot(arc.c.x-cx,arc.c.y-cy)<8&&Math.abs(arc.r-35)<5,'recover the known fillet circle');
+  for(const [incoming,outgoing] of [[Math.atan2(b.y-a.y,b.x-a.x),Math.atan2(c.y-b.y,c.x-b.x)-2*Math.atan(b.bulge)],
+    [Math.atan2(c.y-b.y,c.x-b.x)+2*Math.atan(b.bulge),Math.atan2(d.y-c.y,d.x-c.x)]])
+    assert.ok(Math.abs(Math.atan2(Math.sin(outgoing-incoming),Math.cos(outgoing-incoming)))<1e-8,'fillet meets both lines tangentially');
+}
+
 // A rounded-rectangle gasket is designed from tangent lines and quarter arcs.
-for(const angle of [0,.31,1.6]){
+for(const angle of [0,.31,.87,1.6]){
   const w=720,rgba=new Uint8ClampedArray(w*w*4);
   const rounded=(x,y,hx,hy,r)=>{const dx=Math.abs(x)-(hx-r),dy=Math.abs(y)-(hy-r);return Math.hypot(Math.max(dx,0),Math.max(dy,0))+Math.min(Math.max(dx,dy),0)<=r;};
   for(let y=0;y<w;y++)for(let x=0;x<w;x++){

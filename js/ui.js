@@ -817,7 +817,7 @@ function autoTraceUnderlay() {
     bounds.append(fieldRow); body.append(bounds);
     const status = el('div', { class: 'trace-status', role: 'status', 'aria-live': 'polite' }); body.append(status);
     const accept = el('button', { class: 'trace-button trace-accept', html: 'Add outline', disabled: '' });
-    box.append(el('footer', { class: 'trace-footer' }, el('span', {}, 'Processed on this device · Check scale before export.'), el('div', { class: 'trace-actions' }, el('button', { class: 'trace-button', html: 'Cancel', onclick: hideModal }), accept)));
+    box.append(el('footer', { class: 'trace-footer' }, el('span', {}, 'Processed on this device · Correct perspective and check scale before export.'), el('div', { class: 'trace-actions' }, el('button', { class: 'trace-button', html: 'Cancel', onclick: hideModal }), accept)));
     let roi = { x: 0, y: 0, w: width, h: height }, start = null, previousROI = null, result = null, cropMode = false;
     let worker = null, request = 0, timer = null, deadline = null, alive = true;
     let editor=null,editMode=false,selection=null,editDrag=null,draft=null,panMode=false,previewZoom=1,previewPan={x:0,y:0};
