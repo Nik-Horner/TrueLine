@@ -44,10 +44,10 @@ for(const id of ['screw','steel-bracket','foam-rectangular','foam-irregular','wh
  rows.push(row);console.log(JSON.stringify(row));
  const group=[];for(const label of ['source','classic','trained']){
   const photo=label==='source'?input:new URL(id+'-'+label+'-overlay.png',dir).pathname,panel=new URL(id+'-'+label+'-panel.png',dir).pathname;
-  exec('magick',[photo,'-resize','450x330','-background','#172536','-gravity','center','-extent','470x390','-font','DejaVu-Sans','-fill','#e7edf6','-pointsize','17','-gravity','northwest','-annotate','+12+26',label==='source'?'SOURCE PHOTO':label==='classic'?'PREVIOUS DETECTOR':'TRAINED MODEL + IMAGE EDGES',panel]);group.push(panel);
+  exec('magick',[photo,'-resize','450x330','-background','#172536','-gravity','center','-extent','470x390','-font',process.env.REPORT_FONT||'DejaVu-Sans','-fill','#e7edf6','-pointsize','17','-gravity','northwest','-annotate','+12+26',label==='source'?'SOURCE PHOTO':label==='classic'?'PREVIOUS DETECTOR':'TRAINED MODEL + IMAGE EDGES',panel]);group.push(panel);
  }
  const comparison=new URL(id+'-comparison.png',dir).pathname;
- exec('magick',[...group,'+append','-background','#0c1420','-gravity','north','-splice','0x50','-font','DejaVu-Sans','-fill','#e7edf6','-pointsize','22','-gravity','northwest','-annotate','+20+31',id,comparison]);panels.push(comparison);
+ exec('magick',[...group,'+append','-background','#0c1420','-gravity','north','-splice','0x50','-font',process.env.REPORT_FONT||'DejaVu-Sans','-fill','#e7edf6','-pointsize','22','-gravity','northwest','-annotate','+20+31',id,comparison]);panels.push(comparison);
 }
 const annotated=rows.filter(r=>r.trained.silhouetteIoU!=null),mean=label=>annotated.reduce((s,r)=>s+r[label].silhouetteIoU,0)/annotated.length;
 const metrics={method:'Six manually annotated silhouettes (source-pixel uncertainty approximately +/-2 to 3 pixels), 25 annotated visible plate openings, 97 foam opening checks, and four further carrier capture views. Carrier views are the same category; both foam crops share one photo. No reference or benchmark labels enter inference. Results measure photographed shapes, not physical dimensions.',cases:rows,meanClassicSilhouetteIoU:mean('classic'),meanTrainedSilhouetteIoU:mean('trained')};
