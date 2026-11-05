@@ -26,8 +26,7 @@ without the preview script's signing overrides.
 The Desktop Builds workflow checks PRs on Windows, Apple Silicon Mac and Intel Mac
 without publishing. `npm run test:mac:package` mounts the native architecture's DMG,
 copies the app out, verifies its signature and launches it to test Command shortcuts
-and drawing/export workflows. Mac auto-update requires signed release artifacts and
-the corresponding `latest-mac.yml` update metadata.
+and drawing/export workflows. The desktop app checks the latest published GitHub release at launch. When a newer version is available, Update downloads it through the built-in updater and offers to restart after the user has saved their work. The normal unsaved-work close guard remains active. If update metadata or automatic installation is unavailable, the app offers the release page instead. Unpublished commits and draft or prerelease versions do not trigger the notice; offline checks are silent. Automatic Mac installation requires signed release artifacts and the corresponding `latest-mac.yml` update metadata.
 
 Mac menus and help use Command shortcuts, with Command+Shift+Z for redo.
 Two-finger trackpad scrolling pans the drawing and outline editor; pinch or
@@ -56,12 +55,11 @@ npm run test:upgrades # standalone Chromium workflow suite (set CHROME_BIN if ne
    `TrueLine-Setup.exe`, `latest.yml`, and `TrueLine-Setup.exe.blockmap`.
 
 ```bash
-gh release create v3.1.0 dist-installer/TrueLine-Setup.exe dist-installer/latest.yml \
-  dist-installer/TrueLine-Setup.exe.blockmap --title "TrueLine 3.1.0" --notes "..."
+gh release create v3.1.3 dist-installer/TrueLine-Setup.exe dist-installer/latest.yml \
+  dist-installer/TrueLine-Setup.exe.blockmap --title "TrueLine 3.1.3" --notes "..."
 ```
 
-Installed apps pick it up automatically on next launch, and the Windows download button in the README always
-points at the newest installer (the filename never changes).
+Installed apps offer the update on next launch. After the user chooses Update, it downloads and installs on restart or quit. The Windows download button in the README points at the newest installer (the filename never changes).
 
 ## Auto-trace evaluation
 

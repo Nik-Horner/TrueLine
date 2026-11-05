@@ -18,6 +18,10 @@ const {spawn,execFileSync}=require('node:child_process'),puppeteer=require('pupp
   await page.waitForFunction(async()=>(await import('/js/app.js')).App.ready,{timeout:30000});
   await page.evaluate(()=>{localStorage.setItem('tl-tour-done','1');localStorage.setItem('tl-frdone','1');});
   await page.reload();await page.waitForFunction(async()=>(await import('/js/app.js')).App.ready);
+  assert.equal(await page.evaluate(()=>window.trueLineFiles.appVersion()),require('../package.json').version,'desktop reports its packaged version');
+  await page.click('#helpBtn');await page.evaluate(()=>[...document.querySelectorAll('.help-item')].find(b=>b.textContent.includes('About TrueLine')).click());
+  await page.waitForFunction(version=>document.querySelector('#modalBox h3 small')?.textContent==='v'+version,{},require('../package.json').version);
+  await page.evaluate(()=>document.querySelector('#modalBox .modal-actions button:last-child').click());
   fs.mkdirSync(path.join('test-artifacts','native-'+process.platform),{recursive:true});
   await page.evaluate(async()=>{localStorage.setItem('tl-tour-done','1');localStorage.setItem('tl-frdone','1');window.m=await import('/js/app.js');m.newDoc();m.mutate('Native shortcut test',()=>m.addEntity({type:'circle',c:{x:5,y:5},r:2}));});
   if(process.platform==='darwin' && process.env.TRUELINE_EXECUTABLE) {

@@ -12,12 +12,12 @@ const vm = require('node:vm');
     const electron = {
       app: { requestSingleInstanceLock: () => true, on() {}, whenReady: () => ({ then() {} }) },
       BrowserWindow: { fromWebContents: s => s === sender ? {} : null },
-      ipcMain: { handle: (name, fn) => { assert.equal(name, 'trueline:save-project'); handler = fn; } },
+      ipcMain: { handle: (name, fn) => { if (name === 'trueline:save-project') handler = fn; } },
       dialog: { showSaveDialog: async () => choice },
     };
     const fileSystem = { ...fs, promises: { ...fs.promises, rename: async (...args) => { if (failRename) throw new Error('Simulated disk failure'); return fs.promises.rename(...args); } } };
     vm.runInNewContext(fs.readFileSync(path.join(__dirname, '../electron/main.cjs'), 'utf8'), {
-      require: name => name === 'electron' ? electron : name === 'fs' ? fileSystem : name === './static-server.cjs' ? require('../electron/static-server.cjs') : require(name),
+      require: name => name === 'electron' ? electron : name === 'fs' ? fileSystem : name === './update-check.cjs' ? require('../electron/update-check.cjs') : name === './static-server.cjs' ? require('../electron/static-server.cjs') : require(name),
       __dirname: path.join(__dirname, '../electron'), process, URL,
     });
     const event = { sender, senderFrame: sender.mainFrame };
