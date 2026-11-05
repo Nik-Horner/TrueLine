@@ -17,7 +17,7 @@ async function latestUpdate(fetch, currentVersion) {
   return semver.gt(latest, current) ? latest : null;
 }
 
-async function offerUpdate(win, version, currentVersion, updater, dialog, shell) {
+async function offerUpdate(win, version, currentVersion, updater, dialog, shell, platform = process.platform, nativeUpdater = null) {
   const choice = await dialog.showMessageBox(win, {
     type: 'info', title: 'TrueLine update available',
     message: `TrueLine ${version} is available.`,
@@ -26,6 +26,7 @@ async function offerUpdate(win, version, currentVersion, updater, dialog, shell)
   });
   if (choice.response !== 0 || win.isDestroyed()) return;
   const progress = info => { if (!win.isDestroyed() && Number.isFinite(info?.percent)) win.setProgressBar(Math.max(0, Math.min(1, info.percent / 100))); };
+  let nativeReady, nativeSuccess, nativeFailure, nativeTimer;
   try {
     if (!updater) throw new Error('Automatic updates unavailable');
     win.setProgressBar(2);
@@ -33,7 +34,21 @@ async function offerUpdate(win, version, currentVersion, updater, dialog, shell)
     const update = await updater.checkForUpdates();
     const feedVersion = semver.valid(update?.updateInfo?.version || '');
     if (!feedVersion || !semver.eq(feedVersion, version)) throw new Error('Release update metadata unavailable');
+    if (platform === 'darwin') {
+      if (!nativeUpdater) throw new Error('macOS updater unavailable');
+      // The file download can finish before Squirrel verifies and stages it.
+      nativeReady = new Promise(resolve => {
+        nativeSuccess = () => resolve(true);
+        nativeFailure = () => resolve(false);
+        nativeUpdater.once('update-downloaded', nativeSuccess);
+        nativeUpdater.once('error', nativeFailure);
+      });
+    }
     await updater.downloadUpdate();
+    if (nativeReady) {
+      const ready = await Promise.race([nativeReady, new Promise(resolve => { nativeTimer = setTimeout(() => resolve(false), 60000); })]);
+      if (!ready) throw new Error('macOS could not stage the update');
+    }
   } catch {
     if (!win.isDestroyed()) {
       const fallback = await dialog.showMessageBox(win, {
@@ -46,6 +61,11 @@ async function offerUpdate(win, version, currentVersion, updater, dialog, shell)
     }
     return;
   } finally {
+    clearTimeout(nativeTimer);
+    if (nativeUpdater && nativeSuccess) {
+      nativeUpdater.removeListener('update-downloaded', nativeSuccess);
+      nativeUpdater.removeListener('error', nativeFailure);
+    }
     updater?.removeListener('download-progress', progress);
     if (!win.isDestroyed()) win.setProgressBar(-1);
   }

@@ -35,7 +35,7 @@ const {latestUpdate, offerUpdate, RELEASES_URL} = require('../electron/update-ch
     const shell={openExternal:async url=>{opened.push(url);}};
     return {win,updater,dialog,shell,messages,opened,counts:()=>({downloads,restarts,checks})};
   };
-  const offer = s => offerUpdate(s.win,'3.2.0','3.1.1',s.updater,s.dialog,s.shell);
+  const offer = s => offerUpdate(s.win,'3.2.0','3.1.1',s.updater,s.dialog,s.shell,'win32');
   let state=setup([1]);await offer(state);
   assert.deepEqual(state.messages[0].buttons,['Update','Later']);assert.deepEqual(state.counts(),{downloads:0,restarts:0,checks:0});
   state=setup([0,1]);await offer(state);
@@ -51,6 +51,18 @@ const {latestUpdate, offerUpdate, RELEASES_URL} = require('../electron/update-ch
     assert.match(state.messages[1].message,/could not update automatically/);
     if(behavior.feedVersion)assert.equal(state.counts().downloads,0,'never install a different version from the advertised release');
   }
+  // macOS must finish native signature verification before offering a restart.
+  state=setup([0,1]);state.updater.nativeUpdater=new EventEmitter();
+  state.updater.downloadUpdate=async()=>{};
+  const pending=offerUpdate(state.win,'3.2.0','3.1.1',state.updater,state.dialog,state.shell,'darwin',state.updater.nativeUpdater);
+  for(let i=0;i<3;i++)await new Promise(setImmediate);
+  assert.equal(state.messages.length,1,'a downloaded file is not yet a verified macOS update');
+  state.updater.nativeUpdater.emit('update-downloaded');await pending;
+  assert.equal(state.messages[1].title,'Update ready');
+  state=setup([0,1]);state.updater.nativeUpdater=new EventEmitter();
+  state.updater.downloadUpdate=async()=>{state.updater.nativeUpdater.emit('error',Error('signature rejected'));};
+  await offerUpdate(state.win,'3.2.0','3.1.1',state.updater,state.dialog,state.shell,'darwin',state.updater.nativeUpdater);
+  assert.equal(state.messages[1].title,'Automatic update unavailable');
   state=setup([0,1]);state.updater=null;await offer(state);
   assert.match(state.messages[1].message,/could not update automatically/);assert.deepEqual(state.opened,[]);
   // The real shell must configure the updater for a user-initiated download.

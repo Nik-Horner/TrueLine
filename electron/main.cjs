@@ -1,5 +1,5 @@
 // TrueLine desktop shell.
-const { app, BrowserWindow, ipcMain, dialog, Menu, net, shell } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog, Menu, net, shell, autoUpdater: nativeUpdater } = require('electron');
 const { randomUUID } = require('crypto');
 const fs = require('fs');
 const path = require('path');
@@ -89,7 +89,7 @@ function initUpdater() {
   if (!app.isPackaged) return;
   latestUpdate((url, options) => net.fetch(url, options), app.getVersion()).then(version => {
     const win = BrowserWindow.getAllWindows()[0];
-    if (version && win && !win.isDestroyed()) return offerUpdate(win, version, app.getVersion(), autoUpdater, dialog, shell);
+    if (version && win && !win.isDestroyed()) return offerUpdate(win, version, app.getVersion(), autoUpdater, dialog, shell, process.platform, nativeUpdater);
   }).catch(() => {});
 }
 
