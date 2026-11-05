@@ -1,14 +1,14 @@
 {
   "name": "trueline",
   "productName": "TrueLine",
-  "version": "3.1.1",
+  "version": "3.1.3",
   "description": "Trace with a pen tablet, export dimensionally-accurate DXF/SVG/PDF",
   "main": "electron/main.cjs",
   "author": "TrueLine",
   "private": true,
   "scripts": {
     "start": "electron .",
-    "test": "node tests/run-tests.mjs && node tests/workflows.mjs && node tests/mask-contours.mjs && node tests/trace-input.mjs && node tests/static-server.cjs && node tests/autotrace.mjs && node tests/photo-cad.mjs && node tests/autotrace-edge-cases.mjs && node tests/outline-editor.mjs && node tests/native-save.cjs && node tests/mac-desktop.cjs",
+    "test": "node tests/run-tests.mjs && node tests/workflows.mjs && node tests/mask-contours.mjs && node tests/trace-input.mjs && node tests/static-server.cjs && node tests/autotrace.mjs && node tests/photo-cad.mjs && node tests/autotrace-edge-cases.mjs && node tests/outline-editor.mjs && node tests/native-save.cjs && node tests/mac-desktop.cjs && node tests/update-check.cjs",
     "test:upgrades": "node tests/upgrades.cjs",
     "test:app": "node tests/production.cjs dist-test",
     "pack": "node build/pack.mjs",
@@ -38,7 +38,7 @@
   "build": {
     "appId": "com.trueline.cad",
     "productName": "TrueLine",
-    "copyright": "MIT \u2014 free to use and redistribute",
+    "copyright": "MIT — free to use and redistribute",
     "asar": false,
     "directories": {
       "output": "dist-installer",
@@ -99,6 +99,7 @@
     "puppeteer-core": "^25.3.0"
   },
   "dependencies": {
-    "electron-updater": "^6.8.9"
+    "electron-updater": "^6.8.9",
+    "semver": "^7.8.6"
   }
 }

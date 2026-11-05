@@ -1,6 +1,7 @@
 # Changelog
 
 ## Unreleased
+- The desktop app checks published GitHub releases and offers an in-app update when a newer version is available; About shows the installed version.
 - Independent assembly pieces with two/three reference marks, rigid placement
   previews, error checks, dedicated layers, reassembly, and undo.
 - Expanded tracing mode with floating pen-friendly controls and a finish/accept

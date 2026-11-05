@@ -1,11 +1,12 @@
 // TrueLine desktop shell.
-const { app, BrowserWindow, ipcMain, dialog, Menu } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog, Menu, net, shell } = require('electron');
 const { randomUUID } = require('crypto');
 const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
 const { createStaticServer } = require('./static-server.cjs');
+const { latestUpdate, offerUpdate } = require('./update-check.cjs');
 
 // tiny local static server: file:// blocks ES-module imports, http:// does not
 let serverPromise;
@@ -42,12 +43,15 @@ async function openWindow() {
     });
     // Electron cancels unload by default; preventDefault explicitly permits it.
     if (choice === 1) event.preventDefault();
+    else win.emit('trueline:update-cancelled');
   });
   win.webContents.on('before-input-event', (ev, input) => {
     if (input.key === 'F12' && input.type === 'keyDown') win.webContents.toggleDevTools();
   });
   win.loadURL(`http://127.0.0.1:${port}/`);
 }
+
+ipcMain.handle('trueline:app-version', () => app.getVersion());
 
 // Native saving confirms success or cancellation before clearing the dirty indicator.
 ipcMain.handle('trueline:save-project', async (event, payload) => {
@@ -76,11 +80,17 @@ ipcMain.handle('trueline:save-project', async (event, payload) => {
 // build a new version and drop its dist-installer files on that feed — see README.
 function initUpdater() {
   let autoUpdater;
-  try { ({ autoUpdater } = require('electron-updater')); } catch (e) { return; }   // absent in dev
-  autoUpdater.autoDownload = true;
-  autoUpdater.autoInstallOnAppQuit = true;
-  autoUpdater.on('error', () => {});   // stay silent offline / when no feed is configured
-  autoUpdater.checkForUpdatesAndNotify().catch(() => {});
+  try { ({ autoUpdater } = require('electron-updater')); } catch { /* Portable builds may lack the updater. */ }
+  if (autoUpdater) {
+    autoUpdater.autoDownload = false;
+    autoUpdater.autoInstallOnAppQuit = true;
+    autoUpdater.on('error', () => {});
+  }
+  if (!app.isPackaged) return;
+  latestUpdate((url, options) => net.fetch(url, options), app.getVersion()).then(version => {
+    const win = BrowserWindow.getAllWindows()[0];
+    if (version && win && !win.isDestroyed()) return offerUpdate(win, version, app.getVersion(), autoUpdater, dialog, shell);
+  }).catch(() => {});
 }
 
 const singleInstance = app.requestSingleInstanceLock();

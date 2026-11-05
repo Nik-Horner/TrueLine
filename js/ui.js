@@ -1344,9 +1344,11 @@ function helpTips() {
 
 function aboutModal() {
   showModal(box => {
-    box.append(el('h3', { html: 'TrueLine <small>v3.0.0</small>' }));
+    const version = el('small', {});
+    box.append(el('h3', {}, 'TrueLine ', version));
+    window.trueLineFiles?.appVersion?.().then(value => { version.textContent = `v${value}`; }).catch(() => {});
     box.append(el('p', { class: 'about-lead', html: 'A free, offline replacement for the $1,500 Logic Trace digitizing system. Trace a physical object with a pen tablet, clean up the geometry, and export dimensionally-accurate DXF, SVG, or 1:1 PDF for CNC, CAD, and pattern work.' }));
-    box.append(el('p', { class: 'about-sub', html: 'Runs entirely on your machine — no account, no internet, no per-seat license. Your drawings never leave this computer.' }));
+    box.append(el('p', { class: 'about-sub', html: 'Your drawings stay on this computer. The desktop app checks GitHub for updates when online; no account or per-seat license is required.' }));
     box.append(el('div', { class: 'modal-actions' },
       el('button', { class: 'btn-ghost', html: 'Keyboard shortcuts', onclick: () => { hideModal(); shortcutOverlay(); } }),
       el('button', { class: 'btn-accent', html: 'Close', onclick: hideModal })));
