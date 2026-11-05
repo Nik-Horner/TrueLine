@@ -12,30 +12,34 @@ Which platform(s) did you code your app for?
 Select Other: Desktop (Windows and macOS).
 
 Please list the link to your app's video demonstration here
-PENDING: upload the revised video publicly to YouTube or Vimeo, then paste its https URL.
+https://vimeo.com/1236443371
 
-Please briefly describe what your app does? (87/400 words)
-TrueLine is free, open-source tracing software for makers. It helps turn physical parts and part images into editable, scaled 2D CAD outlines. Users can trace with a mouse or pen tablet, review fitted lines and curves, and set the drawing’s scale from a known measurement. Optional image outline detection provides another way to begin a trace.
+Please briefly describe what your app does?
+TrueLine is free, open-source desktop tracing software for makers. It helps turn physical parts and part images into editable, scaled 2D CAD outlines. Users can trace with a mouse or pen tablet, review fitted lines and curves, or create a circle by picking three points around its edge. They can set the drawing’s scale from a known measurement and use optional image outline detection as another starting point.
 
 Drawings can be saved and exported as DXF, SVG, or PDF for fabrication, repair, and pattern making. Processing stays on the user’s device. Users must verify edges and dimensions before fabrication.
 
-What inspired you to create this app? (72/400 words)
-My dad and I had a physical part but no CAD model for it. We tried taking a picture and tracing it in SolidWorks, but that did not work well for us. We found a paid solution that cost about $1,500. That experience inspired TrueLine: a free tool focused on tracing, reviewing the outline, and setting its scale before exporting it. I designed the interface and shaped the tracing experience through testing.
+What inspired you to create this app?
+My dad and I had a physical part but no CAD model for it. We tried taking a picture and tracing it in SolidWorks, but that did not work well for us. We found a paid solution that cost about $1,500. That experience inspired TrueLine: a free tool focused on tracing, reviewing the outline, and setting its scale before exporting it. I built and refined the tracing functionality and tested it with parts.
 
-What technical difficulties did you face programming your app? (80/400 words)
-While testing, I found that tracing a curve created far too many short edges. An arc in CAD should be an arc, rather than thousands of tiny line segments. We added smoothing to improve the result. TrueLine's fitting workflow can represent suitable strokes as lines, circles, and arcs, with a preview before acceptance. My role was identifying the problem and testing the tracing experience; AI wrote most of the implementation. The goal was cleaner geometry that follows the intended shape.
+What technical difficulties did you face programming your app?
+One challenge was turning a traced curve into useful CAD geometry. An arc should stay an arc, rather than becoming thousands of tiny line segments. I built and refined the tracing functionality to fit suitable strokes as lines, circles, and arcs, with smoothing and a preview before acceptance.
 
-What improvements would you make if you were to create a 2.0 version of your app? (43/400 words)
+Earlier image-processing approaches also struggled with more complicated parts. Using my machine-learning knowledge, I helped move the image-tracing approach to a small pretrained neural network. The app now uses MobileSAM with local inference, followed by edge processing and editable outlines. I tested the results and refined the tracing behavior; users still need to review the outline and verify measurements.
+
+What improvements would you make if you were to create a 2.0 version of your app?
 Review note: Proposed product direction for the creator to review.
 I would improve photo tracing for difficult lighting and backgrounds, make uncertain edges easier to review, and test it with more real parts. I would also make it easier for a new user to verify scale with a second known measurement before exporting.
 
 Did you use AI in the creation, development, or functionality of your app?
 Yes
 
-If you used AI, tell us how you used it and what your team contributed directly. (62/400 words)
-I used Codex and Claude Code extensively, and AI wrote most of TrueLine's code. I personally designed the interface and refined the tracing experience through hands-on testing. Codex also assisted with bug fixes, testing, the demonstration video, and drafting submission materials. TrueLine uses the existing pretrained MobileSAM model through ONNX Runtime Web for local image segmentation; I did not train that model.
+If you used AI, tell us how you used it and what your team contributed directly.
+I used Codex and Claude Code for implementation, debugging, and testing assistance; AI generated much of the app's code. My direct work focused on building and refining the tracing functionality, especially representing curves as CAD arcs rather than many short line segments. I also used my machine-learning knowledge to help choose a small neural-network approach when earlier image processing struggled with complicated parts, and tested and refined the results.
 
-What did you learn or take away from participating in the Congressional App Challenge? (44/400 words)
+TrueLine uses the existing pretrained MobileSAM model through ONNX Runtime Web for local image segmentation; I did not train that model. Codex also helped with bug fixes, tests, demo production, and drafting these submission materials.
+
+What did you learn or take away from participating in the Congressional App Challenge?
 The tracing problem taught me that more points and edges do not automatically produce a better CAD drawing. The geometry needs to represent the intended shape, and an arc should remain a usable arc. Testing the output helped me identify what needed to improve.
 
 Please include a cover photo from your app
