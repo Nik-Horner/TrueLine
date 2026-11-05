@@ -55,8 +55,8 @@ npm run test:upgrades # standalone Chromium workflow suite (set CHROME_BIN if ne
    `TrueLine-Setup.exe`, `latest.yml`, and `TrueLine-Setup.exe.blockmap`.
 
 ```bash
-gh release create v3.1.0 dist-installer/TrueLine-Setup.exe dist-installer/latest.yml \
-  dist-installer/TrueLine-Setup.exe.blockmap --title "TrueLine 3.1.0" --notes "..."
+gh release create v3.1.3 dist-installer/TrueLine-Setup.exe dist-installer/latest.yml \
+  dist-installer/TrueLine-Setup.exe.blockmap --title "TrueLine 3.1.3" --notes "..."
 ```
 
 Installed apps offer the update on next launch. After the user chooses Update, it downloads and installs on restart or quit. The Windows download button in the README points at the newest installer (the filename never changes).
